@@ -223,7 +223,7 @@ final class Tornado
 			
 			$pattern = strtr($route['route'], $tokens);
 			
-			if ($route['method'] == $method && preg_match('#^/?' . $pattern . '/?$#', $querystring, $matches)) {
+			if ( ($route['method'] == $method || $route['method'] == 'HTTP') && preg_match('#^/?' . $pattern . '/?$#', $querystring, $matches)) {
 				
 				if (count($matches) > 1)
 					$this->_params = array_slice($matches, 1);

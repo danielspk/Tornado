@@ -6,7 +6,7 @@ $app->route('HTTP', "/", "demo@demo@index");
 
 
 
-$app->route('GET', '/article/list/all/:number', "demo@demo@index");
+$app->route('HTTP', '/article/list/all/:number', "demo@demo@index");
 
 
 /*$app->route(array(
