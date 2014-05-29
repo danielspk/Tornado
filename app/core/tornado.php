@@ -1,51 +1,51 @@
 <?php
-namespace DMS\Core;
+namespace DMS\Tornado;
 
 /**
  * Clase de principal/bootstrap del core
  * 
- * @package DMS-TORNADO-CORE
+ * @package TORNADO-CORE
  * @author Daniel Martín Spiridione <info@daniel-spiridione.com.ar>
- * @link https://github.com/danielspk/DMS-PHP-CORE
- * @license https://github.com/danielspk/DMS-PHP-CORE/blob/master/LICENSE MIT
- * @version 0.8.0
+ * @link https://github.com/danielspk/TORNADO
+ * @license https://github.com/danielspk/TORNADO/blob/master/LICENSE MIT License
+ * @version 0.9.0
  */
 final class Tornado
 {
 
 	/**
 	 * Instancia única de la clase (patrón singleton)
-	 * @var DMS\Core\Tornado 
+	 * @var DMS\Tornado\Tornado
 	 */
 	private static $_instance = null;
 	
 	/**
 	 * Clase de manejo de enrutamientos
-	 * @var DMS\Core\Route 
+	 * @var DMS\Tornado\Route 
 	 */
 	private $_route = null;
 	
 	/**
 	 * Clase de manejo de autocarga de librerías
-	 * @var DMS\Core\Autoload 
+	 * @var DMS\Tornado\Autoload 
 	 */
 	private $_autoload = null;
 	
 	/**
 	 * Clase de manejo de errors
-	 * @var DMS\Core\Error 
+	 * @var DMS\Tornado\Error 
 	 */
 	private $_error = null;
 	
 	/**
 	 * Clase de manejo de configuración
-	 * @var DMS\Core\Config 
+	 * @var DMS\Tornado\Config 
 	 */
 	private $_config = array();
 	
 	/**
 	 * Clase de manejo de ganchos y eventos
-	 * @var DMS\Core\Hook
+	 * @var DMS\Tornado\Hook
 	 */
 	private $_hook = array();
 	

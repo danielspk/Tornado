@@ -1,14 +1,14 @@
 <?php
 /**
- * DMS-TORNADO-CORE
+ * TORNADO - CORE
  * 
  * Micro core para implementar el patrón HMVC y/o servicios REST.
  * 
- * @package DMS-TORNADO-CORE
+ * @package TORNADO-CORE
  * @author Daniel Martín Spiridione <info@daniel-spiridione.com.ar>
- * @link https://github.com/danielspk/DMS-PHP-CORE
- * @license https://github.com/danielspk/DMS-PHP-CORE/blob/master/LICENSE MIT License
- * @version 0.8.0
+ * @link https://github.com/danielspk/TORNADO
+ * @license https://github.com/danielspk/TORNADO/blob/master/LICENSE MIT License
+ * @version 0.9.0
  */
 
 /*
@@ -48,4 +48,4 @@ require 'app/config/route.php';
 require 'app/config/hook.php';
 
 // se inicia el tornado
-DMS\Core\Tornado::getInstance()->run();
+DMS\Tornado\Tornado::getInstance()->run();

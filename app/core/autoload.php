@@ -1,5 +1,5 @@
 <?php
-namespace DMS\Core;
+namespace DMS\Tornado;
 
 /**
  * Clase de auto carga de librerías
@@ -7,11 +7,11 @@ namespace DMS\Core;
  * Parte del ejemplo del standar PSR-4
  * https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md
  * 
- * @package DMS-TORNADO-CORE
+ * @package TORNADO-CORE
  * @author Daniel Martín Spiridione <info@daniel-spiridione.com.ar>
- * @link https://github.com/danielspk/DMS-PHP-CORE
- * @license https://github.com/danielspk/DMS-PHP-CORE/blob/master/LICENSE MIT
- * @version 0.8.0
+ * @link https://github.com/danielspk/TORNADO
+ * @license https://github.com/danielspk/TORNADO/blob/master/LICENSE MIT License
+ * @version 0.9.0
  */
 final class Autoload
 {

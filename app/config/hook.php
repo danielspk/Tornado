@@ -20,7 +20,7 @@
  * 
  */
 
-$app = DMS\Core\Tornado::getInstance();
+$app = DMS\Tornado\Tornado::getInstance();
 
 $app->hook('offline', function(){
 	echo 'Fuera de línea';

@@ -9,7 +9,7 @@
  * echo $config['clave'];
  */
 
-$app = DMS\Core\Tornado::getInstance();
+$app = DMS\Tornado\Tornado::getInstance();
 
 $app->config('db', 'nombre de base');
 $app->config('db2', array('clave'=>'valor'));

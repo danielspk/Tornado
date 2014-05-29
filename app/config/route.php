@@ -1,6 +1,6 @@
 <?php
 
-$app = DMS\Core\Tornado::getInstance();
+$app = DMS\Tornado\Tornado::getInstance();
 
 $app->route('HTTP', "/", "demo@demo@index");
 
