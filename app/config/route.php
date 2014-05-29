@@ -2,11 +2,11 @@
 
 $app = DMS\Core\Tornado::getInstance();
 
-$app->route('HTTP', "/", "user@user@index");
+$app->route('HTTP', "/", "demo@demo@index");
 
 
 
-$app->route('GET', '/article/list/all/:number', "user@user@index");
+$app->route('GET', '/article/list/all/:number', "demo@demo@index");
 
 
 /*$app->route(array(
