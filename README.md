@@ -42,12 +42,13 @@ TORNADO se inspiro en varios microframeworks PHP, entre ellos cabe mencionar:
 TORNADO se desarrollo tratando de respetar las siguiente metas:
 
 - ser rápido
-- ser fácil de entender (tanto su uso como su construcción interna)
+- ser fácil de entender **(tanto su API como su construcción interna)**
 - tener la menor cantidad de métodos posibles en su API
 - permitir incluir ganchos para que los programadores puedan extender el 
 mismo
 - permitir incluir librerías de terceros con suma facilidad
-- ser ligero respecto a la cantidad de líneas de código
+- ser ligero respecto a la cantidad de líneas de código a mantener **(por esta 
+razón no tiene una compleja arquitectura de diseño)**
 - ser un core de trabajo - NUNCA un framework
 
 ## Características:
