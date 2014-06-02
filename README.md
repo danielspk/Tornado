@@ -187,6 +187,17 @@ Existen 4 tipos de hooks:
 ```
 
 ##### Definir Enrutamientos:
+Los enrutamientos pueden ser:
+- HTTP - cualquier petición
+- GET - RESTfull método GET
+- POST - RESTfull método POST
+- PUT - RESTfull método PUT
+- DELETE - RESTfull método DELETE
+
+En caso de que el servidor no soporte los métodos PUT y DELETE se pueden simular 
+los mismos enviando una petición POST con una variable "REST_METHOD" cuyo valor 
+sea PUT o DELETE
+
 Existen tres tipos de parámetros para enrutar una URL:
 - :string - sólo acepta letras
 - :number - sólo acepta números
