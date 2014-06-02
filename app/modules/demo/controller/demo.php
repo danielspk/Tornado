@@ -3,9 +3,9 @@ namespace APP\Modules;
 
 class Demo extends \DMS\Tornado\Controller {
 	
-	//put your code here
 	public function index($param = null){
 		
+
 		//$pepep = 10 /0;
 		echo ' Hola ' . $param . '<br>';
 		
