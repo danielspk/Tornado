@@ -143,6 +143,25 @@ y las restricciones que quiera aplicar a los redireccionamientos.
 
 ## Manual de uso:
 
+### Uso básico:
+
+```php
+<?php
+
+    require 'app/core/tornado.php';
+    
+    $app->route('HTTP', "/", "demo@demo@index");
+    
+    $app->route(array(
+        "/saludar/:string"	=> function($pNombre = null){
+            echo 'Hola ' . $pNombre;
+        }
+    ));
+
+    DMS\Tornado\Tornado::getInstance()->run();
+    
+```
+
 En construcción (no disponible).....
 
 ## Licencia:
