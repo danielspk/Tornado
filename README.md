@@ -143,23 +143,29 @@ y las restricciones que quiera aplicar a los redireccionamientos.
 
 ## Manual de uso:
 
-### Uso básico:
+#### Uso básico:
+Ejemplo de uso básico (con dos tipos de enrutamientos)
 
 ```php
 <?php
 
+    // incluir el core
     require 'app/core/tornado.php';
     
+    // obtener instancia del core
     $app = DMS\Tornado\Tornado::getInstance();
     
+    // enrutamiento a módulo desde raíz
     $app->route('HTTP', "/", "demo@demo@index");
     
+    // enrutamiento a función anónima
     $app->route(array(
         "/saludar/:string"	=> function($pNombre = null){
             echo 'Hola ' . $pNombre;
         }
     ));
 
+    // arrancar el core
     $app->run();
     
 ```
