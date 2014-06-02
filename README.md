@@ -170,6 +170,29 @@ Ejemplo de uso básico (con dos tipos de enrutamientos)
     
 ```
 
+#### API:
+
+##### Obtener Instancia del core:
+
+```php
+
+    $app = DMS\Tornado\Tornado::getInstance();
+
+```
+
+##### Arrancar el core:
+
+```php
+
+	// con una instancia del core en una variable
+    $app = DMS\Tornado\Tornado::getInstance();
+    $app->run();
+
+    // sin ninguna instancia del core en una variable
+    DMS\Tornado\Tornado::getInstance()->run();
+
+```
+
 En construcción (no disponible).....
 
 ## Licencia:
