@@ -208,8 +208,8 @@ Ejemplo de uso básico (con dos tipos de enrutamientos)
 
     // configuración array
     $nombres = $app->config('nombres');
-    echo $nombres[0]['nombre'];
-    echo $nombres[1]['nombre'];
+    echo $nombres[0]['nombre1'];
+    echo $nombres[1]['nombre2'];
 ```
 
 ##### Setear namespace de autoload:
