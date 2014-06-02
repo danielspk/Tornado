@@ -150,6 +150,8 @@ y las restricciones que quiera aplicar a los redireccionamientos.
 
     require 'app/core/tornado.php';
     
+    $app = DMS\Tornado\Tornado::getInstance();
+    
     $app->route('HTTP', "/", "demo@demo@index");
     
     $app->route(array(
@@ -158,7 +160,7 @@ y las restricciones que quiera aplicar a los redireccionamientos.
         }
     ));
 
-    DMS\Tornado\Tornado::getInstance()->run();
+    $app->run();
     
 ```
 
