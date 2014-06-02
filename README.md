@@ -175,25 +175,111 @@ Ejemplo de uso básico (con dos tipos de enrutamientos)
 ##### Obtener Instancia del core:
 
 ```php
-
     $app = DMS\Tornado\Tornado::getInstance();
-
 ```
 
 ##### Arrancar el core:
 
 ```php
-
 	// con una instancia del core en una variable
     $app = DMS\Tornado\Tornado::getInstance();
     $app->run();
 
     // sin ninguna instancia del core en una variable
     DMS\Tornado\Tornado::getInstance()->run();
-
 ```
 
-En construcción (no disponible).....
+##### Setear configuración:
+
+```php
+    $app = DMS\Tornado\Tornado::getInstance();
+
+    $app->config('nombre', 'valor del nombre');
+    $app->config('nombres', array('nombre1'=>'valor1', 'nombre2'=>'valor2'));
+```
+
+##### Leer configuración:
+
+```php
+    $app = DMS\Tornado\Tornado::getInstance();
+
+    // configuración simple
+    echo $app->config('nombre');
+
+    // configuración array
+    $nombres = $app->config('nombres');
+    echo $nombres[0]['nombre'];
+    echo $nombres[1]['nombre'];
+```
+
+##### Setear namespace de autoload:
+
+```php
+    $app = DMS\Tornado\Tornado::getInstance();
+
+    $app->autoload()->addNamespace('Twing\Twing', array('twing/lib/src'));
+```
+
+##### Definir Hooks:
+Existen 4 tipos de hooks:
+- init: antes de cargar un módulo
+- end: despues de ejecutar un módulo
+- 404: al producirse un error http de tipo 404
+- error: al atraparse un error de aplicación
+
+```php
+    $app = DMS\Tornado\Tornado::getInstance();
+
+    // utilizando un módulo / clase
+    $app->hook('error', array('namespace\clase', 'metodo'));
+
+    // utilizando una función anónima
+    $app->hook('404', function(){
+        echo '404';
+    });
+```
+
+##### Definir Enrutamientos:
+Existen tres tipos de parámetros para enrutar una URL:
+- :string - sólo acepta letras
+- :number - sólo acepta números
+- :alpha - acepta números y letras
+
+```php
+    $app = DMS\Tornado\Tornado::getInstance();
+
+    // utilizando un módulo
+    $app->route('HTTP', "/", "demo@demo@index");
+
+    // utilizando una función anónima
+    $app->route(array(
+        "/saludar/:alpha" => function($pNombre = null){
+            echo 'Hola ' . $pNombre;
+        }
+    ));
+```
+
+##### Organización de proyecto:
+Se recomienda organiza el proyecto de la siguiente forma:
+- setear la configuración en el archivo "app/config/config.php
+- setear los ganchos en el archivo "app/config/hook.php
+- setear los enrutamientos en el archivo "app/config/route.php
+
+Para esto el archivo index.php principal de la aplicación debería quedar de la 
+siguiente forma:
+
+```php
+// se carga el core
+require 'app/core/tornado.php';
+
+// se cargan las configuraciones
+require 'app/config/config.php';
+require 'app/config/route.php';
+require 'app/config/hook.php';
+
+// se inicia el core
+DMS\Tornado\Tornado::getInstance()->run();
+```
 
 ## Licencia:
 
