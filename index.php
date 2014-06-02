@@ -12,7 +12,7 @@
  */
 
 /*
- *             EDITE BAJO SU RIESGO - El tornado lo puedo arrastrar
+ *             EDITE BAJO SU RIESGO - El tornado lo puedo arrasar
  * 
  * 
  *                         . '@(@@@@@@@)@. (@@) `  .   '
