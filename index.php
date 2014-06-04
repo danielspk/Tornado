@@ -1,6 +1,6 @@
 <?php
 /**
- * TORNADO - CORE
+ * TORNADO - CORE PHP
  * 
  * Micro core para implementar el patrón HMVC y/o servicios REST.
  * 

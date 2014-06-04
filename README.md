@@ -1,7 +1,7 @@
 TORNADO
 ============
 
-**ESTE PROYECTO SE ENCUENTRA EN DESARROLLO - AÚN NO EXISTE UNA VERSIÓN FINAL**
+**ESTE PROYECTO SE ENCUENTRA EN DESARROLLO**
 
 TORNADO es un reducido marco de trabajo para PHP que permite implementar el 
 patrón HMVC y/o servicios RESTfull
