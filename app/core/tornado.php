@@ -344,7 +344,7 @@ final class Tornado
 			return;
 		}
 		
-		// se instancia el controlador;
+		// se instancia el controlador
 		$controller = new $this->_controller();
 		
 		// se ejecuta la acción junto a sus parámetros si existiesen
