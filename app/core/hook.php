@@ -32,12 +32,41 @@ final class Hook
 	/**
 	 * Método que ejecuta un evento de aplicación
 	 * @param string $pName Nombre de evento
-	 * @todo Si $this->_hooks[$pName] no existe devolver Exception
 	 * @todo Si $this->_hooks[$pName] incluye @ incluir archivo de módulo
 	 */
 	public function call($pName)
 	{
-		if (isset($this->_hooks[$pName]) && is_callable($this->_hooks[$pName])) {
+		if (!isset($this->_hooks[$pName])) {
+			throw new \InvalidArgumentException('Hook no registrado.');
+		}
+		
+		if (is_string($pName)) {
+			
+			$handler = explode('\\', $pName);
+			
+			$path = 'app/modules/' . $handler[0] . '/controller/' . $handler[1] . '.php';
+			
+			if (! file_exists($path)) {
+				$this->call('404');
+				return;
+			}
+		
+			$controllerNam = 'App\\Modules\\' . $handler[1];
+			
+			if (! method_exists($controllerNam, $handler[2])) {
+				$this->call('404');
+				return;
+			}
+
+			$controller = new $controllerNam();
+		
+			call_user_func_array(array($controller, $handler[2]));
+			
+			return;
+			
+		}
+		
+		if (is_callable($this->_hooks[$pName])) {
 			call_user_func($this->_hooks[$pName]);
 		}
 	}

@@ -336,7 +336,7 @@ final class Tornado
 		}
 		
 		// se agrega el namespace al controlador
-		$this->_controller = 'App\Modules\\' . $this->_controller;
+		$this->_controller = 'App\\Modules\\' . $this->_controller;
 		
 		// se valida si el método solicitado existe
 		if (! method_exists($this->_controller, $this->_method)) {

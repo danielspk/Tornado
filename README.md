@@ -179,7 +179,7 @@ Existen 4 tipos de hooks:
     $app = DMS\Tornado\Tornado::getInstance();
 
     // utilizando un módulo / clase
-    $app->hook('error', array('namespace\clase', 'metodo'));
+    $app->hook('error', 'modulo\controlador\metodo'));
 
     // utilizando una función anónima
     $app->hook('404', function(){

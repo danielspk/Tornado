@@ -28,7 +28,7 @@ final class Config implements \ArrayAccess
 	public function offsetSet($pName, $pValue)
 	{
 		if (is_null($pName)) {
-			throw new \InvalidArgumentException('No se permite setear valores sin un identificador');
+			throw new \InvalidArgumentException('No se permite setear valores sin un identificador.');
 		} else {
 			$this->_config[$pName] = $pValue;
 		}
