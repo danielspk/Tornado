@@ -35,7 +35,7 @@ abstract class Controller
 			unset($pParams);
 		}
 		
-		$view = explode('/', $pView);
+		$view = explode('\\', $pView);
 		
 		require 'app/modules/' . $view[0] . '/view/' . $view[1] . '.tpl.php';
 	}
@@ -46,7 +46,7 @@ abstract class Controller
 	 */
 	protected function loadModel($pModel)
 	{
-		$model = explode('/', $pModel);
+		$model = explode('\\', $pModel);
 		require 'app/modules/' . $model[0] . '/model/' . $model[1] . '_mod.php';
 	}
 	

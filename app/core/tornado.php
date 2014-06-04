@@ -122,7 +122,7 @@ final class Tornado
 		// se ejecuta el hook de inicio
 		$this->_hook->call('init');
 		
-		// se carga el modulo HMVC correspondiente a la URL
+		// se carga el modulo correspondiente a la URL
 		self::_parseURL();
 
 		// se ejecuta el hook de finalización
@@ -211,7 +211,7 @@ final class Tornado
 		// método de petición
 		$method = $_SERVER["REQUEST_METHOD"];
 		
-		// sobrescritura del método de petición si el navegador no soporte PUT y DELETE
+		// sobrescritura del método de petición si el navegador no soporta PUT y DELETE
 		if ($method == 'POST' && isset($_POST['REST_METHOD']) && $_POST['REST_METHOD'] == 'PUT') {
 			$method = 'PUT';
 		} else if ($method == 'POST' && isset($_POST['REST_METHOD']) && $_POST['REST_METHOD'] == 'DELETE') {
@@ -219,11 +219,14 @@ final class Tornado
 		}
 		
 		// se recorren las rutas registradas
-		foreach ($this->_route->getRoutes() as $route /* as $pattern => $handler_name*/) {
+		foreach ($this->_route->getRoutes() as $route) {
 			
 			$pattern = strtr($route['route'], $tokens);
 			
-			if ( ($route['method'] == $method || $route['method'] == 'HTTP') && preg_match('#^/?' . $pattern . '/?$#', $querystring, $matches)) {
+			if (
+				($route['method'] == $method || $route['method'] == 'HTTP') && 
+				preg_match('#^/?' . $pattern . '/?$#', $querystring, $matches)
+			) {
 				
 				if (count($matches) > 1)
 					$this->_params = array_slice($matches, 1);
@@ -236,7 +239,7 @@ final class Tornado
 					
 				} else {
 					
-					$handler = explode('@', $route['callback']);
+					$handler = explode('\\', $route['callback']);
 			
 					$this->_module = $handler[0];
 					$this->_controller = $handler[1];
@@ -317,7 +320,7 @@ final class Tornado
 	{
 		
 		// se valida que el parseo de la URL haya dado un módulo por resultado
-		if (!$this->_module || !$this->_controller ) {
+		if (! $this->_module || !$this->_controller) {
 			$this->_hook->call('404');
 			return;
 		}
@@ -345,7 +348,7 @@ final class Tornado
 		$controller = new $this->_controller();
 		
 		// se ejecuta la acción junto a sus parámetros si existiesen
-		call_user_func_array( array($controller, $this->_method), $this->_params);
+		call_user_func_array(array($controller, $this->_method), $this->_params);
 
 	}
 	

@@ -32,6 +32,8 @@ final class Hook
 	/**
 	 * Método que ejecuta un evento de aplicación
 	 * @param string $pName Nombre de evento
+	 * @todo Si $this->_hooks[$pName] no existe devolver Exception
+	 * @todo Si $this->_hooks[$pName] incluye @ incluir archivo de módulo
 	 */
 	public function call($pName)
 	{

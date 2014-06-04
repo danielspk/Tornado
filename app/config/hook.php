@@ -1,12 +1,4 @@
 <?php
-/**
- * Eventos nativos disponibles:
- * 
- * - init		: previo a ejecutar al módulo
- * - end		: al terminar de ejecutar el módulo
- * - error		: en caso de producirse un error
- * - 404		: en caso de no poder encontrar un módulo para la URL
- */
 
 $app = DMS\Tornado\Tornado::getInstance();
 

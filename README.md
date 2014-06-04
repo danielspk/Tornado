@@ -104,7 +104,7 @@ Ejemplo de uso básico (con dos tipos de enrutamientos)
     $app = DMS\Tornado\Tornado::getInstance();
     
     // enrutamiento a módulo desde raíz
-    $app->route('HTTP', "/", "demo@demo@index");
+    $app->route('HTTP', "/", "demo\demo\index");
     
     // enrutamiento a función anónima
     $app->route(array(
@@ -208,7 +208,7 @@ Existen tres tipos de parámetros para enrutar una URL:
     $app = DMS\Tornado\Tornado::getInstance();
 
     // utilizando un módulo
-    $app->route('HTTP', "/", "demo@demo@index");
+    $app->route('HTTP', "/", "demo\demo\index");
 
     // utilizando una función anónima
     $app->route(array(
