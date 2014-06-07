@@ -45,39 +45,14 @@ final class Hook
 			// se obtiene el modulo controlador método
 			$handler = explode('\\', $this->_hooks[$pName]);
 			
-			// se valida si la ruta del controlador solicitada existe
-			$path = 'app/modules/' . $handler[0] . '/controller/' . $handler[1] . '.php';
-			
-			if (! file_exists($path)) {
-				$this->call('404');
-				return;
-			} else {
-				require_once $path;
-			}
-		
-			// se agrega el namespace al controlador
-			$controllerNam = 'App\\Modules\\' . $handler[1];
-			
-			// se valida si el método solicitado existe
-			if (! method_exists($controllerNam, $handler[2])) {
-				$this->call('404');
-				return;
-			}
-
-			// se instancia el controlador
-			$controller = new $controllerNam();
-		
-			// se ejecuta el método solicitado
-			call_user_func_array(array($controller, $handler[2]));
-			
-			return;
-			
-		}
+			$app = Tornado::getInstance();
+			$app->callModule($handler[0], $handler[1], $handler[2]);
 		
 		// si el callback es una función anónima se la ejecuta
-		if (is_callable($this->_hooks[$pName])) {
+		} else if (is_callable($this->_hooks[$pName])) {
 			call_user_func($this->_hooks[$pName]);
 		}
+		
 	}
 
 }

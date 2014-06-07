@@ -48,31 +48,7 @@ final class Tornado
 	 * @var DMS\Tornado\Hook
 	 */
 	private $_hook = array();
-	
-	/**
-	 * Módulo a ejecutar
-	 * @var string
-	 */
-	private $_module = null;
-	
-	/**
-	 * Controlador a ejecutar
-	 * @var string
-	 */
-	private $_controller = null;
-	
-	/**
-	 * Método a ejecutar
-	 * @var string
-	 */
-	private $_method = null;
-	
-	/**
-	 * Parámetros del método a ejecutar
-	 * @var array
-	 */
-	private $_params = array();
-	
+		
 	/**
 	 * Método constructor
 	 */
@@ -205,9 +181,6 @@ final class Tornado
 			':alpha'  => '([a-zA-Z0-9-_]+)'
 		);
 		
-		// bandera que indica si la URL fue enrutada
-		$routingHandler = false;
-		
 		// método de petición
 		$method = $_SERVER["REQUEST_METHOD"];
 		
@@ -235,30 +208,20 @@ final class Tornado
 				if (is_callable($route['callback'])) {
 					
 					call_user_func($route['callback'], $this->_params);
-					return;
+					
 					
 				} else {
 					
 					$handler = explode('\\', $route['callback']);
-			
-					$this->_module = $handler[0];
-					$this->_controller = $handler[1];
-					$this->_method = $handler[2];
 
-					$routingHandler = true;
-				
+					$this->callModule($handler[0], $handler[1], $handler[2]);
+					
 				}
-			
-				break;
+				
+				return;
 				
 			}
 			
-		}
-		
-		// si la URL fue enrutada se invoca al callback del módulo parseado
-		if ($routingHandler === true) {
-			$this->_callModule();
-			return;
 		}
 		
 		// si la URL no fue enrutada se parsea directamente la URL en busca 
@@ -288,19 +251,21 @@ final class Tornado
 				$url[1] = $url[0];
 			}
 		
-			$this->_module = $url[0];
-			$this->_controller = $url[1];
+			$module = $url[0];
+			$controller = $url[1];
 
 			if ($count > 2) {
-				$this->_method = $url[2];
+				$method = $url[2];
 			} else {
-				$this->_method = 'index';
+				$method = 'index';
 			}
 			
 			if ($count > 3) {
-				$this->_params = array_slice($url, 3);
+				$params = array_slice($url, 3);
 			}
 		
+			$this->callModule($module, $controller, $method, $params);
+			
 		} else {
 			
 			$this->_hook->call('404');
@@ -308,25 +273,25 @@ final class Tornado
 
 		}
 		
-		$this->_callModule();
-		
 	}
 	
 	/**
 	 * Método que ejecuta el módulo\controlador\acción\parámetros parseado
 	 * @return void
 	 */
-	private function _callModule()
+	public function callModule(
+		$pModule = null, $pController = null, $pMethod = null, $pParams = array()
+	)
 	{
 		
 		// se valida que el parseo de la URL haya dado un módulo por resultado
-		if (! $this->_module || !$this->_controller) {
+		if (! $pModule || ! $pController) {
 			$this->_hook->call('404');
 			return;
 		}
 		
 		// se valida si la ruta de la clase solicitada existe
-		$path = 'app/modules/' . $this->_module . '/controller/' . $this->_controller . '.php';
+		$path = 'app/modules/' . $pModule . '/controller/' . $pController . '.php';
 		
 		if (! file_exists($path)) {
 			$this->_hook->call('404');
@@ -336,19 +301,19 @@ final class Tornado
 		}
 		
 		// se agrega el namespace al controlador
-		$this->_controller = 'App\\Modules\\' . $this->_controller;
+		$pController = 'App\\Modules\\' . $pController;
 		
 		// se valida si el método solicitado existe
-		if (! method_exists($this->_controller, $this->_method)) {
+		if (! method_exists($pController, $pMethod)) {
 			$this->_hook->call('404');
 			return;
 		}
 		
 		// se instancia el controlador
-		$controller = new $this->_controller();
+		$controller = new $pController();
 		
 		// se ejecuta la acción junto a sus parámetros si existiesen
-		call_user_func_array(array($controller, $this->_method), $this->_params);
+		call_user_func_array(array($controller, $pMethod), $pParams);
 
 	}
 	
