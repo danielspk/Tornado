@@ -8,7 +8,7 @@ namespace DMS\Tornado;
  * https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md
  * 
  * @package TORNADO-CORE
- * @author Daniel Martín Spiridione <info@daniel-spiridione.com.ar>
+ * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
  * @link https://github.com/danielspk/TORNADO
  * @license https://github.com/danielspk/TORNADO/blob/master/LICENSE MIT License
  * @version 0.9.0

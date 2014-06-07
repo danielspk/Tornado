@@ -6,10 +6,6 @@ TORNADO
 TORNADO es un reducido marco de trabajo para PHP que permite implementar el 
 patrón HMVC y/o servicios RESTfull
 
-### Su nombre:
-
-TORNADO es el nombre que mejor se ajusta a la filosofía ser core: "ser rápido" 
-
 ### Filosofia:
 
 TORNADO no intenta ser un gran framework PHP. Contrariamente intenta ser un 
@@ -43,12 +39,11 @@ TORNADO se desarrollo tratando de respetar las siguiente metas:
 
 - ser rápido
 - ser fácil de entender _(tanto su API como su construcción interna)_
-- tener la menor cantidad de métodos posibles en su API
+- tener la menor cantidad de métodos posibles dentro de su API
 - permitir incluir ganchos para que los programadores puedan extender el 
 mismo
 - permitir incluir librerías de terceros con suma facilidad
-- ser ligero respecto a la cantidad de líneas de código a mantener _(por esta 
-razón no tiene una compleja arquitectura de diseño)_
+- ser ligero respecto a la cantidad de líneas de código a mantener
 - ser un core de trabajo _(NUNCA un framework)_
 
 ## Características:
@@ -63,11 +58,11 @@ amigables)
 ### Codificación:
 
 TORNADO apoya la idea del PHP Framework Interop Group e implementa los 
-estándares PSR-1, PSR-2 y PSR-4.
+estándares PSR-1, PSR-2 y PSR-4. _(Nota: en fase de revisión)_
 
 ### Dependencias externas (opcionales):
 
-- DMS Libs for PHP (en desarrollo)
+- DMS Libs for PHP _(Nota: en desarrollo)_
 
 ## Instalación:
 
@@ -86,8 +81,8 @@ composer install --prefer-dist
 ```
 
 4. En caso de querer utilizar URL amigables editar el archivo .htaccess y 
-modificar las líneas 4 y 5 de acuerdo a la ubicación del proyecto en el servidor 
-y las restricciones que quiera aplicar a los redireccionamientos.
+modificar las líneas 4 y 5 de acuerdo a la ubicación del proyecto dentro del 
+servidor y las restricciones que quiera aplicar a los redireccionamientos.
 
 ## Manual de uso:
 
