@@ -235,6 +235,24 @@ require 'app/config/hook.php';
 DMS\Tornado\Tornado::getInstance()->run();
 ```
 
+#### Módulos:
+
+##### Controladores:
+
+Todos los controladores deben extender de \DMS\Tornado\Controller y deben 
+definir un namespace que respete la siguiente jerarquía: 
+App\Modules\[Modulo]\Controller
+
+```php
+    namespace App\Modules\Demo\Controller;
+
+    class Demo extends \DMS\Tornado\Controller {
+        public function index($param = null){
+            echo ' Hola ' . $param . '<br>';
+        }
+    }
+```
+
 ## Licencia:
 
 El proyecto se distribuye bajo la licencia MIT.
