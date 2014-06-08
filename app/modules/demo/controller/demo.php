@@ -1,10 +1,9 @@
 <?php
-namespace APP\Modules;
+namespace App\Modules\Demo\Controller;
 
 class Demo extends \DMS\Tornado\Controller {
 	
 	public function index($param = null){
-		
 
 		//$pepep = 10 /0;
 		echo ' Hola ' . $param . '<br>';

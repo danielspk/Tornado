@@ -28,7 +28,7 @@ abstract class Controller
 	 * @param string $pView Módulo/Vista
 	 * @param array $pParams Variables
 	 */
-	protected function loadView($pView, $pParams)
+	protected function loadView($pView, $pParams = null)
 	{
 		if (is_array($pParams)) {
 			extract($pParams);

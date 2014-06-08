@@ -17,9 +17,11 @@ $app->hook('end', function(){
 });
 	
 $app->hook('404', function(){
-	echo 'Error 404';
+	echo 'Error 404<br />Página no encontrada<br />';
+	echo '<a href="index.php">Volver al inicio</a>';
 });
 
 $app->hook('error', function() use ($app){
-	echo 'error: <br />' . $app->error()->getCurrentException();
+	echo 'Error de Aplicación: <br />' . $app->error()->getCurrentException();
+	echo '<br /><a href="index.php">Volver al inicio</a>';
 });

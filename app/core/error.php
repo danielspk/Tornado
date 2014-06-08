@@ -57,9 +57,9 @@ final class Error
 	{
 
 		// Se omiten los errores del tipo E_NOTICE
-		//if( $pErrNro === E_NOTICE ) {
-		//	return false;
-		//}
+		if( $pErrNro === E_NOTICE ) {
+			return false;
+		}
 		
 		// Se genera una excepción
 		throw new \ErrorException($pErrStr, $pErrNro, 1, $pErrFile, $pErrLine);

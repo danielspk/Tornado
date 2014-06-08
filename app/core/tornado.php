@@ -228,14 +228,14 @@ final class Tornado
 		// de un acceso directo hacia el módulo, 
 		if ($_SERVER['QUERY_STRING']) {
 			
-			// se elimina la barra final de la url si existiese
+			// se elimina la barra final e inicial de la url si existiesen
 			// se sanea la url
 			// se separan las secciones de la url en un array
 			$url = explode
 			(
 				'/',
 				filter_var(
-					rtrim(
+					trim(
 						$_SERVER['QUERY_STRING'],
 						'/'
 					), 
@@ -262,6 +262,8 @@ final class Tornado
 			
 			if ($count > 3) {
 				$params = array_slice($url, 3);
+			} else {
+				$params = array();
 			}
 		
 			$this->callModule($module, $controller, $method, $params);
@@ -301,7 +303,7 @@ final class Tornado
 		}
 		
 		// se agrega el namespace al controlador
-		$pController = 'App\\Modules\\' . $pController;
+		$pController = 'App\\Modules\\' . $pModule . '\\Controller\\' . $pController;
 		
 		// se valida si el método solicitado existe
 		if (! method_exists($pController, $pMethod)) {

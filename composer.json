@@ -3,8 +3,8 @@
     "type": "project",
     "description": "Reducido núcleo de trabajo para PHP",
     "keywords": [
-		"tornado", "mvc", "hmvc", "rest", "framework", "micro", 
-		"microframework", "php", "core", "dms"
+		"tornado", "mvc", "hmvc", "rest", "framework", "core", 
+		"microframework", "php", "dms", "danielspk"
 	],
     "homepage": "https://github.com/danielspk/TORNADO",
     "license": "MIT",
