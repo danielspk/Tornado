@@ -46,6 +46,15 @@ final class Error
     }
 
     /**
+     * Método que devuelve la excepción actual
+     * @return Exception
+     */
+    public function getCurrentException()
+    {
+        return $this->_currentException;
+    }
+
+    /**
      * Método que gestiona los errores y los convierte en exepciones
      * @param  int            $pErrNro  Número del error
      * @param  string         $pErrStr  Descripción del error
@@ -68,15 +77,6 @@ final class Error
     }
 
     /**
-     * Método que devuelve la excepción actual
-     * @return Exception
-     */
-    public function getCurrentException()
-    {
-        return $this->_currentException;
-    }
-
-    /**
      * Método que gestiona las excepciones
      * @param  ErrorException $pExc Excepción
      * @return void
@@ -94,7 +94,7 @@ final class Error
         ob_clean();
 
         // se ejecuta el gancho de errores
-        Tornado::getInstance()->hook()->call('error');
+        Tornado::getInstance()->hook('error');
 
         // se finaliza la ejecución
         exit();

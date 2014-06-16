@@ -29,9 +29,9 @@ final class Autoload
     public function register($pEnable = true)
     {
         if ($pEnable === true) {
-            spl_autoload_register(array($this, 'loadClass'));
+            spl_autoload_register(array($this, '_loadClass'));
         } else {
-            spl_autoload_unregister(array($this, 'loadClass'));
+            spl_autoload_unregister(array($this, '_loadClass'));
         }
     }
 
@@ -52,7 +52,7 @@ final class Autoload
      * @param  string  $pClass Nombre del namespace\clase a cargar
      * @return boolean
      */
-    public function loadClass($pClass)
+    private function _loadClass($pClass)
     {
 
         // se hace una copia del nombre del namespace\clase
