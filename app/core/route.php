@@ -10,7 +10,7 @@ namespace DMS\Tornado;
  * @license https://github.com/danielspk/TORNADO/blob/master/LICENSE MIT License
  * @version 0.9.0
  */
-final class route
+final class Route
 {
 
     /**
