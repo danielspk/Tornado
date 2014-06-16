@@ -15,19 +15,12 @@ namespace DMS\Tornado;
  */
 final class autoload
 {
+
     /**
      * Prefijos de namespaces y rutas de directorios correspondientes
      * @var array
      */
     private $_prefixes = array();
-
-    /**
-     * Método contructor
-     */
-    public function __construct()
-    {
-        $this->register();
-    }
 
     /**
      * Método que registra la clase para la auto carga de librerías

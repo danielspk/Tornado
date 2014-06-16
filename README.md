@@ -154,12 +154,14 @@ Ejemplo de uso básico (con dos tipos de enrutamientos)
     echo $nombres[1]['nombre2'];
 ```
 
-##### Setear namespace de autoload:
+##### Habilitar autoload y setear namespaces:
 
 ```php
     $app = DMS\Tornado\Tornado::getInstance();
 
+    $app->autoload()->register();
     $app->autoload()->addNamespace('Twing\Twing', array('twing/lib/src'));
+    $app->autoload()->addNamespace('Twing\Twing', array('twing/lib/test'));
 ```
 
 ##### Definir Hooks:
@@ -210,6 +212,25 @@ Existen tres tipos de parámetros para enrutar una URL:
             echo 'Hola ' . $pNombre;
         }
     ));
+```
+
+##### Gestión de errores y excepciones:
+El manejo de errores y excepciones viene habilitado por defecto. Puede alterar 
+su comportamiento de la siguiente forma:
+
+```php
+    $app = DMS\Tornado\Tornado::getInstance();
+
+    $app->error()->setHandler(true);  // habilita el manejador
+    $app->error()->setHandler(false); // deshabilita el manejador
+```
+
+Puede acceder ar la última excepción lanzada de la siguiente forma:
+
+```php
+    $app = DMS\Tornado\Tornado::getInstance();
+
+    $exc = $app->error()->getCurrentException();
 ```
 
 ##### Organización de proyecto:
