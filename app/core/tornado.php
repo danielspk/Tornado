@@ -153,15 +153,15 @@ final class Tornado
     }
 
     /**
-     * Método que asigna ganchos o devuelve la instancia de la clase de ganchos
+     * Método que registra ganchos o invoca a uno
      * @param  string $pName     Nombre del gancho
      * @param  mixed  $pCallback Callback a ejecutar
      * @return mixed
      */
     public function hook($pName = null, $pCallback = null)
     {
-        if (func_num_args() === 0) {
-            return $this->_hook;
+        if (func_num_args() === 1) {
+            $this->_hook->call($pName);
         }
 
         $this->_hook->register($pName, $pCallback);

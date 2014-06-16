@@ -15,7 +15,6 @@ namespace DMS\Tornado;
  */
 final class Autoload
 {
-
     /**
      * Prefijos de namespaces y rutas de directorios correspondientes
      * @var array

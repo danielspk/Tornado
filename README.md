@@ -164,7 +164,7 @@ Ejemplo de uso básico (con dos tipos de enrutamientos)
     $app->autoload()->addNamespace('Twing\Twing', array('twing/lib/test'));
 ```
 
-##### Definir Hooks:
+##### Uso de Hooks:
 Existen 4 tipos de hooks:
 - init: antes de cargar un módulo
 - end: despues de ejecutar un módulo
@@ -181,6 +181,14 @@ Existen 4 tipos de hooks:
     $app->hook('404', function(){
         echo '404';
     });
+```
+
+La forma de ejecutar un gancho por código es la siguiente:
+
+```php
+    $app = DMS\Tornado\Tornado::getInstance();
+
+    $app->hook('fueraDeLinea');
 ```
 
 ##### Definir Enrutamientos:
