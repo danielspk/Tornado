@@ -154,14 +154,13 @@ Ejemplo de uso básico (con dos tipos de enrutamientos)
     echo $nombres[1]['nombre2'];
 ```
 
-##### Habilitar autoload y setear namespaces:
+##### Habilitar/deshabilitar autoload y setear namespaces:
 
 ```php
     $app = DMS\Tornado\Tornado::getInstance();
 
-    $app->autoload()->register();
-    $app->autoload()->addNamespace('Twing\Twing', array('twing/lib/src'));
-    $app->autoload()->addNamespace('Twing\Twing', array('twing/lib/test'));
+    $app->autoload(true); // false para deshabilitar
+    $app->autoload('Twing\Twing', array('twing/lib/src', 'twing/lib/test'));
 ```
 
 ##### Uso de Hooks:

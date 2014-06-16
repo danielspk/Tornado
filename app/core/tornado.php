@@ -144,12 +144,21 @@ final class Tornado
     }
 
     /**
-     * Método que devuelve la instancia de la clase de autoload
-     * @return DMS\Core\Autoload
+     * Método que habilita o no el manejador de autoload, o registra un namespace/directorio
+     * @param  string $pPrefix  Prefijo del namespace a registrar
+     * @param  array  $pBaseDir Rutas de directorios que contienen las clases del namespace
+     * @return mixed
      */
-    public function autoload()
+    public function autoload($pPrefix = null, $pBaseDir = null)
     {
-        return $this->_autoload;
+        if (func_num_args() === 1) {
+
+            $this->_autoload->register($pPrefix);
+
+            return;
+        }
+
+        $this->_autoload->addNamespace($pPrefix, $pBaseDir);
     }
 
     /**
@@ -161,7 +170,10 @@ final class Tornado
     public function hook($pName = null, $pCallback = null)
     {
         if (func_num_args() === 1) {
+
             $this->_hook->call($pName);
+
+            return;
         }
 
         $this->_hook->register($pName, $pCallback);
