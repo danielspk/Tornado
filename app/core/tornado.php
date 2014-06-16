@@ -41,13 +41,13 @@ final class Tornado
      * Clase de manejo de configuración
      * @var DMS\Tornado\Config
      */
-    private $_config = array();
+    private $_config = null;
 
     /**
      * Clase de manejo de ganchos y eventos
      * @var DMS\Tornado\Hook
      */
-    private $_hook = array();
+    private $_hook = null;
 
     /**
      * Método constructor
