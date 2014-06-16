@@ -50,7 +50,9 @@ final class Hook
 
         // si el callback es una función anónima se la ejecuta
         } elseif (is_callable($this->_hooks[$pName])) {
+            
             call_user_func($this->_hooks[$pName]);
+            
         }
 
     }
