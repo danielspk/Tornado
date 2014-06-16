@@ -26,7 +26,7 @@ final class Autoload
      * @param  boolean $pEnable Indica si debe habilitarse o deshabilitarse
      * @return void
      */
-    public function register()
+    public function register($pEnable)
     {
         if ($pEnable === true) {
             spl_autoload_register(array($this, '_loadClass'));

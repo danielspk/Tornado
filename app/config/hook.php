@@ -4,12 +4,12 @@ $app = DMS\Tornado\Tornado::getInstance();
 
 $app->hook('init', function () {
 
-    ob_start(function ($pBuffer, $pPhase) {
+    /*ob_start(function ($pBuffer, $pPhase) {
         $buffer = mb_output_handler($pBuffer, $pPhase);
         $buffer = ob_gzhandler($pBuffer, $pPhase);
 
         return $buffer;
-    });
+    });*/
 
 });
 

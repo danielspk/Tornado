@@ -214,11 +214,9 @@ Existen tres tipos de parámetros para enrutar una URL:
     $app->route('HTTP', "/", "demo\demo\index");
 
     // utilizando una función anónima
-    $app->route(array(
-        "/saludar/:alpha" => function($pNombre = null){
-            echo 'Hola ' . $pNombre;
-        }
-    ));
+    $app->route('HTTP', "/saludar/:alpha", function($pNombre = null) {
+        echo 'Hola ' . $pNombre;
+    });
 ```
 
 ##### Gestión de errores y excepciones:

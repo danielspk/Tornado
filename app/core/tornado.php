@@ -239,7 +239,7 @@ final class Tornado
                 // se determina si hay una función anonima en vez de un módulo
                 if (is_callable($route['callback'])) {
 
-                    call_user_func($route['callback'], $this->_params);
+                    call_user_func_array($route['callback'], $this->_params);
 
                 } else {
 
