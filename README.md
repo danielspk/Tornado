@@ -40,8 +40,7 @@ TORNADO se desarrollo tratando de respetar las siguiente metas:
 - ser rápido
 - ser fácil de entender _(tanto su API como su construcción interna)_
 - tener la menor cantidad de métodos posibles dentro de su API
-- permitir incluir ganchos para que los programadores puedan extender el 
-mismo
+- permitir incluir ganchos para que los programadores puedan extender el mismo
 - permitir incluir librerías de terceros con suma facilidad
 - ser ligero respecto a la cantidad de líneas de código a mantener
 - ser un core de trabajo _(NUNCA un framework)_
@@ -57,8 +56,8 @@ amigables)
 
 ### Codificación:
 
-TORNADO apoya la idea del PHP Framework Interop Group e implementa los 
-estándares PSR-1, PSR-2 y PSR-4. _(Nota: en fase de revisión)_
+TORNADO apoya la iniciativa del PHP Framework Interop Group e implementa los 
+estándares PSR-1, PSR-2 y PSR-4.
 
 ### Dependencias externas (opcionales):
 

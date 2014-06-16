@@ -1,13 +1,13 @@
 <?php
-namespace App\Modules\Demo\Controller;
+namespace app\modules\demo\controller;
 
-class Demo extends \DMS\Tornado\Controller {
-	
-	public function index($param = null){
+class demo extends \DMS\Tornado\Controller
+{
+    public function index($param = null)
+    {
+        //$pepep = 10 /0;
+        echo ' Hola ' . $param . '<br>';
 
-		//$pepep = 10 /0;
-		echo ' Hola ' . $param . '<br>';
-		
-		echo '<form method="post"><input type="submit" value="enviar"/></form>';
-	}
+        echo '<form method="post"><input type="submit" value="enviar"/></form>';
+    }
 }
