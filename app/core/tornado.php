@@ -168,12 +168,20 @@ final class Tornado
     }
 
     /**
-     * Método que devuelve la instancia de la clase de manejo de errores
-     * @return DMS\Core\Error
+     * Método que habilita o no la gestión de errores/excepciones, o devuelve la última excepción lanzada
+     * @param  mixed $pParam Booleano (para habilitar/deshabilitar) o null para devolver excepción
+     * @return mixed
      */
-    public function error()
+    public function error($pParam = null)
     {
-        return $this->_error;
+        if (is_bool($pParam)) {
+
+            $this->_error->setHandler($pParam);
+
+            return;
+        }
+
+        return $this->_error->getCurrentException();
     }
 
     /**

@@ -23,6 +23,6 @@ $app->hook('404', function () {
 });
 
 $app->hook('error', function () use ($app) {
-    echo 'Error de Aplicación: <br />' . $app->error()->getCurrentException();
+    echo 'Error de Aplicación: <br />' . $app->error();
     echo '<br /><a href="index.php">Volver al inicio</a>';
 });

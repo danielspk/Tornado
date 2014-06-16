@@ -229,8 +229,8 @@ su comportamiento de la siguiente forma:
 ```php
     $app = DMS\Tornado\Tornado::getInstance();
 
-    $app->error()->setHandler(true);  // habilita el manejador
-    $app->error()->setHandler(false); // deshabilita el manejador
+    $app->error(true);  // habilita el manejador
+    $app->error(false); // deshabilita el manejador
 ```
 
 Puede acceder ar la última excepción lanzada de la siguiente forma:
@@ -238,7 +238,7 @@ Puede acceder ar la última excepción lanzada de la siguiente forma:
 ```php
     $app = DMS\Tornado\Tornado::getInstance();
 
-    $exc = $app->error()->getCurrentException();
+    $exc = $app->error();
 ```
 
 ##### Organización de proyecto:
