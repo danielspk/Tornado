@@ -263,7 +263,6 @@ DMS\Tornado\Tornado::getInstance()->run();
 #### Módulos:
 
 ##### Controladores:
-
 Todos los controladores deben extender de \DMS\Tornado\Controller y deben 
 definir un namespace que respete la siguiente jerarquía: 
 App\Modules\[Modulo]\Controller
@@ -277,6 +276,30 @@ App\Modules\[Modulo]\Controller
         }
     }
 ```
+
+La clase Controller ofrece los siguientes métodos:
+
+```php
+
+    // permite cargar un controlador
+    $this->loadController('Modulo\Controlador');
+
+    // permite cargar un modeo
+    $this->loadModel('Modulo\Modelo');
+
+    // permite cargar una vista sin parámetros
+    $this->loadView('Modulo\Vista');
+
+    // permite cargar una vista con parámetros
+    $this->loadView('Modulo\Vista', array('clave'=>'valor'));
+```
+
+##### Vistas:
+Los archivos de vistas deben llamarse de la siguiente forma/extenseión: 
+nombre.tpl.php
+
+En caso depasarse parámetros a las vistas la forma de invocar a los mismos es:
+$nombreClave
 
 ## Licencia:
 
