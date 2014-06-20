@@ -295,10 +295,10 @@ La clase Controller ofrece los siguientes métodos:
 ```
 
 ##### Vistas:
-Los archivos de vistas deben llamarse de la siguiente forma/extenseión: 
+Los archivos de vistas deben tener la extensión .tpl.php - Ejemplo:
 nombre.tpl.php
 
-En caso depasarse parámetros a las vistas la forma de invocar a los mismos es:
+En caso de pasarse parámetros a las vistas la forma de invocar a los mismos es:
 $nombreClave
 
 ## Licencia:
