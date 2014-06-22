@@ -301,6 +301,15 @@ nombre.tpl.php
 En caso de pasarse parámetros a las vistas la forma de invocar a los mismos es:
 $nombreClave
 
+###### Sugerenciapara enlaces y URL amigables:
+Para que su sistema se ajuste rápidamente a un entorno de url amigables o no, 
+puede definir, en el archivo de configuración, una constante llamada URLFRIENDLY 
+con el valor "/" si usa url amigables o "index.php/" si no utiliza. Ejemplo:
+
+```html
+    <a href="<?=URLFRIENDLY?>nombre">enlace</a>
+```
+
 ## Licencia:
 
 El proyecto se distribuye bajo la licencia MIT.
