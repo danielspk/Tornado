@@ -1,5 +1,7 @@
 <?php
 
+define('URLFRIENDLY', '/');
+
 $app = DMS\Tornado\Tornado::getInstance();
 
 $app->config('nombre', 'valor');
