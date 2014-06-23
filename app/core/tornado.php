@@ -202,15 +202,15 @@ final class Tornado
     private function _parseURL()
     {
 
-        // se determina si la URL esta enrutada hacia un módulo
+        // se ajustan las barras de la query string
         $querystring = (empty($_SERVER['QUERY_STRING'])) ? '/' : $_SERVER['QUERY_STRING'];
         $querystring .= (substr($querystring, -1) != '/') ? '/' : '';
 
         // filtros de enrutadores y expresión resultante
         $tokens = array(
-            ':string' => '([a-zA-Z]+)',
-            ':number' => '([0-9]+)',
-            ':alpha'  => '([a-zA-Z0-9-_]+)',
+            ':string'    => '([a-zA-Z]+)',
+            ':number'    => '([0-9]+)',
+            ':alpha'     => '([a-zA-Z0-9-_]+)',
             '[/:string]' => '/?([a-zA-Z]+)?',
             '[/:number]' => '/?([0-9]+)?',
             '[/:alpha]'  => '/?([a-zA-Z0-9-_]+)?'
