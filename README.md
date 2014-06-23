@@ -208,6 +208,11 @@ En caso de incluir parámetros opcionales la sintaxis es la siguiente:
 - [/:number]
 - [/:alpha]
 
+*Nota:* a fin de evitar errores en tiempo de ejecución todos los parámetros de 
+los métodos de los controladores deberían estar igualados a null como valor por 
+defecto. Quedando en la lógica del método la correcta validación de sus 
+parámetros.
+
 ```php
     $app = DMS\Tornado\Tornado::getInstance();
 
