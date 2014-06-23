@@ -353,7 +353,7 @@ $nombreClave
 ###### Sugerencia para enlaces y URL amigables:
 Para que su sistema se ajuste rápidamente a un entorno de url amigables o no, 
 puede definir, en el archivo de configuración, una constante llamada URLFRIENDLY 
-con el valor "/" si usa url amigables o "index.php/" si no utiliza. Ejemplo:
+con el valor "./" si usa url amigables o "index.php/" si no utiliza. Ejemplo:
 
 ```html
     <a href="<?=URLFRIENDLY?>nombre">enlace</a>
