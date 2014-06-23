@@ -359,7 +359,7 @@ automáticamente al uso o no de url amigables.
 
 ## Resumen de Métodos:
 
-** DMS\Tornado\Tornado **
+**DMS\Tornado\Tornado**
 
 | Método | Detalle |
 | ------ | ------- |
@@ -375,7 +375,7 @@ automáticamente al uso o no de url amigables.
 | hook(string mixed) | Registra un gancho y su callback |
 | route(string, mixed) | Registra un enrutamiento y su callback |
 
-** DMS\Tornado\Controller **
+**DMS\Tornado\Controller**
 
 | Método | Detalle |
 | ------ | ------- |
