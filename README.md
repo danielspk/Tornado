@@ -234,13 +234,15 @@ En caso de incluir parámetros opcionales la sintaxis es la siguiente:
 El único enrutamiento obligatorio es el del nodo raíz ya que indica cuál será el 
 callback a ejecutar por defecto al ingresar a la aplicación.
 Puede usar la convención de nombres de los módulos MVC para enrutar su 
-aplicación. Por ejemplo el módulo "usuarios", controlador "acceso", método 
-"ingresar" puede ser accedido directamente por URL de la siguiente forma:
+aplicación. Por ejemplo el módulo *"usuarios"*, controlador *"acceso"*, método 
+*"ingresar"* puede ser accedido directamente por URL de la siguiente forma:
+
 http://dominio/index.php?/usuarios/acceso/ingresar
 
 En caso de utilizar parámetros el criterio es el mismo que en los enrutameintos 
 definidos por métodos. Los mismos se separarán por barras y se colocaran a la 
-derecha del método a invocar: 
+derecha del método a invocar:
+
 http://dominio/index.php?/usuarios/listado/buscar/param1/param2
 
 En caso de no indicarse el método a ejecutar por defecto se invocará al método 
