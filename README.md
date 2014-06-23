@@ -357,6 +357,13 @@ con el valor "/" si usa url amigables o "index.php/" si no utiliza. Ejemplo:
 De esta forma con sólo editar el valor de dicha constante el sistema se ajustará 
 automáticamente al uso o no de url amigables.
 
+## Resumen de Métodos:
+
+| Método         | Detalle                                                  |
+| -------------- | -------------------------------------------------------- |
+| getInstance()  | Devuelve la instancia de Tornado (si no existe la crea)  |
+| run()          | Arranca el core                                          |
+
 ## Licencia:
 
 El proyecto se distribuye bajo la licencia MIT.
