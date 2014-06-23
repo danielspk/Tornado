@@ -8,7 +8,7 @@ namespace DMS\Tornado;
  * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
  * @link https://github.com/danielspk/TORNADO
  * @license https://github.com/danielspk/TORNADO/blob/master/LICENSE MIT License
- * @version 0.9.0
+ * @version 0.9.5
  */
 final class Route
 {
@@ -29,18 +29,36 @@ final class Route
     }
 
     /**
-     * Método que registra un evento de aplicación
-     * @param string $pMethod   Método de petición
-     * @param string $pRoute    Patrón de la ruta
-     * @param mixed  $pCallback Módulo o función a invocar
+     * Método que registra una ruta, sus métodos de invocación y su callback
+     * @param string $pMethodRoute Método de petición y Patrón de ruta
+     * @param mixed  $pCallback    Módulo o función a invocar
      */
-    public function register($pMethod, $pRoute, $pCallback)
+    public function register($pMethodRoute, $pCallback)
     {
-        $this->_routes[] = array(
-            'method' => $pMethod,
-            'route' => $pRoute,
-            'callback' => $pCallback)
-        ;
+
+        $pos = strpos(trim($pMethodRoute), '/');
+
+        if ($pos === 0) {
+
+            $this->_routes[] = array(
+                'method' => 'ALL',
+                'route' => $pMethodRoute,
+                'callback' => $pCallback
+            );
+
+        } else {
+
+            $route = trim(substr($pMethodRoute, $pos));
+            $methods = trim(substr($pMethodRoute, 0, $pos));
+
+            $this->_routes[] = array(
+                'method' => $methods,
+                'route' => $route,
+                'callback' => $pCallback
+            );
+
+        }
+
     }
 
 }

@@ -1,7 +1,7 @@
 <?php
 namespace app\modules\demo\controller;
 
-class demo extends \DMS\Tornado\Controller
+class Demo extends \DMS\Tornado\Controller
 {
     public function index($param = null)
     {

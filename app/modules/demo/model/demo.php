@@ -1,6 +1,6 @@
 <?php
 namespace APP\Modules;
 
-class demo
+class Demo
 {
 }

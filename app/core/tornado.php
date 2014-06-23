@@ -8,7 +8,7 @@ namespace DMS\Tornado;
  * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
  * @link https://github.com/danielspk/TORNADO
  * @license https://github.com/danielspk/TORNADO/blob/master/LICENSE MIT License
- * @version 0.9.0
+ * @version 0.9.5
  */
 final class Tornado
 {
@@ -119,13 +119,12 @@ final class Tornado
 
     /**
      * Método que registra enrutamientos a módulos
-     * @param string $pMethod   Método de petición
-     * @param string $pRoute    Patrón de la ruta
-     * @param mixed  $pCallback Módulo o función a invocar
+     * @param string $pMethodRoute Método de petición y Patrón de ruta
+     * @param mixed  $pCallback    Módulo o función a invocar
      */
-    public function route($pMethod, $pRoute, $pCallback)
+    public function route($pMethodRoute, $pCallback)
     {
-        $this->_route->register($pMethod, $pRoute, $pCallback);
+        $this->_route->register($pMethodRoute, $pCallback);
     }
 
     /**
@@ -233,7 +232,7 @@ final class Tornado
             $routeMatch = strtr($route[route], $tokens);
 
             if (
-                ($route['method'] == $method || $route['method'] == 'ALL') &&
+                ($route['method'] == 'ALL' || strstr($route['method'], $method) !== false) &&
                 preg_match('#^/?' . $routeMatch . '/?$#', $querystring, $matches)
             ) {
 
@@ -245,7 +244,7 @@ final class Tornado
                     } else {
                         $params = array();
                     }
-                  
+
                     call_user_func_array($route['callback'], $params);
 
                 } else {
