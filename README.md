@@ -94,11 +94,11 @@ Ejemplo de uso básico (con dos tipos de enrutamientos)
     $app = DMS\Tornado\Tornado::getInstance();
     
     // enrutamiento a módulo desde raíz
-    $app->route('ALL', "/", "demo\demo\index");
+    $app->route('/', 'demo\demo\index');
     
     // enrutamiento a función anónima
     $app->route(array(
-        "/saludar/:string"	=> function($pNombre = null){
+        '/saludar/:string'	=> function($pNombre = null){
             echo 'Hola ' . $pNombre;
         }
     ));
@@ -188,11 +188,11 @@ La forma de ejecutar un gancho por código es la siguiente:
 
 ##### Definir Enrutamientos:
 Los enrutamientos pueden ser:
-- ALL - cualquier petición
-- GET - RESTfull método GET
-- POST - RESTfull método POST
-- PUT - RESTfull método PUT
-- DELETE - RESTfull método DELETE
+- (vacio) - cualquier tipo de petición
+- GET - RESTfull por método GET
+- POST - RESTfull por método POST
+- PUT - RESTfull por método PUT
+- DELETE - RESTfull por método DELETE
 
 En caso de que el servidor no soporte los métodos PUT y DELETE se pueden simular 
 los mismos enviando una petición POST con una variable "REST_METHOD" cuyo valor 
@@ -203,7 +203,7 @@ Existen tres tipos de parámetros para enrutar una URL:
 - :number - sólo acepta números
 - :alpha - acepta números y letras
 
-En caso de incluir parámetros opcionales la sintaxis será la siguiente:
+En caso de incluir parámetros opcionales la sintaxis es la siguiente:
 - [/:string]
 - [/:number]
 - [/:alpha]
@@ -211,18 +211,24 @@ En caso de incluir parámetros opcionales la sintaxis será la siguiente:
 ```php
     $app = DMS\Tornado\Tornado::getInstance();
 
-    // utilizando un módulo
-    $app->route('ALL', '/', 'demo\demo\index');
+    // utilizando un módulo y cualquier tipo de petición
+    $app->route('/', 'demo\demo\index');
 
-    // utilizando una función anónima
-    $app->route('ALL', '/saludar/:alpha', function($pNombre = null) {
+    // utilizando una función anónima y cualquier tipo de petición
+    $app->route('/saludar/:alpha', function($pNombre = null) {
         echo 'Hola ' . $pNombre;
     });
 
-    // utilizando parámetros opcionales
-    $app->route('ALL', '/mostrar[/:alpha][/:number]', function ($pNombre = null, $pEdad = null) {
+    // utilizando parámetros opcionales y cualquier tipo de petición
+    $app->route('/mostrar[/:alpha][/:number]', function ($pNombre = null, $pEdad = null) {
         echo 'Hola ' . $pNombre . ', ' . $pEdad;
     });
+
+    // utilizando un módulo y petición POST
+    $app->route('POST /', 'demo\demo\guardar');
+
+    // utilizando un módulo y petición GET o POST
+    $app->route('GET|POST /', 'demo\demo\listar');
 ```
 
 ##### Gestión de errores y excepciones:
