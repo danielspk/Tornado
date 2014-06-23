@@ -229,7 +229,7 @@ final class Tornado
         // se recorren las rutas registradas
         foreach ($this->_route->getRoutes() as $route) {
 
-            $routeMatch = strtr($route[route], $tokens);
+            $routeMatch = strtr($route['route'], $tokens);
 
             if (
                 ($route['method'] == 'ALL' || strstr($route['method'], $method) !== false) &&
