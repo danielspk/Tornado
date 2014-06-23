@@ -59,10 +59,6 @@ amigables)
 TORNADO apoya la iniciativa del PHP Framework Interop Group e implementa los 
 estándares PSR-1, PSR-2 y PSR-4.
 
-### Dependencias externas (opcionales):
-
-- DMS Libs for PHP _(Nota: en desarrollo)_
-
 ## Instalación:
 
 El core en su versión nativa no requiere instalación alguna. Basta con descargar
@@ -98,7 +94,7 @@ Ejemplo de uso básico (con dos tipos de enrutamientos)
     $app = DMS\Tornado\Tornado::getInstance();
     
     // enrutamiento a módulo desde raíz
-    $app->route('HTTP', "/", "demo\demo\index");
+    $app->route('ALL', "/", "demo\demo\index");
     
     // enrutamiento a función anónima
     $app->route(array(
@@ -192,7 +188,7 @@ La forma de ejecutar un gancho por código es la siguiente:
 
 ##### Definir Enrutamientos:
 Los enrutamientos pueden ser:
-- HTTP - cualquier petición
+- ALL - cualquier petición
 - GET - RESTfull método GET
 - POST - RESTfull método POST
 - PUT - RESTfull método PUT
@@ -207,15 +203,25 @@ Existen tres tipos de parámetros para enrutar una URL:
 - :number - sólo acepta números
 - :alpha - acepta números y letras
 
+En caso de incluir parámetros opcionales la sintaxis será la siguiente:
+- [/:string]
+- [/:number]
+- [/:alpha]
+
 ```php
     $app = DMS\Tornado\Tornado::getInstance();
 
     // utilizando un módulo
-    $app->route('HTTP', "/", "demo\demo\index");
+    $app->route('ALL', '/', 'demo\demo\index');
 
     // utilizando una función anónima
-    $app->route('HTTP', "/saludar/:alpha", function($pNombre = null) {
+    $app->route('ALL', '/saludar/:alpha', function($pNombre = null) {
         echo 'Hola ' . $pNombre;
+    });
+
+    // utilizando parámetros opcionales
+    $app->route('ALL', '/mostrar[/:alpha][/:number]', function ($pNombre = null, $pEdad = null) {
+        echo 'Hola ' . $pNombre . ', ' . $pEdad;
     });
 ```
 
@@ -230,7 +236,7 @@ su comportamiento de la siguiente forma:
     $app->error(false); // deshabilita el manejador
 ```
 
-Puede acceder ar la última excepción lanzada de la siguiente forma:
+Puede acceder a la última excepción lanzada de la siguiente forma:
 
 ```php
     $app = DMS\Tornado\Tornado::getInstance();

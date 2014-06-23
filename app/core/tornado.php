@@ -205,12 +205,16 @@ final class Tornado
 
         // se determina si la URL esta enrutada hacia un módulo
         $querystring = (empty($_SERVER['QUERY_STRING'])) ? '/' : $_SERVER['QUERY_STRING'];
+        $querystring .= (substr($querystring, -1) != '/') ? '/' : '';
 
         // filtros de enrutadores y expresión resultante
         $tokens = array(
             ':string' => '([a-zA-Z]+)',
             ':number' => '([0-9]+)',
-            ':alpha'  => '([a-zA-Z0-9-_]+)'
+            ':alpha'  => '([a-zA-Z0-9-_]+)',
+            '[/:string]' => '/?([a-zA-Z]+)?',
+            '[/:number]' => '/?([0-9]+)?',
+            '[/:alpha]'  => '/?([a-zA-Z0-9-_]+)?'
         );
 
         // método de petición
@@ -226,20 +230,23 @@ final class Tornado
         // se recorren las rutas registradas
         foreach ($this->_route->getRoutes() as $route) {
 
-            $pattern = strtr($route['route'], $tokens);
+            $routeMatch = strtr($route[route], $tokens);
 
             if (
-                ($route['method'] == $method || $route['method'] == 'HTTP') &&
-                preg_match('#^/?' . $pattern . '/?$#', $querystring, $matches)
+                ($route['method'] == $method || $route['method'] == 'ALL') &&
+                preg_match('#^/?' . $routeMatch . '/?$#', $querystring, $matches)
             ) {
-
-                if (count($matches) > 1)
-                    $this->_params = array_slice($matches, 1);
 
                 // se determina si hay una función anonima en vez de un módulo
                 if (is_callable($route['callback'])) {
 
-                    call_user_func_array($route['callback'], $this->_params);
+                    if (count($matches) > 1) {
+                        $params = array_slice($matches, 1);
+                    } else {
+                        $params = array();
+                    }
+                  
+                    call_user_func_array($route['callback'], $params);
 
                 } else {
 
