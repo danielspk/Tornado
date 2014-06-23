@@ -237,7 +237,7 @@ Puede usar la convención de nombres de los módulos MVC para enrutar su
 aplicación. Por ejemplo el módulo *"usuarios"*, controlador *"acceso"*, método 
 *"ingresar"* puede ser accedido directamente por URL de la siguiente forma:
 
-http://dominio/index.php?/usuarios/acceso/ingresar
+(http://dominio/index.php?/usuarios/acceso/ingresar)
 
 En caso de utilizar parámetros el criterio es el mismo que en los enrutameintos 
 definidos por métodos. Los mismos se separarán por barras y se colocaran a la 
