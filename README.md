@@ -243,25 +243,25 @@ En caso de utilizar parámetros el criterio es el mismo que en los enrutameintos
 definidos por métodos. Los mismos se separarán por barras y se colocaran a la 
 derecha del método a invocar:
 
-http://dominio/index.php?/usuarios/listado/buscar/param1/param2
+>http://dominio/index.php?/usuarios/listado/buscar/param1/param2
 
 En caso de no indicarse el método a ejecutar por defecto se invocará al método 
 "index" del controlador:
 
-http://dominio/index.php?/usuarios/acceso
+>http://dominio/index.php?/usuarios/acceso
 
 es igual a 
 
-http://dominio/index.php?/usuarios/acceso/index
+>http://dominio/index.php?/usuarios/acceso/index
 
 Otra forma reducida de acceso es utilizar un único nombre (válido siempre que no 
 existan parámetros):
 
-http://dominio/index.php?/nombre
+>http://dominio/index.php?/nombre
 
 es igual a 
 
-http://dominio/index.php?/nombre/nombre/index
+>http://dominio/index.php?/nombre/nombre/index
 
 ##### Gestión de errores y excepciones:
 El manejo de errores y excepciones viene habilitado por defecto. Puede alterar 
