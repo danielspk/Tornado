@@ -359,10 +359,30 @@ automáticamente al uso o no de url amigables.
 
 ## Resumen de Métodos:
 
-| Método         | Detalle                                                  |
-| -------------- | -------------------------------------------------------- |
-| getInstance()  | Devuelve la instancia de Tornado (si no existe la crea)  |
-| run()          | Arranca el core                                          |
+** DMS\Tornado\Tornado **
+
+| Método | Detalle |
+| ------ | ------- |
+| getInstance() | Devuelve la instancia de Tornado (si no existe la crea) |
+| run() | Arranca el core |
+| config(string) | Devuelve el valor de la variable de configuración |
+| config(string, mixed) | Setea el valor en la variable de configuración |
+| autoload(bool) | Habilita/deshabilita el uso de autoload de clases |
+| autolod(string, array) | Setea un namespace y las posibles ubicaciones de sus clases |
+| error() | Devuelve la última excepción atrapada |
+| error(bool) | Habilita/deshabilita el manejador interno de errores y excepciones |
+| hook(string) | Ejecuta el gancho indicado |
+| hook(string mixed) | Registra un gancho y su callback |
+| route(string, mixed) | Registra un enrutamiento y su callback |
+
+** DMS\Tornado\Controller **
+
+| Método | Detalle |
+| ------ | ------- |
+| loadController(string) | Incluye un controlador |
+| loadModel(string) | Incluye un modelo |
+| loadView(string) | Incluye una vista |
+| loadView(string, array) | Incluye una vista junto a un array de variables |
 
 ## Licencia:
 
