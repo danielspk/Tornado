@@ -94,7 +94,7 @@ Ejemplo de uso básico (con dos tipos de enrutamientos)
     $app = DMS\Tornado\Tornado::getInstance();
     
     // enrutamiento a módulo desde raíz
-    $app->route('/', 'demo\demo\index');
+    $app->route('/', 'demo|demo|index');
     
     // enrutamiento a función anónima
     $app->route(array(
@@ -170,7 +170,7 @@ Existen 4 tipos de hooks:
     $app = DMS\Tornado\Tornado::getInstance();
 
     // utilizando un módulo / clase
-    $app->hook('error', 'modulo\controlador\metodo'));
+    $app->hook('error', 'modulo|controlador|metodo'));
 
     // utilizando una función anónima
     $app->hook('404', function(){
@@ -217,7 +217,7 @@ parámetros.
     $app = DMS\Tornado\Tornado::getInstance();
 
     // utilizando un módulo y cualquier tipo de petición
-    $app->route('/', 'demo\demo\index');
+    $app->route('/', 'demo|demo|index');
 
     // utilizando una función anónima y cualquier tipo de petición
     $app->route('/saludar/:alpha', function($pNombre = null) {
@@ -230,10 +230,10 @@ parámetros.
     });
 
     // utilizando un módulo y petición POST
-    $app->route('POST /', 'demo\demo\guardar');
+    $app->route('POST /', 'demo|demo|guardar');
 
     // utilizando un módulo y petición GET o POST
-    $app->route('GET|POST /', 'demo\demo\listar');
+    $app->route('GET|POST /', 'demo|demo|listar');
 ```
 
 El único enrutamiento obligatorio es el del nodo raíz ya que indica cuál será el 
@@ -331,16 +331,19 @@ La clase Controller ofrece los siguientes métodos:
 ```php
 
     // permite cargar un controlador
-    $this->loadController('Modulo\Controlador');
+    $this->loadController('Modulo|Controlador');
 
     // permite cargar un modeo
-    $this->loadModel('Modulo\Modelo');
+    $this->loadModel('Modulo|Modelo');
 
     // permite cargar una vista sin parámetros
-    $this->loadView('Modulo\Vista');
+    $this->loadView('Modulo|Vista');
 
     // permite cargar una vista con parámetros
-    $this->loadView('Modulo\Vista', array('clave'=>'valor'));
+    $this->loadView('Modulo|Vista', array('clave'=>'valor'));
+
+    // permite cargar una vista contenida dentro de una subcarpeta
+    $this->loadView('Modulo|SubCarpeta/Vista');
 ```
 
 ##### Vistas:

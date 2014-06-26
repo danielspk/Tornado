@@ -249,7 +249,7 @@ final class Tornado
 
                 } else {
 
-                    $handler = explode('\\', $route['callback']);
+                    $handler = explode('|', $route['callback']);
 
                     $this->callModule($handler[0], $handler[1], $handler[2]);
 
