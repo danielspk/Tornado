@@ -47,7 +47,7 @@ abstract class Controller
     protected function loadModel($pModel)
     {
         $model = explode('|', $pModel);
-        require 'app/modules/'. $model[0] . '/model/' . $model[1] . '_mod.php';
+        require 'app/modules/'. $model[0] . '/model/' . $model[1] . '.php';
     }
 
 }
