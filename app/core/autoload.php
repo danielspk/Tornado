@@ -101,7 +101,7 @@ final class Autoload
         foreach ($this->_prefixes[$pPrefix] as $baseDir) {
 
             // se formatea la ruta del archivo a buscar
-            $file = $baseDir . str_replace('\\', '/', $pRelativeClass) . '.php';
+            $file = __DIR__ . '/../' . $baseDir . str_replace('\\', '/', $pRelativeClass) . '.php';
 
             // si existe el archivo se lo carga
             if (file_exists($file)) {
