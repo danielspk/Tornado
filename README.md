@@ -314,10 +314,10 @@ DMS\Tornado\Tornado::getInstance()->run();
 ##### Controladores:
 Todos los controladores deben extender de \DMS\Tornado\Controller y deben 
 definir un namespace que respete la siguiente jerarquía: 
-App\Modules\[Modulo]\Controller
+app\modules\[modulo]\controller
 
 ```php
-    namespace App\Modules\Demo\Controller;
+    namespace app\modules\demo\controller;
 
     class Demo extends \DMS\Tornado\Controller {
         public function index($param = null){
@@ -344,6 +344,20 @@ La clase Controller ofrece los siguientes métodos:
 
     // permite cargar una vista contenida dentro de una subcarpeta
     $this->loadView('Modulo|SubCarpeta/Vista');
+```
+
+##### Modelos:
+Todos los controladores deben definir un namespace que respete la siguiente 
+jerarquía: app\modules\[modulo]\model
+
+```php
+    namespace app\modules\demo\model;
+
+    class Demo {
+        public function getDemos($param = null){
+            return true;
+        }
+    }
 ```
 
 ##### Vistas:
