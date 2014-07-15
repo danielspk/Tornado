@@ -384,6 +384,9 @@ etiqueta base de html dentro del head. Ejemplo:
 
 ```html
     <base href='<?=URLFRIENDLY?>' />
+
+    <!-- ejemplo de uso -->
+    <a href="./ruta">Link a ruta</a>
 ```
 
 De esta forma con sólo editar el valor de dicha constante el sistema se ajustará 
