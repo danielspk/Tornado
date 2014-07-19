@@ -202,15 +202,17 @@ final class Tornado
     private function _parseURL()
     {
 
+        // se determina si la URL esta enrutada hacia un módulo
+
         // se ajustan las barras de la query string
         $querystring = (empty($_SERVER['QUERY_STRING'])) ? '/' : $_SERVER['QUERY_STRING'];
         $querystring .= (substr($querystring, -1) != '/') ? '/' : '';
 
         // filtros de enrutadores y expresión resultante
         $tokens = array(
-            ':string'    => '([a-zA-Z]+)',
-            ':number'    => '([0-9]+)',
-            ':alpha'     => '([a-zA-Z0-9-_]+)',
+            ':string' => '([a-zA-Z]+)',
+            ':number' => '([0-9]+)',
+            ':alpha'  => '([a-zA-Z0-9-_]+)',
             '[/:string]' => '/?([a-zA-Z]+)?',
             '[/:number]' => '/?([0-9]+)?',
             '[/:alpha]'  => '/?([a-zA-Z0-9-_]+)?'
@@ -236,14 +238,15 @@ final class Tornado
                 preg_match('#^/?' . $routeMatch . '/?$#', $querystring, $matches)
             ) {
 
+                // se determina si hay parámetros
+                if (count($matches) > 1) {
+                    $params = array_slice($matches, 1);
+                } else {
+                    $params = array();
+                }
+
                 // se determina si hay una función anonima en vez de un módulo
                 if (is_callable($route['callback'])) {
-
-                    if (count($matches) > 1) {
-                        $params = array_slice($matches, 1);
-                    } else {
-                        $params = array();
-                    }
 
                     call_user_func_array($route['callback'], $params);
 
@@ -251,7 +254,7 @@ final class Tornado
 
                     $handler = explode('|', $route['callback']);
 
-                    $this->callModule($handler[0], $handler[1], $handler[2]);
+                    $this->callModule($handler[0], $handler[1], $handler[2], $params);
 
                 }
 
