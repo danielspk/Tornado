@@ -8,7 +8,7 @@ namespace DMS\Tornado;
  * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
  * @link https://github.com/danielspk/TORNADO
  * @license https://github.com/danielspk/TORNADO/blob/master/LICENSE MIT License
- * @version 0.9.5
+ * @version 0.9.6
  */
 final class Error
 {
