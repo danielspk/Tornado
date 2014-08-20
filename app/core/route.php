@@ -14,7 +14,7 @@ final class Route
 {
 
     /**
-     * Contenedor de funciones de eventos de usuario
+     * Contenedor de enrutamientos
      * @var array
      */
     private $_routes = array();

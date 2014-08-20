@@ -110,7 +110,7 @@ final class Tornado
         $this->_hook->call('init');
 
         // se carga el modulo correspondiente a la URL
-        self::_parseURL();
+        $this->_parseURL();
 
         // se ejecuta el hook de finalización
         $this->_hook->call('end');
@@ -248,7 +248,7 @@ final class Tornado
                 // se determina si hay una función anonima en vez de un módulo
                 if (is_callable($route['callback'])) {
 
-                    call_user_func_array($route['callback'], $params);
+                    $this->callClosure($route['callback'], $params);
 
                 } else {
 
@@ -308,18 +308,32 @@ final class Tornado
 
             $this->callModule($module, $controller, $method, $params);
 
-        } else {
-
-            $this->_hook->call('404');
-
             return;
 
         }
 
+        $this->_hook->call('404');
+
+        return;
+
+    }
+
+    /**
+     * Método que ejecuta una función anónima (closure)
+     * @param object $pCallback Función de ejecución
+     * @param array  $pParams   Parámetros de la función
+     */
+    public function callClosure($pCallback, $pParams)
+    {
+        call_user_func_array($pCallback, $pParams);
     }
 
     /**
      * Método que ejecuta el módulo\controlador\acción\parámetros parseado
+     * @param  string $pModule     Nombre del módulo
+     * @param  string $pController Nombre del controlador
+     * @param  string $pMethod     Nombre del método
+     * @param  array  $pParams     Parámetros del método
      * @return void
      */
     public function callModule(
