@@ -10,6 +10,6 @@ $app->route('/saludar/:alpha', function ($pNombre = null) {
     echo 'Hola ' . $pNombre;
 });
 
-$app->route('/mostrar[/:alpha][/:number]', function ($pNombre = null, $pApellido = null) {
-    echo 'Hola ' . $pNombre . ', ' . $pApellido;
+$app->route('/saludar[/:alpha][/:number]', function ($pNombre = null, $pEdad = null) {
+    echo 'Hola ' . $pNombre . ', Edad: ' . $pEdad;
 });
