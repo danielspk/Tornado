@@ -6,6 +6,8 @@ TORNADO
 TORNADO es un reducido marco de trabajo para PHP que permite implementar el 
 patrón HMVC y/o servicios RESTfull
 
+Puede obtener más información en su web http://tornado-php.com
+
 ### Filosofia:
 
 TORNADO no intenta ser un gran framework PHP. Contrariamente intenta ser un 
