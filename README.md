@@ -152,6 +152,18 @@ Ejemplo de uso básico (con dos tipos de enrutamientos)
     echo $nombres[1]['nombre2'];
 ```
 
+##### Variables de configuración propias de Tornado:
+
+Tornado permite controlar su comportamiento mediante variables de configuración
+predefinidas:
+
+```php
+
+    // deshabilita el acceso por URL a los módulos hmvc
+    $app->config('tornado_url_hmvc_deny', true);
+
+```
+
 ##### Habilitar/deshabilitar autoload y setear namespaces:
 
 ```php
