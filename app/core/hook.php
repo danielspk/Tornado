@@ -6,9 +6,9 @@ namespace DMS\Tornado;
  *
  * @package TORNADO-CORE
  * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
- * @link https://github.com/danielspk/TORNADO
+ * @link http://tornado-php.com
  * @license https://github.com/danielspk/TORNADO/blob/master/LICENSE MIT License
- * @version 0.9.6
+ * @version 0.9.7
  */
 final class Hook
 {
