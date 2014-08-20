@@ -12,7 +12,10 @@
  */
 
 /*
- *              EDITE BAJO SU RIESGO - El tornado lo puedo arrasar
+ * ATENCIÓN: Edite bajo su riego, el tornado lo puedo arrasar.
+ */
+
+/*
  *
  *                                                     ,''
  *                                                     @@@
