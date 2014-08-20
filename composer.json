@@ -6,7 +6,7 @@
 		"tornado", "mvc", "hmvc", "rest", "framework", "core", 
 		"microframework", "php", "dms", "danielspk"
 	],
-    "homepage": "https://github.com/danielspk/TORNADO",
+    "homepage": "http://tornado-php.com/",
     "license": "MIT",
     "authors": [
         {
