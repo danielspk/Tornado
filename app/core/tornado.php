@@ -265,7 +265,7 @@ final class Tornado
         }
 
         // si la URL no fue enrutada y no se deshabilito el acceso a hmvc desde
-		// URLs se parsea la misma en busca de un módulo\controlador\método\parámetros
+        // URLs se parsea la misma en busca de un módulo\controlador\método\parámetros
         if ($_SERVER['QUERY_STRING'] && $this->_config['tornado_url_hmvc_deny'] != true) {
 
             // se elimina la barra final e inicial de la url si existiesen

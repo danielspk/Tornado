@@ -270,6 +270,16 @@ es igual a
 
 >http://dominio/index.php?/nombre/nombre/index
 
+Puede deshabilitar el acceso a los módulos HMVC directamente desde la URL 
+definiendo la siguiente variable de configuración:
+
+```php
+    $app->config('tornado_url_hmvc_deny', true);
+```
+
+Tenga en cuenta que si hace esto la única forma de acceder a los módulos HMVC 
+será definiendo enrutamientos hacia los mismos.
+
 ##### Gestión de errores y excepciones:
 El manejo de errores y excepciones viene habilitado por defecto. Puede alterar 
 su comportamiento de la siguiente forma:
