@@ -162,6 +162,11 @@ predefinidas:
     // deshabilita el acceso por URL a los módulos hmvc
     $app->config('tornado_url_hmvc_deny', true);
 
+    // configura la aplicación para un ambiente de desarrollo
+    // - errores visibles
+    // - parse de anotaciones de métodos HMVC para generar enrutamientos automáticos
+    $app->config('tornado_environment_development', true);
+
 ```
 
 ##### Habilitar/deshabilitar autoload y setear namespaces:

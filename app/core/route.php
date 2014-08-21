@@ -62,6 +62,27 @@ final class Route
     }
 
     /**
+     * Método que registra rutas serializadas
+     */
+    public function unserialize()
+    {
+
+        $file = __DIR__ . '/../config/route_serialize.php';
+
+        if (file_exists($file)) {
+
+            $sz = file_get_contents($file);
+            $serialized = unserialize($sz);
+
+            foreach ($serialized as $route) {
+                $this->register($route[0], $route[1]);
+            }
+
+        }
+
+    }
+
+    /**
      * Método que parsea la url en busca del módulo/callback a ejecutar
      * @return boolean Resultado de la petición
      */
@@ -214,7 +235,7 @@ final class Route
         if (! file_exists($path)) {
             return false;
         } else {
-            require $path;
+            require_once $path;
         }
 
         // se agrega el namespace al controlador

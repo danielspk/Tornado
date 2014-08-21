@@ -50,6 +50,12 @@ final class Tornado
     private $_hook = null;
 
     /**
+     * Clase de manejo de anotaciones
+     * @var DMS\Tornado\Annotation
+     */
+    private $_annotation = null;
+
+    /**
      * Método constructor
      */
     private function __construct()
@@ -61,12 +67,14 @@ final class Tornado
         require __DIR__ . '/hook.php';
         require __DIR__ . '/route.php';
         require __DIR__ . '/controller.php';
+        require __DIR__ . '/annotation.php';
 
         $this->_autoload = new Autoload();
         $this->_error = new Error();
         $this->_config = new Config();
         $this->_hook = new Hook();
         $this->_route = new Route();
+        $this->_annotation = new Annotation();
 
     }
 
@@ -105,6 +113,24 @@ final class Tornado
         mb_http_input('UTF-8');
         mb_language('uni');
         mb_regex_encoding('UTF-8');
+
+        // se establecen comportamientos según el ambiente de la aplicación
+        if ($this->_config['tornado_environment_development'] == true) {
+
+            ini_set('display_errors', '1');
+            error_reporting(E_ALL);
+
+            $this->_annotation->findRoutes();
+
+        } else {
+
+            ini_set('display_errors', '0');
+            error_reporting(0);
+
+        }
+
+        // se registran las rutas serializadas
+        $this->_route->unserialize();
 
         // se ejecuta el hook de inicio
         $this->_hook->call('init');
