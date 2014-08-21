@@ -248,13 +248,13 @@ final class Tornado
                 // se determina si hay una función anonima en vez de un módulo
                 if (is_callable($route['callback'])) {
 
-                    $this->callClosure($route['callback'], $params);
-
+                    call_user_func_array($route['callback'], $params);
+					
                 } else {
 
                     $handler = explode('|', $route['callback']);
 
-                    $this->callModule($handler[0], $handler[1], $handler[2], $params);
+                    $this->_callModule($handler[0], $handler[1], $handler[2], $params);
 
                 }
 
@@ -306,7 +306,7 @@ final class Tornado
                 $params = array();
             }
 
-            $this->callModule($module, $controller, $method, $params);
+            $this->_callModule($module, $controller, $method, $params);
 
             return;
 
@@ -319,16 +319,6 @@ final class Tornado
     }
 
     /**
-     * Método que ejecuta una función anónima (closure)
-     * @param object $pCallback Función de ejecución
-     * @param array  $pParams   Parámetros de la función
-     */
-    public function callClosure($pCallback, $pParams)
-    {
-        call_user_func_array($pCallback, $pParams);
-    }
-
-    /**
      * Método que ejecuta el módulo\controlador\acción\parámetros parseado
      * @param  string $pModule     Nombre del módulo
      * @param  string $pController Nombre del controlador
@@ -336,7 +326,7 @@ final class Tornado
      * @param  array  $pParams     Parámetros del método
      * @return void
      */
-    public function callModule(
+    private function _callModule(
         $pModule = null, $pController = null, $pMethod = null, $pParams = array()
     )
     {
