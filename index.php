@@ -110,4 +110,4 @@ require 'app/config/route.php';
 require 'app/config/hook.php';
 
 // se inicia el tornado
-DMS\Tornado\Tornado::getInstance()->run();
+\DMS\Tornado\Tornado::getInstance()->run();

@@ -2,4 +2,4 @@
 
 define('URLFRIENDLY', '/');
 
-$app = DMS\Tornado\Tornado::getInstance();
+$app = \DMS\Tornado\Tornado::getInstance();

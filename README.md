@@ -93,7 +93,7 @@ Ejemplo de uso básico (con dos tipos de enrutamientos)
     require 'app/core/tornado.php';
     
     // obtener instancia del core
-    $app = DMS\Tornado\Tornado::getInstance();
+    $app = \DMS\Tornado\Tornado::getInstance();
     
     // enrutamiento a módulo desde raíz
     $app->route('/', 'demo|demo|index');
@@ -115,24 +115,24 @@ Ejemplo de uso básico (con dos tipos de enrutamientos)
 ##### Obtener Instancia del core:
 
 ```php
-    $app = DMS\Tornado\Tornado::getInstance();
+    $app = \DMS\Tornado\Tornado::getInstance();
 ```
 
 ##### Arrancar el core:
 
 ```php
 	// con una instancia del core en una variable
-    $app = DMS\Tornado\Tornado::getInstance();
+    $app = \DMS\Tornado\Tornado::getInstance();
     $app->run();
 
     // sin ninguna instancia del core en una variable
-    DMS\Tornado\Tornado::getInstance()->run();
+    \DMS\Tornado\Tornado::getInstance()->run();
 ```
 
 ##### Setear configuración:
 
 ```php
-    $app = DMS\Tornado\Tornado::getInstance();
+    $app = \DMS\Tornado\Tornado::getInstance();
 
     $app->config('nombre', 'valor del nombre');
     $app->config('nombres', array('nombre1'=>'valor1', 'nombre2'=>'valor2'));
@@ -141,7 +141,7 @@ Ejemplo de uso básico (con dos tipos de enrutamientos)
 ##### Leer configuración:
 
 ```php
-    $app = DMS\Tornado\Tornado::getInstance();
+    $app = \DMS\Tornado\Tornado::getInstance();
 
     // configuración simple
     echo $app->config('nombre');
@@ -167,7 +167,7 @@ predefinidas:
 ##### Habilitar/deshabilitar autoload y setear namespaces:
 
 ```php
-    $app = DMS\Tornado\Tornado::getInstance();
+    $app = \DMS\Tornado\Tornado::getInstance();
 
     $app->autoload(true); // false para deshabilitar
     $app->autoload('Twing\Twing', array('twing/lib/src', 'twing/lib/test'));
@@ -181,10 +181,10 @@ Existen 4 tipos de hooks:
 - error: al atraparse un error de aplicación
 
 ```php
-    $app = DMS\Tornado\Tornado::getInstance();
+    $app = \DMS\Tornado\Tornado::getInstance();
 
-    // utilizando un módulo / clase
-    $app->hook('error', 'modulo|controlador|metodo'));
+    // utilizando una clase / método / parámetros
+    $app->hook('error', array('ErrorUser', 'display', array()));
 
     // utilizando una función anónima
     $app->hook('404', function(){
@@ -192,10 +192,25 @@ Existen 4 tipos de hooks:
     });
 ```
 
+También es posible crear ganchos personalizados. Ejemplo usando una clase de 
+usuario (se asume que ya debe estar incluida o incluida en el autoload):
+
+```php
+class Saludador
+{
+    public function persona($nombre, $apellido)
+    {
+        echo 'Hola ' . $nombre . ', ' . $apellido;
+    }
+}
+
+$app->hook('saludar', array('Saludador', 'persona', array('Tornado', 'Core')));
+```
+
 La forma de ejecutar un gancho por código es la siguiente:
 
 ```php
-    $app = DMS\Tornado\Tornado::getInstance();
+    $app = \DMS\Tornado\Tornado::getInstance();
 
     $app->hook('fueraDeLinea');
 ```
@@ -228,7 +243,7 @@ defecto. Quedando en la lógica del método la correcta validación de sus
 parámetros.
 
 ```php
-    $app = DMS\Tornado\Tornado::getInstance();
+    $app = \DMS\Tornado\Tornado::getInstance();
 
     // utilizando un módulo y cualquier tipo de petición
     $app->route('/', 'demo|demo|index');
@@ -297,7 +312,7 @@ El manejo de errores y excepciones viene habilitado por defecto. Puede alterar
 su comportamiento de la siguiente forma:
 
 ```php
-    $app = DMS\Tornado\Tornado::getInstance();
+    $app = \DMS\Tornado\Tornado::getInstance();
 
     $app->error(true);  // habilita el manejador
     $app->error(false); // deshabilita el manejador
@@ -306,7 +321,7 @@ su comportamiento de la siguiente forma:
 Puede acceder a la última excepción lanzada de la siguiente forma:
 
 ```php
-    $app = DMS\Tornado\Tornado::getInstance();
+    $app = \DMS\Tornado\Tornado::getInstance();
 
     $exc = $app->error();
 ```
@@ -330,7 +345,7 @@ require 'app/config/route.php';
 require 'app/config/hook.php';
 
 // se inicia el core
-DMS\Tornado\Tornado::getInstance()->run();
+\DMS\Tornado\Tornado::getInstance()->run();
 ```
 
 #### Módulos:

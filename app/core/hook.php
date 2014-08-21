@@ -39,14 +39,18 @@ final class Hook
             throw new \InvalidArgumentException('Hook no registrado.');
         }
 
-        // si el callback del hook es un string se hace una llamada a un módulo
-        if (is_string($this->_hooks[$pName])) {
+        // si el callback del hook es un array se hace una llamada a la clase/método
+        if (is_array($this->_hooks[$pName])) {
 
-            // se obtiene el modulo controlador método
-            $handler = explode('\\', $this->_hooks[$pName]);
+            $classHook = new $this->_hooks[$pName][0]();
 
-            $app = Tornado::getInstance();
-            $app->callModule($handler[0], $handler[1], $handler[2]);
+            call_user_func_array(
+                array(
+                    $classHook,
+                    $this->_hooks[$pName][1]
+                ),
+                $this->_hooks[$pName][2]
+            );
 
         // si el callback es una función anónima se la ejecuta
         } elseif (is_callable($this->_hooks[$pName])) {
