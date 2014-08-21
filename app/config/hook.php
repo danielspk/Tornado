@@ -19,10 +19,10 @@ $app->hook('end', function () {
 
 $app->hook('404', function () {
     echo 'Error 404<br />Página no encontrada<br />';
-    echo '<a href="index.php">Volver al inicio</a>';
+    echo '<a href="./">Volver</a>';
 });
 
 $app->hook('error', function () use ($app) {
     echo 'Error de Aplicación: <br />' . $app->error();
-    echo '<br /><a href="index.php">Volver al inicio</a>';
+    echo '<br /><a href="./">Volver</a>';
 });
