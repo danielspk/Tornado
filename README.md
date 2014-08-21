@@ -319,6 +319,35 @@ definiendo la siguiente variable de configuración:
 Tenga en cuenta que si hace esto la única forma de acceder a los módulos HMVC 
 será definiendo enrutamientos hacia los mismos.
 
+##### Anotaciones:
+Algunas acciones pueden ser establecidas mediante anotaciones DocBlocks.
+
+###### Enrutamientos:
+En los controladores de los módulos HMVC puede utilizar el tag @T_ROUTE para 
+setear un enrutamiento. Esto generará un archivo de configuración denominado 
+"route_serialize.php".
+
+Siempre que la aplicación se encuentre en modo de desarrollo (variable de 
+configuración "tornado_environment_development" en true) se recorrerán los 
+métodos de los controladores para actualizar este archivo de configuración.
+
+Ejemplo:
+
+```php
+class Demo extends \DMS\Tornado\Controller
+{
+    /**
+     * Ejemplo de enrutamientos mediante anotaciones
+     * @T_ROUTE /demo/anotacion
+     * @T_ROUTE GET|POST /demo/otra/anotacion
+     */
+    public function index()
+    {
+        echo 'Hola Mundo Tornado';
+    }
+}
+```
+
 ##### Gestión de errores y excepciones:
 El manejo de errores y excepciones viene habilitado por defecto. Puede alterar 
 su comportamiento de la siguiente forma:
