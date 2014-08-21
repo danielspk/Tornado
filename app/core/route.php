@@ -76,9 +76,10 @@ final class Route
 
         // filtros de enrutadores y expresión resultante
         $tokens = array(
-            ':string' => '([a-zA-Z]+)',
-            ':number' => '([0-9]+)',
-            ':alpha'  => '([a-zA-Z0-9-_]+)',
+            ':*'         => '(.*)',
+            ':string'    => '([a-zA-Z]+)',
+            ':number'    => '([0-9]+)',
+            ':alpha'     => '([a-zA-Z0-9-_]+)',
             '[/:string]' => '/?([a-zA-Z]+)?',
             '[/:number]' => '/?([0-9]+)?',
             '[/:alpha]'  => '/?([a-zA-Z0-9-_]+)?'
@@ -109,6 +110,12 @@ final class Route
                     $params = array_slice($matches, 1);
                 } else {
                     $params = array();
+                }
+
+                // el comodin :* hace que la expresión regular no separe los
+                // parámetros de la url (se realiza el explode correspondiente)
+                if (count($params) && strpos($params[0], '/') !== false) {
+                    $params = explode('/', trim($params[0], '/'));
                 }
 
                 // se determina si hay una función anonima en vez de un módulo

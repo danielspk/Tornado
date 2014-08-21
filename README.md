@@ -227,10 +227,11 @@ En caso de que el servidor no soporte los métodos PUT y DELETE se pueden simula
 los mismos enviando una petición POST con una variable "REST_METHOD" cuyo valor 
 sea PUT o DELETE
 
-Existen tres tipos de parámetros para enrutar una URL:
+Existen cuatro tipos de parámetros para enrutar una URL:
 - :string - sólo acepta letras
 - :number - sólo acepta números
 - :alpha - acepta números y letras
+- :* - acepta cualquier cantidad y tipo de parámetros
 
 En caso de incluir parámetros opcionales la sintaxis es la siguiente:
 - [/:string]
@@ -256,6 +257,13 @@ parámetros.
     // utilizando parámetros opcionales y cualquier tipo de petición
     $app->route('/mostrar[/:alpha][/:number]', function ($pNombre = null, $pEdad = null) {
         echo 'Hola ' . $pNombre . ', ' . $pEdad;
+    });
+
+    // utilizando un comodín (n cantidad de parámetros) y cualquier tipo de petición
+    $app->route('/felicitador/:*', function () {
+        $params = func_get_args();
+        echo 'Felicitaciones ' . (isset($params[0]) ? $params[0] : '') . ' ';
+        echo (isset($params[1]) ? $params[1] : '');
     });
 
     // utilizando un módulo y petición POST
