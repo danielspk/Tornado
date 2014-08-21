@@ -7,7 +7,7 @@
  * @package TORNADO-CORE
  * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
  * @link http://tornado-php.com
- * @license https://github.com/danielspk/TORNADO/blob/master/LICENSE MIT License
+ * @license http://tornado-php.com/licencia/ MIT License
  * @version 0.9.7
  */
 
