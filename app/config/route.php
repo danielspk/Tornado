@@ -16,6 +16,5 @@ $app->route('/saludador[/:alpha][/:number]', function ($pNombre = 'anonimo', $pE
 
 $app->route('/felicitador/:*', function () {
     $params = func_get_args();
-    echo 'Felicitaciones ' . (isset($params[0]) ? $params[0] : '') . ' ';
-    echo (isset($params[1]) ? $params[1] : '');
+    echo 'Felicitaciones ' . (isset($params[0]) ? $params[0] : '');
 });
