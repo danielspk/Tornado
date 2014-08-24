@@ -348,6 +348,21 @@ class Demo extends \DMS\Tornado\Controller
 }
 ```
 
+##### Vistas
+Puede incluir archivos de vistas/templates dentro de una ruta manejada por 
+clousures de la siguiente forma:
+
+```php
+    $app = \DMS\Tornado\Tornado::getInstance();
+
+    $app->render('ruta/archivo.php');  // vista sin parámetros
+    $app->render('ruta/archivo.php', array('nombre'=>'valor')); // vista con parámetros
+```
+
+Los parámetros pasados a la vista/template se manejan de la misma forma que los 
+parámetros pasados a una vista de un módulo HMVC.
+
+
 ##### Gestión de errores y excepciones:
 El manejo de errores y excepciones viene habilitado por defecto. Puede alterar 
 su comportamiento de la siguiente forma:
@@ -489,6 +504,8 @@ automáticamente al uso o no de url amigables.
 | hook(string) | Ejecuta el gancho indicado |
 | hook(string mixed) | Registra un gancho y su callback |
 | route(string, mixed) | Registra un enrutamiento y su callback |
+| render(string) | Incluye una vista/template
+| render(string, array) | Incluye una vista/template junto a un array de variables |
 
 **DMS\Tornado\Controller**
 

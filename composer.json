@@ -19,6 +19,9 @@
 	"config": {
         "vendor-dir": "app/vendor"
     },
+    "autoload": {
+        "psr-4": {"DMS\\Tornado\\" : "app/core/"}
+    },
     "support": {
         "issues": "https://github.com/danielspk/TORNADO/issues",
         "source": "https://github.com/danielspk/TORNADO"

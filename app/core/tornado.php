@@ -223,4 +223,19 @@ final class Tornado
         return $this->_error->getCurrentException();
     }
 
+    /**
+     * Método que carga un template/vista
+     * @param string $pTemplate Archivo de template/vista
+     * @param array  $pParams   Variables
+     */
+    public function render($pTemplate, $pParams = null)
+    {
+        if (is_array($pParams)) {
+            extract($pParams);
+            unset($pParams);
+        }
+
+        require $pTemplate;
+    }
+    
 }
