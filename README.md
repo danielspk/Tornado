@@ -362,7 +362,6 @@ clousures de la siguiente forma:
 Los parámetros pasados a la vista/template se manejan de la misma forma que los 
 parámetros pasados a una vista de un módulo HMVC.
 
-
 ##### Gestión de errores y excepciones:
 El manejo de errores y excepciones viene habilitado por defecto. Puede alterar 
 su comportamiento de la siguiente forma:
