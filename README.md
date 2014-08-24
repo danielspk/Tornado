@@ -278,6 +278,16 @@ parámetros.
     $app->route('GET|POST /', 'demo|demo|listar');
 ```
 
+También es posible definir parámetros con nombre. En dicho caso puede omitirse 
+el uso de parámetros de entrada en las funciones anónimas o métodos de los 
+módulos HMVC. Ejemplo:
+
+```php
+    $app->route('/bienvenida/@nombre:alpha/tornado/@edad:number', function () use ($app) {
+        echo 'Hola ' . $app->param('nombre') . ', Edad: ' . $app->param('edad');
+    });
+```
+
 El único enrutamiento obligatorio es el del nodo raíz ya que indica cuál será el 
 callback a ejecutar por defecto al ingresar a la aplicación.
 Puede usar la convención de nombres de los módulos MVC para enrutar su 
