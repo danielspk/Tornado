@@ -8,7 +8,7 @@ namespace DMS\Tornado;
  * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
  * @link http://tornado-php.com
  * @license http://tornado-php.com/licencia/ MIT License
- * @version 0.9.8
+ * @version 0.9.9
  */
 final class Tornado
 {
@@ -60,6 +60,12 @@ final class Tornado
      * @var array
      */
     private $_services = array();
+    
+    /**
+     * Parámetros del enrutamiento
+     * @var array
+     */
+    private $_params = null;
     
     /**
      * Método constructor
@@ -281,6 +287,21 @@ final class Tornado
         }
         
         return $this->_services[$pService]();
+    }
+    
+    /**
+     * Método que setea / recupera los parámetros del enrutamiento
+     * @param string $pName Nombre
+     * @param string $pValue Valor
+     * @return string
+     */
+    public function param($pName, $pValue = null)
+    {
+        if (func_num_args() === 2) {
+            $this->_params[$pName] = $pValue;
+        } else {
+            return (isset($this->_params[$pName])) ? $this->_params[$pName] : null;
+        }
     }
     
 }

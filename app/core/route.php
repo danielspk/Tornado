@@ -8,7 +8,7 @@ namespace DMS\Tornado;
  * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
  * @link http://tornado-php.com
  * @license http://tornado-php.com/licencia/ MIT License
- * @version 0.9.8
+ * @version 0.9.9
  */
 final class Route
 {
@@ -88,7 +88,9 @@ final class Route
      */
     public function invokeUrl()
     {
-
+       
+        $app = Tornado::getInstance();
+        
         // se determina si la URL esta enrutada hacia un módulo
 
         // se ajustan las barras de la query string
@@ -101,9 +103,8 @@ final class Route
             ':string'    => '([a-zA-Z]+)',
             ':number'    => '([0-9]+)',
             ':alpha'     => '([a-zA-Z0-9-_]+)',
-            '[/:string]' => '/?([a-zA-Z]+)?',
-            '[/:number]' => '/?([0-9]+)?',
-            '[/:alpha]'  => '/?([a-zA-Z0-9-_]+)?'
+            '[/' => '/?',
+            ']' => '?'
         );
 
         // método de petición
@@ -119,7 +120,8 @@ final class Route
         // se recorren las rutas registradas
         foreach ($this->_routes as $route) {
 
-            $routeMatch = strtr($route['route'], $tokens);
+            $routeMatch = strtr($route['route'], $tokens);  // se reemplazan los filtros de tipo de dato por expresiones
+            $routeMatch = preg_replace('#@([a-zA-Z0-9-_]+)#', '', $routeMatch); // se eliminan los nombres de parámetros
 
             if (
                 ($route['method'] == 'ALL' || strstr($route['method'], $method) !== false) &&
@@ -128,7 +130,22 @@ final class Route
 
                 // se determina si hay parámetros
                 if (count($matches) > 1) {
+                    
                     $params = array_slice($matches, 1);
+                    
+                    // se obtienen los nombres de parámetros
+                    preg_match_all('#@([a-zA-Z0-9-_]+):#', $route['route'], $paramsNames);
+                    
+                    if (count($paramsNames)) {
+                     
+                        $cantP = count($paramsNames[1]);
+                
+                        for($i = 0; $i < $cantP; $i++) {
+                            $app->param($paramsNames[1][$i], $params[$i]);
+                        }
+                    
+                    }
+                    
                 } else {
                     $params = array();
                 }
@@ -160,10 +177,7 @@ final class Route
 
         // si la URL no fue enrutada y no se deshabilito el acceso a hmvc desde
         // URLs se parsea la misma en busca de un módulo\controlador\método\parámetros
-        if (
-            $_SERVER['QUERY_STRING'] &&
-            Tornado::getInstance()->config('tornado_url_hmvc_deny') != true
-        ) {
+        if ($_SERVER['QUERY_STRING'] && $app->config('tornado_url_hmvc_deny') != true) {
 
             // se elimina la barra final e inicial de la url si existiesen
             // se sanea la url
