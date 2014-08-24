@@ -56,6 +56,12 @@ final class Tornado
     private $_annotation = null;
 
     /**
+     * Servicios inyectados
+     * @var array
+     */
+    private $_services = array();
+    
+    /**
      * Método constructor
      */
     private function __construct()
@@ -236,6 +242,45 @@ final class Tornado
         }
 
         require $pTemplate;
+    }
+    
+    /**
+     * Método que registra un servicio/clase externa
+     * @param string $pService Nombre del servicio a registrar
+     * @param callable $pCallback Función a ejecutar al momento de invocarse
+     */
+    public function register($pService, $pCallback)
+    {
+        $this->_services[$pService] = $pCallback;
+    }
+    
+    /**
+     * Método mágico __call. Se asume que es invocado al solicitar un servicio inyectado
+     * @param string $pService Nombre del servicio
+     * @param array $pArgs Parámetros
+     * @return object
+     */
+    public function __call($pService, $pArgs)
+    {
+        if (!isset($this->_services[$pService])) {
+            throw new \BadMethodCallException('El servicio ' . $pService . ' no está registrado.');
+        }
+        
+        return call_user_func_array($this->_services[$pService], $pArgs);
+    }
+    
+    /**
+     * Método mágico __get. Se asume que es invocado al solicitar un servicio inyectado
+     * @param string $pService Nombre del servicio
+     * @return object
+     */
+    public function __get($pService)
+    {
+        if (!isset($this->_services[$pService])) {
+            throw new \InvalidArgumentException('El servicio ' . $pService . ' no está registrado.');
+        }
+        
+        return $this->_services[$pService]();
     }
     
 }

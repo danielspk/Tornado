@@ -54,6 +54,7 @@ amigables)
 - Configuración de la aplicación
 - Ganchos para extender las características del core
 - Captura de errores y excepciones
+- Inyección de dependencias
 - Auto carga de librerías de terceros
 
 ### Codificación:
@@ -381,6 +382,27 @@ Puede acceder a la última excepción lanzada de la siguiente forma:
     $exc = $app->error();
 ```
 
+##### Inyección de Dependencias:
+Es posible extender el core mediante la inyección de nuevas clases.
+La forma de registrar una nueva dependencia es:
+
+```php
+    $app->register('fecha', function($fecha = '2014-12-31'){
+        return new DateTime($fecha);
+    });
+```
+
+Este registro creará un dependencia para la clase 'DateTime' denominada 'fecha'.
+Podrá hacer uso de la misma de la siguiente forma:
+
+```php
+    $app = \DMS\Tornado\Tornado::getInstance();
+
+    echo $app->fecha()->format('d/m/Y') . '<br />'; // forma de uso como método
+    echo $app->fecha('2014-08-20')->format('d/m/Y') . '<br />'; // forma de uso como método con parámetros
+    echo $app->fecha->format('d/m/Y') . '<br />'; // forma de uso como propiedad
+```
+
 ##### Organización de proyecto:
 Se recomienda organiza el proyecto de la siguiente forma:
 - setear la configuración en el archivo "app/config/config.php
@@ -503,6 +525,7 @@ automáticamente al uso o no de url amigables.
 | hook(string) | Ejecuta el gancho indicado |
 | hook(string mixed) | Registra un gancho y su callback |
 | route(string, mixed) | Registra un enrutamiento y su callback |
+| register(string, callable) | Registra una clase/servicio para extender la aplicación
 | render(string) | Incluye una vista/template
 | render(string, array) | Incluye una vista/template junto a un array de variables |
 
