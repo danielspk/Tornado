@@ -62,12 +62,6 @@ final class Tornado
     private $_services = array();
     
     /**
-     * Parámetros del enrutamiento
-     * @var array
-     */
-    private $_params = null;
-    
-    /**
      * Método constructor
      */
     private function __construct()
@@ -251,6 +245,16 @@ final class Tornado
     }
     
     /**
+     * Método que recupera un parámetro del enrutamiento actual
+     * @param string $pName Nombre
+     * @return string
+     */
+    public function param($pName)
+    {
+        return $this->_route->getParam($pName);
+    }
+    
+    /**
      * Método que registra un servicio/clase externa
      * @param string $pService Nombre del servicio a registrar
      * @param callable $pCallback Función a ejecutar al momento de invocarse
@@ -287,21 +291,6 @@ final class Tornado
         }
         
         return $this->_services[$pService]();
-    }
-    
-    /**
-     * Método que setea / recupera los parámetros del enrutamiento
-     * @param string $pName Nombre
-     * @param string $pValue Valor
-     * @return string
-     */
-    public function param($pName, $pValue = null)
-    {
-        if (func_num_args() === 2) {
-            $this->_params[$pName] = $pValue;
-        } else {
-            return (isset($this->_params[$pName])) ? $this->_params[$pName] : null;
-        }
     }
     
 }

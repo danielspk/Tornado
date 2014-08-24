@@ -528,6 +528,7 @@ automáticamente al uso o no de url amigables.
 | register(string, callable) | Registra una clase/servicio para extender la aplicación
 | render(string) | Incluye una vista/template
 | render(string, array) | Incluye una vista/template junto a un array de variables |
+| param(string) | Devuelve el valor de un parámetro del enrutamiento |
 
 **DMS\Tornado\Controller**
 

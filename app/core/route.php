@@ -2,7 +2,7 @@
 namespace DMS\Tornado;
 
 /**
- * Clase de rutas
+ * Clase de enrutamientos
  *
  * @package TORNADO-CORE
  * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
@@ -20,14 +20,21 @@ final class Route
     private $_routes = array();
 
     /**
-     * Método que devuelve todas las rutas
-     * @return array
+     * Parámetros del enrutamiento invocado
+     * @var array
      */
-    public function getRoutes()
+    private $_params = null;
+    
+    /**
+     * Método que recupera un parámetro del enrutamiento actual
+     * @param string $pName Nombre
+     * @return string
+     */
+    public function getParam($pName)
     {
-        return $this->_routes;
+        return (isset($this->_params[$pName])) ? $this->_params[$pName] : null;
     }
-
+    
     /**
      * Método que registra una ruta, sus métodos de invocación y su callback
      * @param string $pMethodRoute Método de petición y Patrón de ruta
@@ -141,7 +148,7 @@ final class Route
                         $cantP = count($paramsNames[1]);
                 
                         for($i = 0; $i < $cantP; $i++) {
-                            $app->param($paramsNames[1][$i], $params[$i]);
+                            $this->_params[$paramsNames[1][$i]] = $params[$i];
                         }
                     
                     }
