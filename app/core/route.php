@@ -158,9 +158,18 @@ final class Route
                 }
 
                 // el comodin :* hace que la expresión regular no separe los
-                // parámetros de la url (se realiza el explode correspondiente)
-                if (count($params) && strpos($params[0], '/') !== false) {
-                    $params = explode('/', trim($params[0], '/'));
+                // parámetros de la url
+                if (count($params) && strpos(end($params), '/') !== false) {
+					
+					// se extran los parámetros del comodin
+					$paramAsterik = explode('/', trim(end($params), '/'));
+					
+					// se elimina el último parámetro (comodin)
+					array_pop($params);
+					
+					// se unen los parámetros
+                    $params = array_merge($params, $paramAsterik);
+
                 }
 
                 // se determina si hay una función anonima en vez de un módulo
