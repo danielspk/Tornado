@@ -22,6 +22,7 @@ final class Annotation
 
         $routesFind = array();
 
+        // se recorren los controladores
         foreach (glob('app/modules/*/controller/*.php') as $file) {
 
             include $file;
@@ -32,6 +33,7 @@ final class Annotation
 
             $methods = $rc->getMethods();
 
+            // se recorren los métodos del controlador
             foreach ($methods as $method) {
 
                 $rm = new \ReflectionMethod($nameClass, $method->name);
@@ -40,10 +42,12 @@ final class Annotation
                 $commentsText = $rm->getDocComment();
                 $commentsLines = explode("\n", $commentsText);
 
+                // se recuperan los tags de enrutamientos
                 $routes = array_filter($commentsLines, function ($value) {
                     return (strpos($value, '@T_ROUTE') !== false);
                 });
 
+                // se agregan los enrutamientos
                 foreach ($routes as $route) {
 
                     $route = trim(substr(trim(str_replace('@T_ROUTE', '', $route)), 1));
@@ -57,6 +61,7 @@ final class Annotation
 
         }
 
+        // se serializan los enrutamientos en un archivo de configuración
         if (count($routesFind) > 0) {
             $sz = serialize($routesFind);
             file_put_contents(__DIR__ . '/../config/route_serialize.php', $sz);

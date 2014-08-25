@@ -96,8 +96,6 @@ final class Route
     public function invokeUrl()
     {
 
-        $app = Tornado::getInstance();
-
         // se determina si la URL esta enrutada hacia un módulo
 
         // se ajustan las barras de la query string
@@ -193,7 +191,10 @@ final class Route
 
         // si la URL no fue enrutada y no se deshabilito el acceso a hmvc desde
         // URLs se parsea la misma en busca de un módulo\controlador\método\parámetros
-        if ($_SERVER['QUERY_STRING'] && $app->config('tornado_url_hmvc_deny') != true) {
+        if (
+            $_SERVER['QUERY_STRING'] &&
+            Tornado::getInstance()->config('tornado_url_hmvc_deny') != true
+        ) {
 
             // se elimina la barra final e inicial de la url si existiesen
             // se sanea la url
