@@ -60,7 +60,7 @@ final class Tornado
      * @var array
      */
     private $_services = array();
-    
+
     /**
      * Método constructor
      */
@@ -243,31 +243,31 @@ final class Tornado
 
         require $pTemplate;
     }
-    
+
     /**
      * Método que recupera un parámetro del enrutamiento actual
-     * @param string $pName Nombre
+     * @param  string $pName Nombre
      * @return string
      */
     public function param($pName)
     {
         return $this->_route->getParam($pName);
     }
-    
+
     /**
      * Método que registra un servicio/clase externa
-     * @param string $pService Nombre del servicio a registrar
+     * @param string   $pService  Nombre del servicio a registrar
      * @param callable $pCallback Función a ejecutar al momento de invocarse
      */
     public function register($pService, $pCallback)
     {
         $this->_services[$pService] = $pCallback;
     }
-    
+
     /**
      * Método mágico __call. Se asume que es invocado al solicitar un servicio inyectado
-     * @param string $pService Nombre del servicio
-     * @param array $pArgs Parámetros
+     * @param  string $pService Nombre del servicio
+     * @param  array  $pArgs    Parámetros
      * @return object
      */
     public function __call($pService, $pArgs)
@@ -275,13 +275,13 @@ final class Tornado
         if (!isset($this->_services[$pService])) {
             throw new \BadMethodCallException('El servicio ' . $pService . ' no está registrado.');
         }
-        
+
         return call_user_func_array($this->_services[$pService], $pArgs);
     }
-    
+
     /**
      * Método mágico __get. Se asume que es invocado al solicitar un servicio inyectado
-     * @param string $pService Nombre del servicio
+     * @param  string $pService Nombre del servicio
      * @return object
      */
     public function __get($pService)
@@ -289,8 +289,8 @@ final class Tornado
         if (!isset($this->_services[$pService])) {
             throw new \InvalidArgumentException('El servicio ' . $pService . ' no está registrado.');
         }
-        
+
         return $this->_services[$pService]();
     }
-    
+
 }

@@ -24,17 +24,17 @@ final class Route
      * @var array
      */
     private $_params = null;
-    
+
     /**
      * Método que recupera un parámetro del enrutamiento actual
-     * @param string $pName Nombre
+     * @param  string $pName Nombre
      * @return string
      */
     public function getParam($pName)
     {
         return (isset($this->_params[$pName])) ? $this->_params[$pName] : null;
     }
-    
+
     /**
      * Método que registra una ruta, sus métodos de invocación y su callback
      * @param string $pMethodRoute Método de petición y Patrón de ruta
@@ -95,9 +95,9 @@ final class Route
      */
     public function invokeUrl()
     {
-       
+
         $app = Tornado::getInstance();
-        
+
         // se determina si la URL esta enrutada hacia un módulo
 
         // se ajustan las barras de la query string
@@ -137,22 +137,22 @@ final class Route
 
                 // se determina si hay parámetros
                 if (count($matches) > 1) {
-                    
+
                     $params = array_slice($matches, 1);
-                    
+
                     // se obtienen los nombres de parámetros
                     preg_match_all('#@([a-zA-Z0-9-_]+):#', $route['route'], $paramsNames);
-                    
+
                     if (count($paramsNames)) {
-                     
+
                         $cantP = count($paramsNames[1]);
-                
-                        for($i = 0; $i < $cantP; $i++) {
+
+                        for ($i = 0; $i < $cantP; $i++) {
                             $this->_params[$paramsNames[1][$i]] = $params[$i];
                         }
-                    
+
                     }
-                    
+
                 } else {
                     $params = array();
                 }
@@ -160,14 +160,14 @@ final class Route
                 // el comodin :* hace que la expresión regular no separe los
                 // parámetros de la url
                 if (count($params) && strpos(end($params), '/') !== false) {
-					
-					// se extran los parámetros del comodin
-					$paramAsterik = explode('/', trim(end($params), '/'));
-					
-					// se elimina el último parámetro (comodin)
-					array_pop($params);
-					
-					// se unen los parámetros
+
+                    // se extran los parámetros del comodin
+                    $paramAsterik = explode('/', trim(end($params), '/'));
+
+                    // se elimina el último parámetro (comodin)
+                    array_pop($params);
+
+                    // se unen los parámetros
                     $params = array_merge($params, $paramAsterik);
 
                 }
