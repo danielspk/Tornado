@@ -237,7 +237,7 @@ Existen cuatro tipos de parámetros para enrutar una URL:
 - :string - sólo acepta letras
 - :number - sólo acepta números
 - :alpha - acepta números y letras
-- :* - acepta cualquier cantidad y tipo de parámetros (sólo puede incluirse uno sólo y al final)
+- :* - acepta cualquier cantidad y tipo de parámetros (sólo puede incluirse uno solo y al final)
 
 En caso de incluir parámetros opcionales la sintaxis es la siguiente:
 - [/:string]
