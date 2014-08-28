@@ -8,7 +8,7 @@ namespace DMS\Tornado;
  * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
  * @link http://tornado-php.com
  * @license http://tornado-php.com/licencia/ MIT License
- * @version 0.9.9
+ * @version 0.9.10
  */
 final class Annotation
 {
