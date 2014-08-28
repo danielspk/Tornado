@@ -25,9 +25,11 @@ final class Annotation
         // se recorren los controladores
         foreach (glob('app/modules/*/controller/*.php') as $file) {
 
-            include $file;
+            require $file;
 
             $nameClass = str_replace(array('/', '.php'), array('\\', ''), $file);
+            $namespaceSections = explode('\\', $nameClass);
+            $moduleSections = $namespaceSections[2] . '|' . $namespaceSections[4] . '|';
 
             $rc = new \ReflectionClass($nameClass);
 
@@ -38,7 +40,6 @@ final class Annotation
 
                 $rm = new \ReflectionMethod($nameClass, $method->name);
 
-                $namespaceSections = explode('\\', $nameClass);
                 $commentsText = $rm->getDocComment();
                 $commentsLines = explode("\n", $commentsText);
 
@@ -50,8 +51,8 @@ final class Annotation
                 // se agregan los enrutamientos
                 foreach ($routes as $route) {
 
-                    $route = trim(substr(trim(str_replace('@T_ROUTE', '', $route)), 1));
-                    $callback = $namespaceSections[2] . '|' . $namespaceSections[4] . '|' . $method->name;
+                    $route = trim(substr(str_replace('@T_ROUTE', '', trim($route)), 1));
+                    $callback = $moduleSections . $method->name;
 
                     $routesFind[] = array($route, $callback);
 
