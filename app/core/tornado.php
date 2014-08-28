@@ -66,7 +66,6 @@ final class Tornado
      */
     private function __construct()
     {
-
         require __DIR__ . '/autoload.php';
         require __DIR__ . '/error.php';
         require __DIR__ . '/config.php';
@@ -81,7 +80,6 @@ final class Tornado
         $this->_hook = new Hook();
         $this->_route = new Route();
         $this->_annotation = new Annotation();
-
     }
 
     /**
@@ -112,7 +110,6 @@ final class Tornado
      */
     public function run()
     {
-
         // se establece la codificación de funciones, entradas y salidas
         mb_internal_encoding('UTF-8');
         mb_http_output('UTF-8');
@@ -148,7 +145,6 @@ final class Tornado
 
         // se ejecuta el hook de finalización
         $this->_hook->call('end');
-
     }
 
     /**
@@ -241,7 +237,7 @@ final class Tornado
             unset($pParams);
         }
 
-        require $pTemplate;
+        require_once $pTemplate;
     }
 
     /**

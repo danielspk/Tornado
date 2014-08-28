@@ -98,7 +98,6 @@ final class Error
 
         // se finaliza la ejecución
         exit();
-
     }
 
 }

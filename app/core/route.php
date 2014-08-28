@@ -104,12 +104,12 @@ final class Route
 
         // filtros de enrutadores y expresión resultante
         $tokens = array(
-            ':*'         => '(.*)',
-            ':string'    => '([a-zA-Z]+)',
-            ':number'    => '([0-9]+)',
-            ':alpha'     => '([a-zA-Z0-9-_]+)',
-            '[/' => '/?',
-            ']' => '?'
+            ':*'      => '(.*)',
+            ':string' => '([a-zA-Z]+)',
+            ':number' => '([0-9]+)',
+            ':alpha'  => '([a-zA-Z0-9-_]+)',
+            '[/'      => '/?',
+            ']'       => '?'
         );
 
         // método de petición
@@ -239,7 +239,6 @@ final class Route
         }
 
         return false;
-
     }
 
     /**
@@ -263,7 +262,7 @@ final class Route
         // se valida si la ruta de la clase solicitada existe
         $path = 'app/modules/' . $pModule . '/controller/' . $pController . '.php';
 
-        if (! file_exists($path)) {
+        if (!file_exists($path)) {
             return false;
         } else {
             require_once $path;
@@ -284,7 +283,6 @@ final class Route
         call_user_func_array(array($controller, $pMethod), $pParams);
 
         return true;
-
     }
 
 }
