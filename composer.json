@@ -23,7 +23,8 @@
         "source": "https://github.com/danielspk/TORNADO"
     },
     "require": {
-        "php": ">=5.3.0"
+        "php": ">=5.3.0",
+		"danielspk/libs": "dev-master"
     },
     "suggest": {
         "danielspk/libs": "Librerías de usos varios para PHP"
