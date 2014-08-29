@@ -1,7 +1,6 @@
 {
     "name": "danielspk/tornado",
     "description": "Reducido núcleo de trabajo para PHP",
-    "version": "0.9.10",
     "type": "project",
     "keywords": [
         "tornado", "mvc", "hmvc", "rest", "framework", "core", 
@@ -34,8 +33,9 @@
             "DMS\\Tornado\\" : "app/core/"
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "config": {
+        "preferred-install": "dist",
         "vendor-dir": "app/vendor"
     }
 }
