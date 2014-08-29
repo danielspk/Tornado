@@ -70,15 +70,13 @@ incluir las dependencias de terceros debe usar "composer" para su instalación:
 
 1. Instale composer ( puede obtener ayuda en https://getcomposer.org/download/ )
 
-2. Edite el archivo composer.json para incluir las librerías necesarias.
-
-3. Inicie la consola de comando en la ubicación del proyecto y ejecute
+2. Inicie la consola de comando y ejecute el siguiente comando
 
 ```
-composer install --prefer-dist
+composer create-project danielspk/tornado ruta/al/proyecto
 ```
 
-4. En caso de querer utilizar URL amigables editar el archivo .htaccess y 
+3. En caso de querer utilizar URL amigables editar el archivo .htaccess y 
 modificar las líneas 4 y 5 de acuerdo a la ubicación del proyecto dentro del 
 servidor y las restricciones que quiera aplicar a los redireccionamientos.
 
