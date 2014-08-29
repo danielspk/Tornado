@@ -64,9 +64,9 @@ estándares PSR-1, PSR-2 y PSR-4.
 
 ## Instalación:
 
-El core en su versión nativa no requiere instalación alguna. Basta con descargar
-el proyecto y copiarlo en alguna ubicación del servidor web. En caso de querer
-incluir las dependencias de terceros debe usar "composer" para su instalación:
+El core no requiere instalación alguna. Basta con descargar el proyecto y 
+copiarlo en alguna ubicación del servidor web.
+También puede utilizar "composer" para su instalación - Ejemplo:
 
 1. Instale composer ( puede obtener ayuda en https://getcomposer.org/download/ )
 
