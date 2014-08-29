@@ -33,7 +33,9 @@
             "DMS\\Tornado\\" : "app/core/"
         }
     },
+    "minimum-stability": "stable",
     "config": {
+        "preferred-install": "dist",
         "vendor-dir": "app/vendor"
     }
 }
