@@ -1,6 +1,7 @@
 {
     "name": "danielspk/tornado",
     "description": "Reducido núcleo de trabajo para PHP",
+    "type": "project",
     "keywords": [
         "tornado", "mvc", "hmvc", "rest", "framework", "core", 
         "microframework", "php", "dms", "danielspk"
