@@ -330,7 +330,7 @@ será definiendo enrutamientos hacia los mismos.
 
 ##### Delegaciones:
 Es posible delegar la acción de un módulo hacia otro sin necesidad de realizar 
-una redirección por http. Este delegación invoca al otro módulo dentro del mismo 
+una redirección por http. Esta delegación invoca al otro módulo dentro del mismo 
 request original. Ejemplo:
 
 ```php
