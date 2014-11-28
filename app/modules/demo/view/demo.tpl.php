@@ -5,6 +5,6 @@
     <title>Tornado PHP</title>
 </head>
 <body>
-    <h1>Torando vista</h1>
+    <h1>Tornado vista</h1>
 </body>
 </html>

@@ -36,7 +36,7 @@ final class Hook
     public function call($pName)
     {
         if (!isset($this->_hooks[$pName])) {
-            throw new \InvalidArgumentException('Hook no registrado.');
+            throw new \InvalidArgumentException('Not registered Hook.');
         }
 
         // si el callback del hook es un array se hace una llamada a la clase/método

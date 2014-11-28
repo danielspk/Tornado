@@ -328,6 +328,21 @@ definiendo la siguiente variable de configuración:
 Tenga en cuenta que si hace esto la única forma de acceder a los módulos HMVC 
 será definiendo enrutamientos hacia los mismos.
 
+##### Delegaciones:
+Es posible delegar la acción de un módulo hacia otro sin necesidad de realizar 
+una redirección por http. Este delegación invoca al otro módulo dentro del mismo 
+request original. Ejemplo:
+
+```php
+
+    // sin parámetros
+    $app->forward('modulo|clase|metodo');
+
+    // con parámetros
+    $app->forward('modulo|clase|metodo', array('param1', 'param2'));
+
+```
+
 ##### Anotaciones:
 Algunas acciones pueden ser establecidas mediante anotaciones DocBlocks.
 
@@ -537,6 +552,8 @@ automáticamente al uso o no de url amigables.
 | render(string) | Incluye una vista/template
 | render(string, array) | Incluye una vista/template junto a un array de variables |
 | param(string) | Devuelve el valor de un parámetro del enrutamiento |
+| forward(string) | Delega la acción hacia otro módulo |
+| forward(string, array) | Delega la acción hacia otro módulo |
 
 **DMS\Tornado\Controller**
 

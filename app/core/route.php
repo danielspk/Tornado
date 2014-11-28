@@ -34,7 +34,7 @@ final class Route
     {
         return (isset($this->_params[$pName])) ? $this->_params[$pName] : null;
     }
-
+    
     /**
      * Método que registra una ruta, sus métodos de invocación y su callback
      * @param string $pMethodRoute Método de petición y Patrón de ruta
@@ -181,7 +181,7 @@ final class Route
 
                     $handler = explode('|', $route['callback']);
 
-                    return $this->_callModule($handler[0], $handler[1], $handler[2], $params);
+                    return $this->callModule($handler[0], $handler[1], $handler[2], $params);
 
                 }
 
@@ -234,7 +234,7 @@ final class Route
                 $params = array();
             }
 
-            return $this->_callModule($module, $controller, $method, $params);
+            return $this->callModule($module, $controller, $method, $params);
 
         }
 
@@ -249,7 +249,7 @@ final class Route
      * @param  array   $pParams     Parámetros del método
      * @return boolean Resultado de la invocación
      */
-    private function _callModule(
+    public function callModule(
         $pModule = null, $pController = null, $pMethod = null, $pParams = array()
     )
     {

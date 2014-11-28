@@ -88,7 +88,7 @@ final class Tornado
      */
     public function __clone()
     {
-        throw new \BadMethodCallException('Tornado no puede ser clonado.');
+        throw new \BadMethodCallException('Tornado cannot be cloned.');
     }
 
     /**
@@ -261,6 +261,22 @@ final class Tornado
     }
 
     /**
+     * Método que delega la petición a otro módulo
+     * @param string $pModule Nombre de la ruta a delegar
+     * @param array  $pParams Parámetros para la ruta
+     */
+    public function forward($pModule, $pParams = null)
+    {
+        $module = explode('|', $pModule);
+        
+        if (count($module) !== 3) {
+            throw new \BadMethodCallException('Invalid module name.');
+        }
+        
+        $this->_route->callModule($module[0], $module[1], $module[2], $pParams);
+    }
+    
+    /**
      * Método mágico __call. Se asume que es invocado al solicitar un servicio inyectado
      * @param  string $pService Nombre del servicio
      * @param  array  $pArgs    Parámetros
@@ -269,7 +285,7 @@ final class Tornado
     public function __call($pService, $pArgs)
     {
         if (!isset($this->_services[$pService])) {
-            throw new \BadMethodCallException('El servicio ' . $pService . ' no está registrado.');
+            throw new \BadMethodCallException('The service ' . $pService . ' is not registered.');
         }
 
         return call_user_func_array($this->_services[$pService], $pArgs);
@@ -283,7 +299,7 @@ final class Tornado
     public function __get($pService)
     {
         if (!isset($this->_services[$pService])) {
-            throw new \InvalidArgumentException('El servicio ' . $pService . ' no está registrado.');
+            throw new \InvalidArgumentException('The service ' . $pService . ' is not registered.');
         }
 
         return $this->_services[$pService]();

@@ -101,7 +101,7 @@
  * Generado por: http://picascii.com/
  */
 
-// se cargan la librería del core
+// se carga la librería del core
 require 'app/core/tornado.php';
 
 // se cargan las configuraciones
