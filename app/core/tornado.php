@@ -15,43 +15,43 @@ final class Tornado
 
     /**
      * Instancia única de la clase (patrón singleton)
-     * @var DMS\Tornado\Tornado
+     * @var \DMS\Tornado\Tornado
      */
     private static $_instance = null;
 
     /**
      * Clase de manejo de enrutamientos
-     * @var DMS\Tornado\Route
+     * @var \DMS\Tornado\Route
      */
     private $_route = null;
 
     /**
      * Clase de manejo de autocarga de librerías
-     * @var DMS\Tornado\Autoload
+     * @var \DMS\Tornado\Autoload
      */
     private $_autoload = null;
 
     /**
      * Clase de manejo de errors
-     * @var DMS\Tornado\Error
+     * @var \DMS\Tornado\Error
      */
     private $_error = null;
 
     /**
      * Clase de manejo de configuración
-     * @var DMS\Tornado\Config
+     * @var \DMS\Tornado\Config
      */
     private $_config = null;
 
     /**
      * Clase de manejo de ganchos y eventos
-     * @var DMS\Tornado\Hook
+     * @var \DMS\Tornado\Hook
      */
     private $_hook = null;
 
     /**
      * Clase de manejo de anotaciones
-     * @var DMS\Tornado\Annotation
+     * @var \DMS\Tornado\Annotation
      */
     private $_annotation = null;
 
@@ -93,7 +93,7 @@ final class Tornado
 
     /**
      * Método que instancia la clase o devuelve la misma (patrón singleton)
-     * @return DMS\Core\Tornado
+     * @return \DMS\Tornado\Tornado
      */
     public static function getInstance()
     {
@@ -135,15 +135,25 @@ final class Tornado
         // se registran las rutas serializadas
         $this->_route->unserialize();
 
-        // se ejecuta el hook de inicio
-        $this->_hook->call('init');
+        // flujo de ejecución:
+        // - se parsea la url en busca del route a ejecutar
+        // - se ejecutan los hooks de inicio
+        // - si alguno no devuelve false se ejecuta la ruta
+        // - si la ruta no fue ejecuta se ejecuta el hook de error
+        // - se ejecutan los hooks de finalización
 
-        // se carga el modulo/callback correspondiente a la URL del request
-        if ($this->_route->invokeUrl() === false) {
-            $this->_hook->call('404');
+        $this->_route->parseUrl();
+
+        $flowReturn = $this->_hook->call('init');
+
+        if ($flowReturn !== false) {
+
+            $flowReturn = $this->_route->execute();
+
+            if ($flowReturn === false)
+                $this->_hook->call('404');
         }
 
-        // se ejecuta el hook de finalización
         $this->_hook->call('end');
     }
 
@@ -194,9 +204,10 @@ final class Tornado
      * Método que registra ganchos o invoca a uno
      * @param  string $pName     Nombre del gancho
      * @param  mixed  $pCallback Callback a ejecutar
+     * @param  mixed  $pPosition Orden del gancho
      * @return mixed
      */
-    public function hook($pName = null, $pCallback = null)
+    public function hook($pName = null, $pCallback = null, $pPosition = null)
     {
         if (func_num_args() === 1) {
 
@@ -205,7 +216,7 @@ final class Tornado
             return;
         }
 
-        $this->_hook->register($pName, $pCallback);
+        $this->_hook->register($pName, $pCallback, $pPosition);
     }
 
     /**
@@ -248,6 +259,11 @@ final class Tornado
     public function param($pName)
     {
         return $this->_route->getParam($pName);
+    }
+
+    public function getRouteModule()
+    {
+        return $this->_route->getRouteMatch();
     }
 
     /**

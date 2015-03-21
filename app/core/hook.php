@@ -23,42 +23,63 @@ final class Hook
      * Método que registra un evento de aplicación
      * @param string $pName     Nombre del evento
      * @param mixed  $pCallback Array con clase::método o función callable
+     * @param int    $pPosition Orden de ejecución del hook
      */
-    public function register($pName, $pCallback)
+    public function register($pName, $pCallback, $pPosition)
     {
-        $this->_hooks[$pName] = $pCallback;
+        if ($pPosition !== null)
+            $this->_hooks[$pName][$pPosition] = $pCallback;
+        else
+            $this->_hooks[$pName][] = $pCallback;
     }
 
     /**
      * Método que ejecuta un evento de aplicación
      * @param string $pName Nombre de evento
+     * @return mixed|null
      */
     public function call($pName)
     {
         if (!isset($this->_hooks[$pName])) {
-            throw new \InvalidArgumentException('Not registered Hook.');
+            if (in_array($pName, array('init', 'end', 'error', '404')))
+                return;
+            else
+                throw new \InvalidArgumentException('Not registered Hook.');
         }
 
-        // si el callback del hook es un array se hace una llamada a la clase/método
-        if (is_array($this->_hooks[$pName])) {
+        $return = null;
 
-            $classHook = new $this->_hooks[$pName][0]();
+        //ksort($this->_hooks[$pName]);
 
-            call_user_func_array(
-                array(
-                    $classHook,
-                    $this->_hooks[$pName][1]
-                ),
-                $this->_hooks[$pName][2]
-            );
+        // se recorren los hooks con ese nombre
+        foreach ($this->_hooks[$pName] as $hook) {
 
-        // si el callback es una función anónima se la ejecuta
-        } elseif (is_callable($this->_hooks[$pName])) {
+            // si el callback del hook es un array se hace una llamada a la clase/método
+            if (is_array($hook)) {
 
-            call_user_func($this->_hooks[$pName]);
+                $classHook = new $hook[0]();
 
+                $return = call_user_func_array(
+                    array(
+                        $classHook,
+                        $hook[1]
+                    ),
+                    $hook[2]
+                );
+
+                // si el callback es una función anónima se la ejecuta
+            } elseif (is_callable($hook)) {
+
+                $return = call_user_func($hook);
+
+            }
+
+            // si un hook devuelve false se impide la ejecución de los siguientes hooks
+            if ($return === false)
+                break;
         }
 
+        return $return;
     }
 
 }

@@ -15,7 +15,7 @@ final class Error
 
     /**
      * Excepción capturada
-     * @var type Exception
+     * @var \Exception Exception
      */
     private $_currentException;
 
@@ -47,7 +47,7 @@ final class Error
 
     /**
      * Método que devuelve la excepción actual
-     * @return Exception
+     * @return \Exception
      */
     public function getCurrentException()
     {
@@ -61,7 +61,7 @@ final class Error
      * @param  string         $pErrFile Archivo del error
      * @param  int            $pErrLine Número de línea del error
      * @return boolean|void
-     * @throws ErrorException
+     * @throws \ErrorException
      */
     public function handlerError($pErrNro, $pErrStr, $pErrFile, $pErrLine)
     {
@@ -78,7 +78,7 @@ final class Error
 
     /**
      * Método que gestiona las excepciones
-     * @param  ErrorException $pExc Excepción
+     * @param  \ErrorException $pExc Excepción
      * @return void
      */
     public function handlerException($pExc)

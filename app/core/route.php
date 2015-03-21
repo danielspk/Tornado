@@ -25,6 +25,8 @@ final class Route
      */
     private $_params = null;
 
+    private $_routeMatch = null;
+
     /**
      * Método que recupera un parámetro del enrutamiento actual
      * @param  string $pName Nombre
@@ -34,7 +36,12 @@ final class Route
     {
         return (isset($this->_params[$pName])) ? $this->_params[$pName] : null;
     }
-    
+
+    public function getRouteMatch()
+    {
+        return $this->_routes[$this->_routeMatch];
+    }
+
     /**
      * Método que registra una ruta, sus métodos de invocación y su callback
      * @param string $pMethodRoute Método de petición y Patrón de ruta
@@ -50,7 +57,8 @@ final class Route
             $this->_routes[] = array(
                 'method' => 'ALL',
                 'route' => $pMethodRoute,
-                'callback' => $pCallback
+                'callback' => $pCallback,
+                'params' => null
             );
 
         } else {
@@ -61,7 +69,8 @@ final class Route
             $this->_routes[] = array(
                 'method' => $methods,
                 'route' => $route,
-                'callback' => $pCallback
+                'callback' => $pCallback,
+                'params' => null
             );
 
         }
@@ -93,7 +102,7 @@ final class Route
      * Método que parsea la url en busca del módulo/callback a ejecutar
      * @return boolean Resultado de la petición
      */
-    public function invokeUrl()
+    public function parseUrl()
     {
 
         // se determina si la URL esta enrutada hacia un módulo
@@ -123,7 +132,7 @@ final class Route
         }
 
         // se recorren las rutas registradas
-        foreach ($this->_routes as $route) {
+        foreach ($this->_routes as $index => $route) {
 
             $routeMatch = strtr($route['route'], $tokens);  // se reemplazan los filtros de tipo de dato por expresiones
             $routeMatch = preg_replace('#@([a-zA-Z0-9-_]+)#', '', $routeMatch); // se eliminan los nombres de parámetros
@@ -167,24 +176,12 @@ final class Route
 
                     // se unen los parámetros
                     $params = array_merge($params, $paramAsterik);
-
                 }
 
-                // se determina si hay una función anonima en vez de un módulo
-                if (is_callable($route['callback'])) {
+                $this->_routeMatch = $index;
+                $this->_routes[$this->_routeMatch]['params'] = $params;
 
-                    call_user_func_array($route['callback'], $params);
-
-                    return true;
-
-                } else {
-
-                    $handler = explode('|', $route['callback']);
-
-                    return $this->callModule($handler[0], $handler[1], $handler[2], $params);
-
-                }
-
+                return true;
             }
 
         }
@@ -223,9 +220,9 @@ final class Route
             $controller = $url[1];
 
             if ($count > 2) {
-                $method = $url[2];
+                $action = $url[2];
             } else {
-                $method = 'index';
+                $action = 'index';
             }
 
             if ($count > 3) {
@@ -234,11 +231,31 @@ final class Route
                 $params = array();
             }
 
-            return $this->callModule($module, $controller, $method, $params);
+            $this->register($method.' /'.$module.'/'.$controller.'/'.$action, $module.'|'.$controller.'|'.$action);
 
+            $this->_routeMatch = end((array_keys($this->_routes)));
+            $this->_routes[$this->_routeMatch]['params'] = $params;
         }
 
         return false;
+    }
+
+    public function execute()
+    {
+        // se determina si hay una función anonima en vez de un módulo
+        if (is_callable($this->_routes[$this->_routeMatch]['callback'])) {
+
+            call_user_func_array($this->_routes[$this->_routeMatch]['callback'], $this->_routes[$this->_routeMatch]['params']);
+
+            return true;
+
+        } else {
+
+            $handler = explode('|', $this->_routes[$this->_routeMatch]['callback']);
+
+            return $this->callModule($handler[0], $handler[1], $handler[2], $this->_routes[$this->_routeMatch]['params']);
+
+        }
     }
 
     /**

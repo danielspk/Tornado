@@ -85,8 +85,8 @@ final class Autoload
 
     /**
      * Método que recorre el array de rutas del namespace y carga la clase
-     * @param  string  $prefix         Nombre del prefijo de namespace
-     * @param  string  $relative_class Nombre del directorio\clase
+     * @param  string  $pPrefix         Nombre del prefijo de namespace
+     * @param  string  $pRelativeClass  Nombre del directorio\clase
      * @return boolean
      */
     private function _loadMappedFile($pPrefix, $pRelativeClass)
