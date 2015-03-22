@@ -12,7 +12,6 @@ namespace DMS\Tornado;
  */
 final class Error
 {
-
     /**
      * Excepción capturada
      * @var \Exception Exception
@@ -90,14 +89,10 @@ final class Error
         // se conserva la excepción
         $this->_currentException = $pExc;
 
-        // se limpia el buffer de salida
-        ob_clean();
-
-        // se ejecuta el gancho de errores
+        // se ejecuta/n el/los gancho/s de errores
         Tornado::getInstance()->hook('error');
 
         // se finaliza la ejecución
         exit();
     }
-
 }

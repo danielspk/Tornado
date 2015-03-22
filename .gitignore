@@ -1,3 +1,6 @@
 /.idea/
 /_resources/
+/app/vendor/
 /app/config/route_serialize.php
+/composer.lock
+/phpunit.xml

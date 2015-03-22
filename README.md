@@ -10,17 +10,16 @@ Puede obtener más información en su web http://tornado-php.com
 
 ### Filosofia:
 
-TORNADO no intenta ser un gran framework PHP. Contrariamente intenta ser un 
-núcleo de trabajo muy reducido para implementar patrones de arquitectura HMVC 
+TORNADO no intenta ser un gran framework full-stack. Contrariamente intenta ser  
+un núcleo de trabajo muy reducido para implementar patrones de arquitectura HMVC 
 y/o servicios REST, con la menor parametrización y utilización de código 
 posible, apoyado en un core que organice el proyecto y un sistema de 
 configuración y gestión de errores simple.
 
 TORNADO no incluye librerías de soporte para tareas comunes como acceso a base 
 de datos, gestión de plantillas, envío de mais, etc.
-Para esto el core ofrece, mediante composer, la posibilidad de incluir librerías 
-de terceros para extender sus características de acuerdo a las necesidades 
-particulares del proyecto a desarrollar.
+Puede utilizar Composer para incluir librerías de terceros y de acuerdo a las 
+necesidades particulares del proyecto a desarrollar.
 
 Puede obtener más información de la filosofía del core mirando la wiki del 
 proyecto.
@@ -33,7 +32,7 @@ TORNADO se inspiro en varios microframeworks PHP, entre ellos cabe mencionar:
 - Flight - http://flightphp.com/
 - Shield - https://github.com/enygma/shieldframework
 - Slim - http://www.slimframework.com/
-- Fat-Free Framework - http://fatfreeframework.com/home
+- AltoRouter - http://altorouter.com/
 
 ### Metas:
 
@@ -42,7 +41,7 @@ TORNADO se desarrollo tratando de respetar las siguiente metas:
 - ser rápido
 - ser fácil de entender _(tanto su API como su construcción interna)_
 - tener la menor cantidad de métodos posibles dentro de su API
-- permitir incluir ganchos para que los programadores puedan extender el mismo
+- permitir definir ganchos para que los programadores puedan extender el mismo
 - permitir incluir librerías de terceros con suma facilidad
 - ser ligero respecto a la cantidad de líneas de código a mantener
 - ser un core de trabajo _(NUNCA un framework)_
@@ -76,8 +75,8 @@ También puede utilizar "composer" para su instalación - Ejemplo:
 composer create-project danielspk/tornado ruta/al/proyecto
 ```
 
-3. En caso de querer utilizar URL amigables editar el archivo .htaccess y 
-modificar las líneas 4 y 5 de acuerdo a la ubicación del proyecto dentro del 
+3. En caso de querer utilizar URL amigables edite el archivo .htaccess y 
+modifique las líneas 4 y 5 de acuerdo a la ubicación del proyecto dentro del 
 servidor y las restricciones que quiera aplicar a los redireccionamientos.
 
 ## Manual de uso:
@@ -104,7 +103,7 @@ Ejemplo de uso básico (con dos tipos de enrutamientos)
         }
     ));
 
-    // arrancar el core
+    // ejecutar la aplicación
     $app->run();
     
 ```
@@ -117,7 +116,7 @@ Ejemplo de uso básico (con dos tipos de enrutamientos)
     $app = \DMS\Tornado\Tornado::getInstance();
 ```
 
-##### Arrancar el core:
+##### Ejecutar el core:
 
 ```php
 	// con una instancia del core en una variable
@@ -128,7 +127,7 @@ Ejemplo de uso básico (con dos tipos de enrutamientos)
     \DMS\Tornado\Tornado::getInstance()->run();
 ```
 
-##### Setear configuración:
+##### Setear configuraciones:
 
 ```php
     $app = \DMS\Tornado\Tornado::getInstance();
@@ -137,7 +136,7 @@ Ejemplo de uso básico (con dos tipos de enrutamientos)
     $app->config('nombres', array('nombre1'=>'valor1', 'nombre2'=>'valor2'));
 ```
 
-##### Leer configuración:
+##### Leer configuraciones:
 
 ```php
     $app = \DMS\Tornado\Tornado::getInstance();
@@ -153,13 +152,10 @@ Ejemplo de uso básico (con dos tipos de enrutamientos)
 
 ##### Variables de configuración propias de Tornado:
 
-Tornado permite controlar su comportamiento mediante variables de configuración
-predefinidas:
+Tornado permite configurar el ambiente de trabajo de la aplicación.
+De esta forma se puede cambiar el comportamiento interno del core:
 
 ```php
-
-    // deshabilita el acceso por URL a los módulos hmvc
-    $app->config('tornado_url_hmvc_deny', true);
 
     // configura la aplicación para un ambiente de desarrollo
     // - errores visibles
@@ -179,9 +175,11 @@ predefinidas:
 
 ##### Uso de Hooks:
 Existen 4 tipos de hooks:
-- init: antes de cargar un módulo
-- end: despues de ejecutar un módulo
-- 404: al producirse un error http de tipo 404
+- init: antes de parsear la url
+- before: antes de ejecutar la ruta
+- after: despues de ejecutar la ruta
+- end: al finalizar la ejecución
+- 404: al no encontrarse una ruta coincidente a la url
 - error: al atraparse un error de aplicación
 
 ```php
@@ -219,6 +217,52 @@ La forma de ejecutar un gancho por código es la siguiente:
     $app->hook('fueraDeLinea');
 ```
 
+Pueden crearse n cantidad de hooks con un mismo nombre. Los mismos se ejecutarán 
+secuencialmente en el orden en que fueron definidos. Puede alterar este orden indicando
+explicitamente el orden deseado:
+
+```php
+    $app = \DMS\Tornado\Tornado::getInstance();
+
+    $app->hook('before', function(){
+        echo 'Declarado primero - ejecutado despues';
+    }, 1);
+    
+    $app->hook('before', function(){
+        echo 'Declarado despues - ejecutado primero';
+    }, 0);
+```
+
+Si declara más de un hook con el mismo nombre puede impedir que se ejecuten los hooks 
+haciendo que el hook devuelva false en su ejecución.
+
+A excepción de los hook init puede consultar que ruta se va o esta ejecutandose:
+
+```php
+    $app = \DMS\Tornado\Tornado::getInstance();
+
+    $app->hook('before', function() use ($app){
+        $ruta = $app->getRouteMatch()
+    });
+```
+
+##### Hooks y flujo de ejecución:
+
+La secuencia de ejecución del core es la siguiente:
+- se ejecutan los hooks init
+- se parsea la url en busca de la ruta a ejecutar
+- - si no hay coincidencias se ejecuta:
+- - - hooks 404
+- - - hooks end
+- - - se finaliza
+- se ejecutan los hooks before
+- - si alguno devuelve false se ejecuta:
+- - - hooks end
+- - - se finaliza
+- se ejecuta la ruta
+- se ejecutan los hooks after
+- se ejecutan los hooks end
+
 ##### Definir Enrutamientos:
 Los enrutamientos pueden ser:
 - (vacio) - cualquier tipo de petición
@@ -241,11 +285,6 @@ En caso de incluir parámetros opcionales la sintaxis es la siguiente:
 - [/:string]
 - [/:number]
 - [/:alpha]
-
-*Nota:* a fin de evitar errores en tiempo de ejecución todos los parámetros de 
-los métodos de los controladores deberían estar igualados a null como valor por 
-defecto. Quedando en la lógica del método la correcta validación de sus 
-parámetros.
 
 ```php
     $app = \DMS\Tornado\Tornado::getInstance();
@@ -286,61 +325,36 @@ módulos HMVC. Ejemplo:
     });
 ```
 
-El único enrutamiento obligatorio es el del nodo raíz ya que indica cuál será el 
-callback a ejecutar por defecto al ingresar a la aplicación.
-Puede usar la convención de nombres de los módulos MVC para enrutar su 
-aplicación. Por ejemplo el módulo *"usuarios"*, controlador *"acceso"*, método 
-*"ingresar"* puede ser accedido directamente por URL de la siguiente forma:
-
->http://dominio/index.php?/usuarios/acceso/ingresar
-
-En caso de utilizar parámetros el criterio es el mismo que en los enrutameintos 
-definidos por métodos. Los mismos se separarán por barras y se colocaran a la 
-derecha del método a invocar:
-
->http://dominio/index.php?/usuarios/listado/buscar/param1/param2
-
-En caso de no indicarse el método a ejecutar por defecto se invocará al método 
-"index" del controlador:
-
->http://dominio/index.php?/usuarios/acceso
-
-es igual a 
-
->http://dominio/index.php?/usuarios/acceso/index
-
-Otra forma reducida de acceso es utilizar un único nombre (válido siempre que no 
-existan parámetros):
-
->http://dominio/index.php?/nombre
-
-es igual a 
-
->http://dominio/index.php?/nombre/nombre/index
-
-Puede deshabilitar el acceso a los módulos HMVC directamente desde la URL 
-definiendo la siguiente variable de configuración:
+Puede agregar tipos de parámetros auxiliares de la siguiente forma:
 
 ```php
-    $app->config('tornado_url_hmvc_deny', true);
+    $app = \DMS\Tornado\Tornado::getInstance();
+
+    $app->addTypeParam(':custom', '([123]+)');
+    
+    $app->route('/personalizado/:custom', function ($pCustom = null) {
+        echo 'Parametro personalizado ' . $pCustom;
+    });
 ```
 
-Tenga en cuenta que si hace esto la única forma de acceder a los módulos HMVC 
-será definiendo enrutamientos hacia los mismos.
+Nota: El único enrutamiento obligatorio es el del nodo raíz ya que indica cuál será el 
+callback a ejecutar por defecto al ingresar a la aplicación.
 
 ##### Delegaciones:
-Es posible delegar la acción de un módulo hacia otro sin necesidad de realizar 
-una redirección por http. Esta delegación invoca al otro módulo dentro del mismo 
+Es posible delegar la acción de un módulo/ruta hacia otro sin necesidad de realizar 
+una redirección por http. Esta delegación invoca al otro módulo/ruta dentro del mismo 
 request original. Ejemplo:
 
 ```php
 
-    // sin parámetros
-    $app->forward('modulo|clase|metodo');
+    // a módulo sin parámetros
+    $app->forwardModule('modulo|clase|metodo');
 
-    // con parámetros
-    $app->forward('modulo|clase|metodo', array('param1', 'param2'));
+    // a módulo con parámetros
+    $app->forwardModule('modulo|clase|metodo', array('param1', 'param2'));
 
+    // a url (parámetros incluidos en url)
+    $app->forwardUrl('/otra/ruta/1234');
 ```
 
 ##### Anotaciones:
@@ -548,12 +562,15 @@ automáticamente al uso o no de url amigables.
 | hook(string) | Ejecuta el gancho indicado |
 | hook(string mixed) | Registra un gancho y su callback |
 | route(string, mixed) | Registra un enrutamiento y su callback |
+| addTypeParam(string, string) | Registra un nuevo tipo de parámetro |
 | register(string, callable) | Registra una clase/servicio para extender la aplicación
 | render(string) | Incluye una vista/template
 | render(string, array) | Incluye una vista/template junto a un array de variables |
 | param(string) | Devuelve el valor de un parámetro del enrutamiento |
-| forward(string) | Delega la acción hacia otro módulo |
-| forward(string, array) | Delega la acción hacia otro módulo |
+| getRouteMatch | Devuelve la ruta que se esta procesando |
+| forwardModule(string) | Delega la acción hacia otro módulo |
+| forwardModule(string, array) | Delega la acción hacia otro módulo |
+| forwardUrl(string) | Delega la acción hacia otra ruta |
 
 **DMS\Tornado\Controller**
 

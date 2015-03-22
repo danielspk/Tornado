@@ -1,0 +1,8 @@
+-----------------------------------------------------------------------------
+ Tips:
+-----------------------------------------------------------------------------
+
+Este archivo es una micro guía de tipsre el uso de Tornado:
+
+1) Los hooks init pueden utilizarse para:
+   - Setear la internacionalización de la aplicación

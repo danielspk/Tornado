@@ -2,8 +2,8 @@
 
 $app = \DMS\Tornado\Tornado::getInstance();
 
-$app->hook('init', function () use ($app) {
-    //print_r($app->getRouteModule());
+$app->hook('init', function () {
+
 });
 
 $app->hook('end', function () {

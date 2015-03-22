@@ -80,7 +80,6 @@ final class Autoload
 
         // si no se pudo cargar ninguna clase
         return false;
-
     }
 
     /**
@@ -114,7 +113,5 @@ final class Autoload
 
         // si no se pudo cargar ninguna clase
         return false;
-
     }
-
 }

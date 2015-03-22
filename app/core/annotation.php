@@ -12,14 +12,12 @@ namespace DMS\Tornado;
  */
 final class Annotation
 {
-
     /**
      * Método que busca anotaciones de enrutamientos y serializa su resultado
      * @return void
      */
     public function findRoutes()
     {
-
         $routesFind = array();
 
         // se recorren los controladores
@@ -67,7 +65,5 @@ final class Annotation
             $sz = serialize($routesFind);
             file_put_contents(__DIR__ . '/../config/route_serialize.php', $sz);
         }
-
     }
-
 }

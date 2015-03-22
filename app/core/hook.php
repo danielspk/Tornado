@@ -12,7 +12,6 @@ namespace DMS\Tornado;
  */
 final class Hook
 {
-
     /**
      * Contenedor de funciones de eventos de usuario
      * @var array
@@ -35,21 +34,22 @@ final class Hook
 
     /**
      * Método que ejecuta un evento de aplicación
-     * @param string $pName Nombre de evento
+     * @param string $pName Nombre del evento
      * @return mixed|null
      */
     public function call($pName)
     {
+        $return = null;
+
         if (!isset($this->_hooks[$pName])) {
-            if (in_array($pName, array('init', 'end', 'error', '404')))
-                return;
+            if (in_array($pName, array('init', 'before', 'after', 'end', 'error', '404')))
+                return $return;
             else
                 throw new \InvalidArgumentException('Not registered Hook.');
         }
 
-        $return = null;
-
-        //ksort($this->_hooks[$pName]);
+        // se ordenan los hooks con ese nombre
+        ksort($this->_hooks[$pName]);
 
         // se recorren los hooks con ese nombre
         foreach ($this->_hooks[$pName] as $hook) {
@@ -76,10 +76,7 @@ final class Hook
 
             // si un hook devuelve false se impide la ejecución de los siguientes hooks
             if ($return === false)
-                break;
+                return $return;
         }
-
-        return $return;
     }
-
 }
