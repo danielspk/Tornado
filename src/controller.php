@@ -12,7 +12,6 @@ namespace DMS\Tornado;
  */
 abstract class Controller
 {
-
     /**
      * Método que carga otro controlador
      * @param string $pController Módulo|Controlador
@@ -49,5 +48,4 @@ abstract class Controller
         $model = explode('|', $pModel);
         require 'app/modules/'. $model[0] . '/model/' . $model[1] . '.php';
     }
-
 }

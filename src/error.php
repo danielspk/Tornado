@@ -12,10 +12,9 @@ namespace DMS\Tornado;
  */
 final class Error
 {
-
     /**
      * Excepción capturada
-     * @var type Exception
+     * @var \Exception Exception
      */
     private $_currentException;
 
@@ -47,7 +46,7 @@ final class Error
 
     /**
      * Método que devuelve la excepción actual
-     * @return Exception
+     * @return \Exception
      */
     public function getCurrentException()
     {
@@ -61,7 +60,7 @@ final class Error
      * @param  string         $pErrFile Archivo del error
      * @param  int            $pErrLine Número de línea del error
      * @return boolean|void
-     * @throws ErrorException
+     * @throws \ErrorException
      */
     public function handlerError($pErrNro, $pErrStr, $pErrFile, $pErrLine)
     {
@@ -78,7 +77,7 @@ final class Error
 
     /**
      * Método que gestiona las excepciones
-     * @param  ErrorException $pExc Excepción
+     * @param  \ErrorException $pExc Excepción
      * @return void
      */
     public function handlerException($pExc)
@@ -90,14 +89,10 @@ final class Error
         // se conserva la excepción
         $this->_currentException = $pExc;
 
-        // se limpia el buffer de salida
-        ob_clean();
-
-        // se ejecuta el gancho de errores
+        // se ejecuta/n el/los gancho/s de errores
         Tornado::getInstance()->hook('error');
 
         // se finaliza la ejecución
         exit();
     }
-
 }

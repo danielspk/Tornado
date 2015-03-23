@@ -12,9 +12,8 @@ namespace DMS\Tornado;
  */
 final class Config implements \ArrayAccess
 {
-
     /**
-     * Matriz con configuracion dinámica
+     * Matriz con configuración dinámica
      * @var array
      */
     private $_config = array();
@@ -62,5 +61,4 @@ final class Config implements \ArrayAccess
     {
         return isset($this->_config[$pName]) ? $this->_config[$pName] : null;
     }
-
 }

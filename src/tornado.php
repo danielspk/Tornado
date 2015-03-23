@@ -2,7 +2,7 @@
 namespace DMS\Tornado;
 
 /**
- * Clase de principal/bootstrap del core
+ * Clase de principal/bootstrap del src
  *
  * @package TORNADO-CORE
  * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
@@ -12,73 +12,66 @@ namespace DMS\Tornado;
  */
 final class Tornado
 {
-
     /**
      * Instancia única de la clase (patrón singleton)
-     * @var DMS\Tornado\Tornado
+     * @var \DMS\Tornado\Tornado
      */
     private static $_instance = null;
 
     /**
      * Clase de manejo de enrutamientos
-     * @var DMS\Tornado\Route
+     * @var \DMS\Tornado\Route
      */
     private $_route = null;
 
     /**
-     * Clase de manejo de autocarga de librerías
-     * @var DMS\Tornado\Autoload
-     */
-    private $_autoload = null;
-
-    /**
      * Clase de manejo de errors
-     * @var DMS\Tornado\Error
+     * @var \DMS\Tornado\Error
      */
     private $_error = null;
 
     /**
      * Clase de manejo de configuración
-     * @var DMS\Tornado\Config
+     * @var \DMS\Tornado\Config
      */
     private $_config = null;
 
     /**
      * Clase de manejo de ganchos y eventos
-     * @var DMS\Tornado\Hook
+     * @var \DMS\Tornado\Hook
      */
     private $_hook = null;
 
     /**
      * Clase de manejo de anotaciones
-     * @var DMS\Tornado\Annotation
+     * @var \DMS\Tornado\Annotation
      */
     private $_annotation = null;
 
     /**
-     * Servicios inyectados
-     * @var array
+     * Clase de ervicios inyectados
+     * @var \DMS\Tornado\Service
      */
-    private $_services = array();
+    private $_service = null;
 
     /**
      * Método constructor
      */
     private function __construct()
     {
-        require __DIR__ . '/autoload.php';
         require __DIR__ . '/error.php';
         require __DIR__ . '/config.php';
         require __DIR__ . '/hook.php';
         require __DIR__ . '/route.php';
-        require __DIR__ . '/controller.php';
+        require __DIR__ . '/service.php';
         require __DIR__ . '/annotation.php';
+        require __DIR__ . '/controller.php';
 
-        $this->_autoload = new Autoload();
         $this->_error = new Error();
         $this->_config = new Config();
         $this->_hook = new Hook();
         $this->_route = new Route();
+        $this->_service = new Service();
         $this->_annotation = new Annotation();
     }
 
@@ -93,7 +86,7 @@ final class Tornado
 
     /**
      * Método que instancia la clase o devuelve la misma (patrón singleton)
-     * @return DMS\Core\Tornado
+     * @return \DMS\Tornado\Tornado
      */
     public static function getInstance()
     {
@@ -118,12 +111,15 @@ final class Tornado
         mb_regex_encoding('UTF-8');
 
         // se establecen comportamientos según el ambiente de la aplicación
-        if ($this->_config['tornado_environment_development'] == true) {
+        if ($this->_config['tornado_environment_development'] === true) {
 
             ini_set('display_errors', '1');
             error_reporting(E_ALL);
 
-            $this->_annotation->findRoutes();
+            $this->_annotation->findRoutes(
+                $this->_config['tornado_hmvc_module_path'],
+                $this->_config['tornado_hmvc_serialize_path']
+            );
 
         } else {
 
@@ -132,19 +128,74 @@ final class Tornado
 
         }
 
-        // se registran las rutas serializadas
-        $this->_route->unserialize();
+        // se registran las rutas serializadas de los controladores
+        $this->_route->unserialize($this->_config['tornado_hmvc_serialize_path']);
 
-        // se ejecuta el hook de inicio
+        // flujo de ejecución:
+        // - se ejecutan los hooks init
+        // - se parsea la url en busca de la ruta a ejecutar
+        // - - si no hay coincidencias se ejecuta:
+        // - - - hooks 404
+        // - - - hooks end
+        // - - - se finaliza
+        // - se ejecutan los hooks before
+        // - - si alguno devuelve false se ejecuta:
+        // - - - hooks end
+        // - - - se finaliza
+        // - se ejecuta la ruta
+        // - se ejecutan los hooks after
+        // - se ejecutan los hooks end
+
         $this->_hook->call('init');
 
-        // se carga el modulo/callback correspondiente a la URL del request
-        if ($this->_route->invokeUrl() === false) {
+        $flowReturn = $this->_route->parseUrl();
+
+        if ($flowReturn === false) {
             $this->_hook->call('404');
+            $this->_hook->call('end');
+            return;
         }
 
-        // se ejecuta el hook de finalización
+        $flowReturn = $this->_hook->call('before');
+
+        if ($flowReturn === false) {
+            $this->_hook->call('end');
+            return;
+        }
+
+        $this->_route->execute();
+
+        $this->_hook->call('after');
         $this->_hook->call('end');
+    }
+
+    /**
+     * Método que delega la petición a otra ruta
+     * @param string $pUrl Ruta
+     */
+    public function forwardUrl($pUrl)
+    {
+        if ($this->_route->parseUrl($pUrl) !== true) {
+            throw new \BadMethodCallException('Invalid url route.');
+        }
+
+        $this->_route->execute();
+    }
+
+    /**
+     * Método que delega/ejecuta la petición a otro módulo
+     * @param string $pModule Módulo
+     * @param array  $pParams Parametros
+     */
+    public function forwardModule($pModule, $pParams = null)
+    {
+        $module = explode('|', $pModule);
+
+        if (count($module) !== 3) {
+            throw new \BadMethodCallException('Invalid module name.');
+        }
+
+        $this->_route->callModule($module[0], $module[1], $module[2], $pParams);
     }
 
     /**
@@ -155,6 +206,16 @@ final class Tornado
     public function route($pMethodRoute, $pCallback)
     {
         $this->_route->register($pMethodRoute, $pCallback);
+    }
+
+    /**
+     * Método que agrega nuevos tipos de parámetros a los enrutamientos
+     * @param string $pType       Abreviatura de parámetro
+     * @param string $pExpression Expresión regular
+     */
+    public function addTypeParam($pType, $pExpression)
+    {
+        $this->_route->addType($pType, $pExpression);
     }
 
     /**
@@ -184,7 +245,7 @@ final class Tornado
 
             $this->_autoload->register($pPrefix);
 
-            return;
+            return null;
         }
 
         $this->_autoload->addNamespace($pPrefix, $pBaseDir);
@@ -194,18 +255,19 @@ final class Tornado
      * Método que registra ganchos o invoca a uno
      * @param  string $pName     Nombre del gancho
      * @param  mixed  $pCallback Callback a ejecutar
+     * @param  mixed  $pPosition Orden del gancho
      * @return mixed
      */
-    public function hook($pName = null, $pCallback = null)
+    public function hook($pName = null, $pCallback = null, $pPosition = null)
     {
         if (func_num_args() === 1) {
 
             $this->_hook->call($pName);
 
-            return;
+            return null;
         }
 
-        $this->_hook->register($pName, $pCallback);
+        $this->_hook->register($pName, $pCallback, $pPosition);
     }
 
     /**
@@ -219,7 +281,7 @@ final class Tornado
 
             $this->_error->setHandler($pParam);
 
-            return;
+            return null;
         }
 
         return $this->_error->getCurrentException();
@@ -251,31 +313,24 @@ final class Tornado
     }
 
     /**
+     * Método que retorna la ruta coincidente
+     * @return array
+     */
+    public function getRouteMatch()
+    {
+        return $this->_route->getRouteMatch();
+    }
+
+    /**
      * Método que registra un servicio/clase externa
      * @param string   $pService  Nombre del servicio a registrar
      * @param callable $pCallback Función a ejecutar al momento de invocarse
      */
     public function register($pService, $pCallback)
     {
-        $this->_services[$pService] = $pCallback;
+        $this->_service->register($pService, $pCallback);
     }
 
-    /**
-     * Método que delega la petición a otro módulo
-     * @param string $pModule Nombre de la ruta a delegar
-     * @param array  $pParams Parámetros para la ruta
-     */
-    public function forward($pModule, $pParams = null)
-    {
-        $module = explode('|', $pModule);
-        
-        if (count($module) !== 3) {
-            throw new \BadMethodCallException('Invalid module name.');
-        }
-        
-        $this->_route->callModule($module[0], $module[1], $module[2], $pParams);
-    }
-    
     /**
      * Método mágico __call. Se asume que es invocado al solicitar un servicio inyectado
      * @param  string $pService Nombre del servicio
@@ -284,11 +339,7 @@ final class Tornado
      */
     public function __call($pService, $pArgs)
     {
-        if (!isset($this->_services[$pService])) {
-            throw new \BadMethodCallException('The service ' . $pService . ' is not registered.');
-        }
-
-        return call_user_func_array($this->_services[$pService], $pArgs);
+        return $this->_service->$pService($pArgs);
     }
 
     /**
@@ -298,11 +349,6 @@ final class Tornado
      */
     public function __get($pService)
     {
-        if (!isset($this->_services[$pService])) {
-            throw new \InvalidArgumentException('The service ' . $pService . ' is not registered.');
-        }
-
-        return $this->_services[$pService]();
+        return $this->_service->$pService;
     }
-
 }

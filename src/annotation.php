@@ -12,18 +12,18 @@ namespace DMS\Tornado;
  */
 final class Annotation
 {
-
     /**
      * Método que busca anotaciones de enrutamientos y serializa su resultado
+     * @param $pHmvcPath      string Path de módulos hmvc
+     * @param $pSerializePath string Path de rutas serializadas
      * @return void
      */
-    public function findRoutes()
+    public function findRoutes($pHmvcPath, $pSerializePath)
     {
-
         $routesFind = array();
 
         // se recorren los controladores
-        foreach (glob('app/modules/*/controller/*.php') as $file) {
+        foreach (glob($pHmvcPath . '/*/controller/*.php') as $file) {
 
             require $file;
 
@@ -65,9 +65,7 @@ final class Annotation
         // se serializan los enrutamientos en un archivo de configuración
         if (count($routesFind) > 0) {
             $sz = serialize($routesFind);
-            file_put_contents(__DIR__ . '/../config/route_serialize.php', $sz);
+            file_put_contents($pSerializePath . '/route_serialize.php', $sz);
         }
-
     }
-
 }
