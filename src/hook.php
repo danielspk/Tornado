@@ -2,13 +2,14 @@
 namespace DMS\Tornado;
 
 /**
- * Clase de eventos/ganchos para extender el core
+ * Clase de eventos/ganchos para extender el src
  *
  * @package TORNADO-CORE
  * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
  * @link http://tornado-php.com
  * @license http://tornado-php.com/licencia/ MIT License
  * @version 1.0.0
+ * @TODO: extender los hooks para que permitan rutas y no se ejecuten siempre: $app->hook('before', '/admin/*', callback);
  */
 final class Hook
 {

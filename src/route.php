@@ -106,10 +106,11 @@ final class Route
 
     /**
      * Método que registra rutas serializadas
+     * @param $pSerializePath string Path de rutas serializadas
      */
-    public function unserialize()
+    public function unserialize($pSerializePath)
     {
-        $file = __DIR__ . '/../config/route_serialize.php';
+        $file = $pSerializePath . '/route_serialize.php';
 
         if (file_exists($file)) {
 

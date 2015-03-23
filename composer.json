@@ -1,7 +1,7 @@
 {
     "name": "danielspk/tornado",
     "description": "Reducido núcleo de trabajo para PHP",
-    "type": "project",
+    "type": "library",
     "keywords": [
         "tornado", "mvc", "hmvc", "rest", "framework", "core", 
         "microframework", "php", "dms", "danielspk"
@@ -25,17 +25,9 @@
     "require": {
         "php": ">=5.3.0"
     },
-    "suggest": {
-        "danielspk/libs": "Librerías de usos varios para PHP"
-    },
     "autoload": {
         "psr-4": {
-            "DMS\\Tornado\\" : "app/core/"
+          "DMS\\Tornado\\": "src/"
         }
-    },
-    "minimum-stability": "stable",
-    "config": {
-        "preferred-install": "dist",
-        "vendor-dir": "app/vendor"
     }
 }

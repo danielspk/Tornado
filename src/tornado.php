@@ -2,7 +2,7 @@
 namespace DMS\Tornado;
 
 /**
- * Clase de principal/bootstrap del core
+ * Clase de principal/bootstrap del src
  *
  * @package TORNADO-CORE
  * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
@@ -23,12 +23,6 @@ final class Tornado
      * @var \DMS\Tornado\Route
      */
     private $_route = null;
-
-    /**
-     * Clase de manejo de autocarga de librerías
-     * @var \DMS\Tornado\Autoload
-     */
-    private $_autoload = null;
 
     /**
      * Clase de manejo de errors
@@ -65,7 +59,6 @@ final class Tornado
      */
     private function __construct()
     {
-        require __DIR__ . '/autoload.php';
         require __DIR__ . '/error.php';
         require __DIR__ . '/config.php';
         require __DIR__ . '/hook.php';
@@ -74,7 +67,6 @@ final class Tornado
         require __DIR__ . '/annotation.php';
         require __DIR__ . '/controller.php';
 
-        $this->_autoload = new Autoload();
         $this->_error = new Error();
         $this->_config = new Config();
         $this->_hook = new Hook();
@@ -124,7 +116,10 @@ final class Tornado
             ini_set('display_errors', '1');
             error_reporting(E_ALL);
 
-            $this->_annotation->findRoutes();
+            $this->_annotation->findRoutes(
+                $this->_config['tornado_hmvc_module_path'],
+                $this->_config['tornado_hmvc_serialize_path']
+            );
 
         } else {
 
@@ -134,7 +129,7 @@ final class Tornado
         }
 
         // se registran las rutas serializadas de los controladores
-        $this->_route->unserialize();
+        $this->_route->unserialize($this->_config['tornado_hmvc_serialize_path']);
 
         // flujo de ejecución:
         // - se ejecutan los hooks init
