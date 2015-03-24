@@ -60,6 +60,8 @@ amigables)
 TORNADO apoya la iniciativa del PHP Framework Interop Group e implementa los 
 estándares PSR-1, PSR-2 y PSR-4.
 
+Puede obtener más información en http://www.php-fig.org/
+
 ## Instalación:
 
 La instalación recomendada requiere el uso de Composer. 
@@ -198,6 +200,7 @@ Existen 6 tipos de hooks:
 - error: al atraparse un error o excepción en aplicación
 
 ```php
+
     $app = \DMS\Tornado\Tornado::getInstance();
 
     // utilizando una clase / método / parámetros
@@ -207,28 +210,33 @@ Existen 6 tipos de hooks:
     $app->hook('404', function(){
         echo '404';
     });
+    
 ```
 
-También es posible crear ganchos personalizados. Ejemplo usando una clase de usuario
+También es posible crear ganchos personalizados. Ejemplo usando una clase de usuario:
 
 ```php
-class Saludador
-{
-    public function persona($nombre, $apellido)
-    {
-        echo 'Hola ' . $nombre . ', ' . $apellido;
-    }
-}
 
-$app->hook('saludar', array('Saludador', 'persona', array('Tornado', 'PHP')));
+    class Saludador
+    {
+        public function persona($nombre, $apellido)
+        {
+            echo 'Hola ' . $nombre . ', ' . $apellido;
+        }
+    }
+
+    $app->hook('saludar', array('Saludador', 'persona', array('Tornado', 'PHP')));
+    
 ```
 
 La forma de ejecutar un gancho por código es la siguiente:
 
 ```php
+
     $app = \DMS\Tornado\Tornado::getInstance();
 
     $app->hook('fueraDeLinea');
+    
 ```
 
 Pueden crearse n cantidad de hooks con un mismo nombre. Los mismos se ejecutarán 
@@ -236,6 +244,7 @@ secuencialmente en el orden en que fueron definidos. Puede, opcionalmente, alter
 este orden indicando explicitamente el orden deseado:
 
 ```php
+
     $app = \DMS\Tornado\Tornado::getInstance();
 
     $app->hook('before', function(){
@@ -245,6 +254,7 @@ este orden indicando explicitamente el orden deseado:
     $app->hook('before', function(){
         echo 'Declarado despues - ejecutado primero';
     }, 0);
+    
 ```
 
 Si declara más de un hook con el mismo nombre puede impedir que se ejecuten los hooks 
@@ -254,11 +264,13 @@ A excepción de los hook init puede consultar que ruta se va o se esta ejecutand
 la siguiente forma:
 
 ```php
+
     $app = \DMS\Tornado\Tornado::getInstance();
 
     $app->hook('before', function() use ($app){
         $ruta = $app->getRouteMatch()
     });
+    
 ```
 
 Esto devolverá un array con la siguiente información:
@@ -309,6 +321,7 @@ En caso de incluir parámetros opcionales la sintaxis es la siguiente:
 - [/:alpha]
 
 ```php
+
     $app = \DMS\Tornado\Tornado::getInstance();
 
     // utilizando un módulo y cualquier tipo de petición
@@ -335,6 +348,7 @@ En caso de incluir parámetros opcionales la sintaxis es la siguiente:
 
     // utilizando un módulo y petición GET o POST
     $app->route('GET|POST /', 'demo|demo|listar');
+    
 ```
 
 También es posible definir parámetros con nombre. En dicho caso puede omitirse 
@@ -342,14 +356,17 @@ el uso de parámetros de entrada en las funciones anónimas o métodos de los
 módulos HMVC. Ejemplo:
 
 ```php
+
     $app->route('/bienvenida/@nombre:alpha/tornado/@edad:number', function () use ($app) {
         echo 'Hola ' . $app->param('nombre') . ', Edad: ' . $app->param('edad');
     });
+    
 ```
 
 Puede agregar tipos de parámetros auxiliares de la siguiente forma:
 
 ```php
+
     $app = \DMS\Tornado\Tornado::getInstance();
 
     $app->addTypeParam(':custom', '([123]+)');
@@ -357,6 +374,7 @@ Puede agregar tipos de parámetros auxiliares de la siguiente forma:
     $app->route('/personalizado/:custom', function ($pCustom = null) {
         echo 'Parametro personalizado ' . $pCustom;
     });
+    
 ```
 
 Nota: El único enrutamiento obligatorio es el del nodo raíz ya que indica cuál será el 
@@ -377,6 +395,7 @@ request original. Ejemplo:
 
     // a url (parámetros incluidos en url)
     $app->forwardUrl('/otra/ruta/1234');
+    
 ```
 
 ##### Anotaciones:
@@ -394,18 +413,20 @@ métodos de los controladores para actualizar este archivo de configuración.
 Ejemplo:
 
 ```php
-class Demo extends \DMS\Tornado\Controller
-{
-    /**
-     * Ejemplo de enrutamientos mediante anotaciones
-     * @T_ROUTE /demo/anotacion
-     * @T_ROUTE GET|POST /demo/otra/anotacion
-     */
-    public function index()
+
+    class Demo extends \DMS\Tornado\Controller
     {
-        echo 'Hola Mundo Tornado';
+        /**
+         * Ejemplo de enrutamientos mediante anotaciones
+         * @T_ROUTE /demo/anotacion
+         * @T_ROUTE GET|POST /demo/otra/anotacion
+         */
+        public function index()
+        {
+            echo 'Hola Mundo Tornado';
+        }
     }
-}
+
 ```
 
 ##### Vistas
@@ -427,18 +448,22 @@ El manejo de errores y excepciones viene habilitado por defecto. Puede alterar
 su comportamiento de la siguiente forma:
 
 ```php
+
     $app = \DMS\Tornado\Tornado::getInstance();
 
     $app->error(true);  // habilita el manejador
     $app->error(false); // deshabilita el manejador
+    
 ```
 
 Puede acceder a la última excepción lanzada de la siguiente forma:
 
 ```php
+
     $app = \DMS\Tornado\Tornado::getInstance();
 
     $exc = $app->error();
+    
 ```
 
 ##### Inyección de Dependencias:
@@ -446,20 +471,24 @@ Es posible extender el core mediante la inyección de nuevas clases.
 La forma de registrar una nueva dependencia es:
 
 ```php
+
     $app->register('fecha', function($fecha = '2014-12-31'){
         return new DateTime($fecha);
     });
+    
 ```
 
 Este registro creará un dependencia para la clase 'DateTime' denominada 'fecha'.
 Podrá hacer uso de la misma de la siguiente forma:
 
 ```php
+
     $app = \DMS\Tornado\Tornado::getInstance();
 
     echo $app->fecha()->format('d/m/Y') . '<br />'; // forma de uso como método
     echo $app->fecha('2014-08-20')->format('d/m/Y') . '<br />'; // forma de uso como método con parámetros
     echo $app->fecha->format('d/m/Y') . '<br />'; // forma de uso como propiedad
+    
 ```
 
 ##### Organización de proyecto:
@@ -475,6 +504,7 @@ definir un namespace que respete la siguiente jerarquía:
 app\modules\[modulo]\controller
 
 ```php
+
     namespace app\modules\demo\controller;
 
     class Demo extends \DMS\Tornado\Controller {
@@ -482,6 +512,7 @@ app\modules\[modulo]\controller
             echo ' Hola ' . $param . '<br>';
         }
     }
+    
 ```
 
 La clase Controller ofrece los siguientes métodos:
@@ -502,6 +533,7 @@ La clase Controller ofrece los siguientes métodos:
 
     // permite cargar una vista contenida dentro de una subcarpeta
     $this->loadView('Modulo|SubCarpeta/Vista');
+    
 ```
 
 ##### Modelos:
@@ -509,6 +541,7 @@ Todos los controladores deben definir un namespace que respete la siguiente
 jerarquía: app\modules\[modulo]\model
 
 ```php
+
     namespace app\modules\demo\model;
 
     class Demo {
@@ -516,6 +549,7 @@ jerarquía: app\modules\[modulo]\model
             return true;
         }
     }
+    
 ```
 
 ##### Vistas:
@@ -545,7 +579,7 @@ $nombreClave
 | render(string) | Incluye una vista/template
 | render(string, array) | Incluye una vista/template junto a un array de variables |
 | param(string) | Devuelve el valor de un parámetro del enrutamiento |
-| getRouteMatch | Devuelve la ruta que se esta procesando |
+| getRouteMatch() | Devuelve la ruta que se esta procesando |
 | forwardModule(string) | Delega la acción hacia otro módulo |
 | forwardModule(string, array) | Delega la acción hacia otro módulo |
 | forwardUrl(string) | Delega la acción hacia otra ruta |
