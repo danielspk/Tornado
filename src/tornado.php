@@ -8,7 +8,7 @@ namespace DMS\Tornado;
  * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
  * @link http://tornado-php.com
  * @license http://tornado-php.com/licencia/ MIT License
- * @version 1.0.0
+ * @version 2.0.0-beta
  */
 final class Tornado
 {
@@ -241,24 +241,6 @@ final class Tornado
         }
 
         $this->_config[$pName] = $pValue;
-    }
-
-    /**
-     * Método que habilita o no el manejador de autoload, o registra un namespace/directorio
-     * @param  string $pPrefix  Prefijo del namespace a registrar
-     * @param  array  $pBaseDir Rutas de directorios que contienen las clases del namespace
-     * @return mixed
-     */
-    public function autoload($pPrefix = null, $pBaseDir = null)
-    {
-        if (func_num_args() === 1) {
-
-            $this->_autoload->register($pPrefix);
-
-            return null;
-        }
-
-        $this->_autoload->addNamespace($pPrefix, $pBaseDir);
     }
 
     /**

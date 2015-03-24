@@ -8,7 +8,8 @@ namespace DMS\Tornado;
  * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
  * @link http://tornado-php.com
  * @license http://tornado-php.com/licencia/ MIT License
- * @version 1.0.0
+ * @version 2.0.0-beta
+ * @TODO: analizar registrar como singleton
  */
 final class Service
 {
