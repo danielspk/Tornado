@@ -8,11 +8,10 @@ namespace DMS\Tornado;
  * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
  * @link http://tornado-php.com
  * @license http://tornado-php.com/licencia/ MIT License
- * @version 1.0.0
+ * @version 2.0.0-beta
  */
 final class Route
 {
-
     /**
      * Contenedor de enrutamientos
      * @var array
@@ -20,10 +19,39 @@ final class Route
     private $_routes = array();
 
     /**
-     * Parámetros del enrutamiento invocado
+     * Tipos de parámetros soportados
      * @var array
      */
-    private $_params = null;
+    private $_typesParams = array(
+        ':*'      => '(.*)',
+        ':string' => '([a-zA-Z]+)',
+        ':number' => '([0-9]+)',
+        ':alpha'  => '([a-zA-Z0-9-_]+)',
+        '[/'      => '/?',
+        ']'       => '?'
+    );
+
+    /**
+     * Parámetros con nombre del enrutamiento invocado
+     * @var array
+     */
+    private $_paramsName = null;
+
+    /**
+     * Índice de la ruta coincidente
+     * @var null|int
+     */
+    private $_routeMatch = null;
+
+    /**
+     * Método que agrega nuevos tipos de parámetros
+     * @param string $pType       Abreviatura de parámetro
+     * @param string $pExpression Expresión regular
+     */
+    public function addType($pType, $pExpression)
+    {
+        $this->_typesParams[] = array($pType => $pExpression);
+    }
 
     /**
      * Método que recupera un parámetro del enrutamiento actual
@@ -32,9 +60,18 @@ final class Route
      */
     public function getParam($pName)
     {
-        return (isset($this->_params[$pName])) ? $this->_params[$pName] : null;
+        return (isset($this->_paramsName[$pName])) ? $this->_paramsName[$pName] : null;
     }
-    
+
+    /**
+     * Método que retorna la ruta coincidente
+     * @return array
+     */
+    public function getRouteMatch()
+    {
+        return $this->_routes[$this->_routeMatch];
+    }
+
     /**
      * Método que registra una ruta, sus métodos de invocación y su callback
      * @param string $pMethodRoute Método de petición y Patrón de ruta
@@ -42,7 +79,6 @@ final class Route
      */
     public function register($pMethodRoute, $pCallback)
     {
-
         $pos = strpos(trim($pMethodRoute), '/');
 
         if ($pos === 0) {
@@ -50,7 +86,8 @@ final class Route
             $this->_routes[] = array(
                 'method' => 'ALL',
                 'route' => $pMethodRoute,
-                'callback' => $pCallback
+                'callback' => $pCallback,
+                'params' => null
             );
 
         } else {
@@ -61,20 +98,19 @@ final class Route
             $this->_routes[] = array(
                 'method' => $methods,
                 'route' => $route,
-                'callback' => $pCallback
+                'callback' => $pCallback,
+                'params' => null
             );
-
         }
-
     }
 
     /**
      * Método que registra rutas serializadas
+     * @param $pSerializePath string Path de rutas serializadas
      */
-    public function unserialize()
+    public function unserialize($pSerializePath)
     {
-
-        $file = __DIR__ . '/../config/route_serialize.php';
+        $file = $pSerializePath . '/route_serialize.php';
 
         if (file_exists($file)) {
 
@@ -84,33 +120,22 @@ final class Route
             foreach ($serialized as $route) {
                 $this->register($route[0], $route[1]);
             }
-
         }
-
     }
 
     /**
      * Método que parsea la url en busca del módulo/callback a ejecutar
      * @return boolean Resultado de la petición
      */
-    public function invokeUrl()
+    public function parseUrl($pUrl = null)
     {
-
-        // se determina si la URL esta enrutada hacia un módulo
-
         // se ajustan las barras de la query string
-        $querystring = (empty($_SERVER['QUERY_STRING'])) ? '/' : $_SERVER['QUERY_STRING'];
-        $querystring .= (substr($querystring, -1) != '/') ? '/' : '';
+        if ($pUrl === null)
+            $querystring = (empty($_SERVER['QUERY_STRING'])) ? '/' : $_SERVER['QUERY_STRING'];
+        else
+            $querystring = $pUrl;
 
-        // filtros de enrutadores y expresión resultante
-        $tokens = array(
-            ':*'      => '(.*)',
-            ':string' => '([a-zA-Z]+)',
-            ':number' => '([0-9]+)',
-            ':alpha'  => '([a-zA-Z0-9-_]+)',
-            '[/'      => '/?',
-            ']'       => '?'
-        );
+        $querystring .= (substr($querystring, -1) != '/') ? '/' : '';
 
         // método de petición
         $method = $_SERVER["REQUEST_METHOD"];
@@ -123,9 +148,9 @@ final class Route
         }
 
         // se recorren las rutas registradas
-        foreach ($this->_routes as $route) {
+        foreach ($this->_routes as $index => $route) {
 
-            $routeMatch = strtr($route['route'], $tokens);  // se reemplazan los filtros de tipo de dato por expresiones
+            $routeMatch = strtr($route['route'], $this->_typesParams);  // se reemplazan los filtros de tipo de dato por expresiones
             $routeMatch = preg_replace('#@([a-zA-Z0-9-_]+)#', '', $routeMatch); // se eliminan los nombres de parámetros
 
             if (
@@ -146,7 +171,7 @@ final class Route
                         $cantP = count($paramsNames[1]);
 
                         for ($i = 0; $i < $cantP; $i++) {
-                            $this->_params[$paramsNames[1][$i]] = $params[$i];
+                            $this->_paramsName[$paramsNames[1][$i]] = $params[$i];
                         }
 
                     }
@@ -167,78 +192,33 @@ final class Route
 
                     // se unen los parámetros
                     $params = array_merge($params, $paramAsterik);
-
                 }
 
-                // se determina si hay una función anonima en vez de un módulo
-                if (is_callable($route['callback'])) {
+                $this->_routeMatch = $index;
+                $this->_routes[$index]['params'] = $params;
 
-                    call_user_func_array($route['callback'], $params);
-
-                    return true;
-
-                } else {
-
-                    $handler = explode('|', $route['callback']);
-
-                    return $this->callModule($handler[0], $handler[1], $handler[2], $params);
-
-                }
-
+                return true;
             }
-
-        }
-
-        // si la URL no fue enrutada y no se deshabilito el acceso a hmvc desde
-        // URLs se parsea la misma en busca de un módulo\controlador\método\parámetros
-        if (
-            $_SERVER['QUERY_STRING'] &&
-            Tornado::getInstance()->config('tornado_url_hmvc_deny') != true
-        ) {
-
-            // se elimina la barra final e inicial de la url si existiesen
-            // se sanea la url
-            // se separan las secciones de la url en un array
-            $url = explode
-            (
-                '/',
-                filter_var(
-                    trim(
-                        $_SERVER['QUERY_STRING'],
-                        '/'
-                    ),
-                    FILTER_SANITIZE_URL
-                )
-            );
-
-            // dependiendo la cantidad de secciones de la url se conforma el
-            // modulo, controlador, acción y parámetros
-            $count = count($url);
-
-            if ($count == 1) {
-                $url[1] = $url[0];
-            }
-
-            $module = $url[0];
-            $controller = $url[1];
-
-            if ($count > 2) {
-                $method = $url[2];
-            } else {
-                $method = 'index';
-            }
-
-            if ($count > 3) {
-                $params = array_slice($url, 3);
-            } else {
-                $params = array();
-            }
-
-            return $this->callModule($module, $controller, $method, $params);
 
         }
 
         return false;
+    }
+
+    public function execute()
+    {
+        // se determina si hay una función anonima en vez de un módulo
+        if (is_callable($this->_routes[$this->_routeMatch]['callback'])) {
+
+            call_user_func_array($this->_routes[$this->_routeMatch]['callback'], $this->_routes[$this->_routeMatch]['params']);
+
+        } else {
+
+            $handler = explode('|', $this->_routes[$this->_routeMatch]['callback']);
+
+            $this->callModule($handler[0], $handler[1], $handler[2], $this->_routes[$this->_routeMatch]['params']);
+
+        }
     }
 
     /**
@@ -249,21 +229,13 @@ final class Route
      * @param  array   $pParams     Parámetros del método
      * @return boolean Resultado de la invocación
      */
-    public function callModule(
-        $pModule = null, $pController = null, $pMethod = null, $pParams = array()
-    )
+    public function callModule($pModule, $pController, $pMethod, $pParams = array())
     {
-
-        // se valida que el parseo de la URL haya dado un módulo por resultado
-        if (! $pModule || ! $pController) {
-            return false;
-        }
-
         // se valida si la ruta de la clase solicitada existe
         $path = 'app/modules/' . $pModule . '/controller/' . $pController . '.php';
 
         if (!file_exists($path)) {
-            return false;
+            throw new \InvalidArgumentException('Module unknown.');
         } else {
             require_once $path;
         }
@@ -273,7 +245,7 @@ final class Route
 
         // se valida si el método solicitado existe
         if (! method_exists($pController, $pMethod)) {
-            return false;
+            throw new \InvalidArgumentException('Method unknown.');
         }
 
         // se instancia el controlador
@@ -281,8 +253,5 @@ final class Route
 
         // se ejecuta la acción junto a sus parámetros si existiesen
         call_user_func_array(array($controller, $pMethod), $pParams);
-
-        return true;
     }
-
 }

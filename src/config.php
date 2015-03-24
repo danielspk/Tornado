@@ -8,16 +8,24 @@ namespace DMS\Tornado;
  * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
  * @link http://tornado-php.com
  * @license http://tornado-php.com/licencia/ MIT License
- * @version 1.0.0
+ * @version 2.0.0-beta
  */
 final class Config implements \ArrayAccess
 {
-
     /**
-     * Matriz con configuracion dinámica
+     * Matriz con configuración dinámica
      * @var array
      */
-    private $_config = array();
+    private $_config;
+
+    /**
+     * Método constructor
+     * @param array $pConf Configuración inicial
+     */
+    public function __construct($pConf = array())
+    {
+        $this->_config = $pConf;
+    }
 
     /**
      * Método que setea valores de configuración (Interfase \ArrayAccess)
@@ -62,5 +70,4 @@ final class Config implements \ArrayAccess
     {
         return isset($this->_config[$pName]) ? $this->_config[$pName] : null;
     }
-
 }
