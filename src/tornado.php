@@ -68,7 +68,12 @@ final class Tornado
         require __DIR__ . '/controller.php';
 
         $this->_error = new Error();
-        $this->_config = new Config();
+        $this->_config = new Config(array(
+            'tornado_environment_development' => true,
+            'tornado_hmvc_use'                => false,
+            'tornado_hmvc_module_path'        => '',
+            'tornado_hmvc_serialize_path'     => ''
+        ));
         $this->_hook = new Hook();
         $this->_route = new Route();
         $this->_service = new Service();
@@ -110,16 +115,20 @@ final class Tornado
         mb_language('uni');
         mb_regex_encoding('UTF-8');
 
+        // se establece el gestor de errores
+        $this->_error->setHandler(true);
+
         // se establecen comportamientos según el ambiente de la aplicación
         if ($this->_config['tornado_environment_development'] === true) {
 
             ini_set('display_errors', '1');
             error_reporting(E_ALL);
 
-            $this->_annotation->findRoutes(
-                $this->_config['tornado_hmvc_module_path'],
-                $this->_config['tornado_hmvc_serialize_path']
-            );
+            if ($this->_config['tornado_environment_development'] === true)
+                $this->_annotation->findRoutes(
+                    $this->_config['tornado_hmvc_module_path'],
+                    $this->_config['tornado_hmvc_serialize_path']
+                );
 
         } else {
 
@@ -129,7 +138,8 @@ final class Tornado
         }
 
         // se registran las rutas serializadas de los controladores
-        $this->_route->unserialize($this->_config['tornado_hmvc_serialize_path']);
+        if ($this->_config['tornado_environment_development'] === true)
+            $this->_route->unserialize($this->_config['tornado_hmvc_serialize_path']);
 
         // flujo de ejecución:
         // - se ejecutan los hooks init

@@ -16,7 +16,16 @@ final class Config implements \ArrayAccess
      * Matriz con configuración dinámica
      * @var array
      */
-    private $_config = array();
+    private $_config;
+
+    /**
+     * Método constructor
+     * @param array $pConf Configuración inicial
+     */
+    public function __construct($pConf = array())
+    {
+        $this->_config = $pConf;
+    }
 
     /**
      * Método que setea valores de configuración (Interfase \ArrayAccess)

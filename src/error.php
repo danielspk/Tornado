@@ -19,14 +19,6 @@ final class Error
     private $_currentException;
 
     /**
-     * Método constructor
-     */
-    public function __construct()
-    {
-        $this->setHandler();
-    }
-
-    /**
      * Método que crea la instancia de la clase si no existiese
      * Si la instancia no existe se encarga de registrar los manejadores
      * de errores y excepciones

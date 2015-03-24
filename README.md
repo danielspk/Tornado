@@ -10,16 +10,16 @@ Puede obtener más información en su web http://tornado-php.com
 
 ### Filosofia:
 
-TORNADO no intenta ser un gran framework full-stack. Contrariamente intenta ser  
+TORNADO no intenta ser un framework PHP full-stack. Contrariamente intenta ser  
 un núcleo de trabajo muy reducido para implementar patrones de arquitectura HMVC 
 y/o servicios REST, con la menor parametrización y utilización de código 
-posible, apoyado en un core que organice el proyecto y un sistema de 
+posible, apoyado en un core que organice su proyecto junto a un sistema de 
 configuración y gestión de errores simple.
 
 TORNADO no incluye librerías de soporte para tareas comunes como acceso a base 
 de datos, gestión de plantillas, envío de mais, etc.
-Puede utilizar Composer para incluir librerías de terceros y de acuerdo a las 
-necesidades particulares del proyecto a desarrollar.
+Utilice Composer para incluir paquetes de terceros de acuerdo a las necesidades 
+particulares del proyecto a desarrollar.
 
 Puede obtener más información de la filosofía del core mirando la wiki del 
 proyecto.
@@ -39,10 +39,10 @@ TORNADO se inspiro en varios microframeworks PHP, entre ellos cabe mencionar:
 TORNADO se desarrollo tratando de respetar las siguiente metas:
 
 - ser rápido
-- ser fácil de entender _(tanto su API como su construcción interna)_
+- fácil de entender _(tanto su API como su construcción interna)_
 - tener la menor cantidad de métodos posibles dentro de su API
 - permitir definir ganchos para que los programadores puedan extender el mismo
-- permitir incluir librerías de terceros con suma facilidad
+- incluir librerías/paquetes de terceros con suma facilidad
 - ser ligero respecto a la cantidad de líneas de código a mantener
 - ser un core de trabajo _(NUNCA un framework)_
 
@@ -50,11 +50,10 @@ TORNADO se desarrollo tratando de respetar las siguiente metas:
 
 - Enrutamientos para utilizar módulos HMVC y/o servicios REST (apoyado en URL 
 amigables)
-- Configuración de la aplicación
+- Configuración general de la aplicación
 - Ganchos para extender las características del core
 - Captura de errores y excepciones
 - Inyección de dependencias
-- Auto carga de librerías de terceros
 
 ### Codificación:
 
@@ -63,23 +62,31 @@ estándares PSR-1, PSR-2 y PSR-4.
 
 ## Instalación:
 
-El core no requiere instalación alguna. Basta con descargar el proyecto y 
-copiarlo en alguna ubicación del servidor web.
-También puede utilizar "composer" para su instalación - Ejemplo:
+La instalación recomendada requiere el uso de Composer. 
 
 1. Instale composer ( puede obtener ayuda en https://getcomposer.org/download/ )
 
-2. Inicie la consola de comando y ejecute el siguiente comando
+2. Cree un archivo composer.json con los paquetes a instalar
 
 ```
-composer create-project danielspk/tornado ruta/al/proyecto
+{
+    "require": {
+        "danielspk/tornado" : "2.*"
+    }
+}
 ```
 
-3. En caso de querer utilizar URL amigables edite el archivo .htaccess y 
-modifique las líneas 4 y 5 de acuerdo a la ubicación del proyecto dentro del 
-servidor y las restricciones que quiera aplicar a los redireccionamientos.
+3. Inicie la consola de comando y ejecute el siguiente comando
+
+```
+composer install
+```
 
 ## Manual de uso:
+
+La versión actual difiere totalmente de la versión inicial 1.0.0
+
+Si va a actualizar su aplicación lea en detalle el archivo de cambios CHANGELOG.md
 
 #### Uso básico:
 Ejemplo de uso básico (con dos tipos de enrutamientos)
@@ -87,8 +94,8 @@ Ejemplo de uso básico (con dos tipos de enrutamientos)
 ```php
 <?php
 
-    // incluir el core
-    require 'app/core/tornado.php';
+    // incluir el autoload
+    require 'vendor/autoload.php';
     
     // obtener instancia del core
     $app = \DMS\Tornado\Tornado::getInstance();
@@ -159,28 +166,36 @@ De esta forma se puede cambiar el comportamiento interno del core:
 
     // configura la aplicación para un ambiente de desarrollo
     // - errores visibles
-    // - parse de anotaciones de métodos HMVC para generar enrutamientos automáticos
+    // - parse de anotaciones en módulos HMVC para generar enrutamientos automáticos
     $app->config('tornado_environment_development', true);
 
 ```
 
-##### Habilitar/deshabilitar autoload y setear namespaces:
+Otras configuraciones:
 
 ```php
-    $app = \DMS\Tornado\Tornado::getInstance();
 
-    $app->autoload(true); // false para deshabilitar
-    $app->autoload('Twing\Twing', array('twing/lib/src', 'twing/lib/test'));
+    // - indica si se van a utilizar módulos hmvc
+    $app->config('tornado_hmvc_use', true);
+
+    // - ruta donde se alojarán los módulos hmvc
+    // (relativa a donde se inicie Tornado)
+    $app->config('tornado_hmvc_module_path', true);
+        
+    // - ruta donde se serilizaran las rutas de los módulos hmvc
+    // (relativa a donde se inicie Tornado)
+    $app->config('tornado_hmvc_serialize_path', true);
+        
 ```
 
 ##### Uso de Hooks:
-Existen 4 tipos de hooks:
-- init: antes de parsear la url
-- before: antes de ejecutar la ruta
-- after: despues de ejecutar la ruta
-- end: al finalizar la ejecución
-- 404: al no encontrarse una ruta coincidente a la url
-- error: al atraparse un error de aplicación
+Existen 6 tipos de hooks:
+- init: antes de parsear la url en busca de una ruta coincidente
+- before: antes de ejecutar la ruta coincidente
+- after: despues de ejecutar la ruta coincidente
+- end: al finalizar la ejecución de la petición
+- 404: al no encontrarse una ruta coincidente con la url
+- error: al atraparse un error o excepción en aplicación
 
 ```php
     $app = \DMS\Tornado\Tornado::getInstance();
@@ -194,8 +209,7 @@ Existen 4 tipos de hooks:
     });
 ```
 
-También es posible crear ganchos personalizados. Ejemplo usando una clase de 
-usuario (se asume que ya debe estar incluida o incluida en el autoload):
+También es posible crear ganchos personalizados. Ejemplo usando una clase de usuario
 
 ```php
 class Saludador
@@ -206,7 +220,7 @@ class Saludador
     }
 }
 
-$app->hook('saludar', array('Saludador', 'persona', array('Tornado', 'Core')));
+$app->hook('saludar', array('Saludador', 'persona', array('Tornado', 'PHP')));
 ```
 
 La forma de ejecutar un gancho por código es la siguiente:
@@ -218,8 +232,8 @@ La forma de ejecutar un gancho por código es la siguiente:
 ```
 
 Pueden crearse n cantidad de hooks con un mismo nombre. Los mismos se ejecutarán 
-secuencialmente en el orden en que fueron definidos. Puede alterar este orden indicando
-explicitamente el orden deseado:
+secuencialmente en el orden en que fueron definidos. Puede, opcionalmente, alterar 
+este orden indicando explicitamente el orden deseado:
 
 ```php
     $app = \DMS\Tornado\Tornado::getInstance();
@@ -234,9 +248,10 @@ explicitamente el orden deseado:
 ```
 
 Si declara más de un hook con el mismo nombre puede impedir que se ejecuten los hooks 
-haciendo que el hook devuelva false en su ejecución.
+subsiguientes haciendo que el hook devuelva false en su ejecución.
 
-A excepción de los hook init puede consultar que ruta se va o esta ejecutandose:
+A excepción de los hook init puede consultar que ruta se va o se esta ejecutandose de 
+la siguiente forma:
 
 ```php
     $app = \DMS\Tornado\Tornado::getInstance();
@@ -246,20 +261,27 @@ A excepción de los hook init puede consultar que ruta se va o esta ejecutandose
     });
 ```
 
+Esto devolverá un array con la siguiente información:
+
+- Método de la petición (GET, POST, etc)
+- Ruta
+- Callback
+- Parámetros
+
 ##### Hooks y flujo de ejecución:
 
 La secuencia de ejecución del core es la siguiente:
 - se ejecutan los hooks init
-- se parsea la url en busca de la ruta a ejecutar
+- se parsea la url en busca de la ruta coincidente
 - - si no hay coincidencias se ejecuta:
 - - - hooks 404
 - - - hooks end
-- - - se finaliza
+- - - se finaliza la ejecución
 - se ejecutan los hooks before
 - - si alguno devuelve false se ejecuta:
 - - - hooks end
-- - - se finaliza
-- se ejecuta la ruta
+- - - se finaliza la ejecución
+- se ejecuta la ruta coincidente
 - se ejecutan los hooks after
 - se ejecutan los hooks end
 
@@ -441,26 +463,9 @@ Podrá hacer uso de la misma de la siguiente forma:
 ```
 
 ##### Organización de proyecto:
-Se recomienda organiza el proyecto de la siguiente forma:
-- setear la configuración en el archivo "app/config/config.php
-- setear los ganchos en el archivo "app/config/hook.php
-- setear los enrutamientos en el archivo "app/config/route.php
 
-Para esto el archivo index.php principal de la aplicación debería quedar de la 
-siguiente forma:
-
-```php
-// se carga el core
-require 'app/core/tornado.php';
-
-// se cargan las configuraciones
-require 'app/config/config.php';
-require 'app/config/route.php';
-require 'app/config/hook.php';
-
-// se inicia el core
-\DMS\Tornado\Tornado::getInstance()->run();
-```
+Existe un proyecto que dispone de un esqueleto para una aplicación base.
+Puede descargar el mismo desde https://github.com/danielspk/TornadoSkeletonApplication
 
 #### Módulos:
 
@@ -520,31 +525,6 @@ nombre.tpl.php
 En caso de pasarse parámetros a las vistas la forma de invocar a los mismos es:
 $nombreClave
 
-###### Sugerencia para enlaces relativos y URL amigables:
-Para que su sistema se ajuste rápidamente a un entorno de url amigables, puede 
-definir, en el archivo de configuración, una constante llamada URLFRIENDLY 
-con el valor de base para las rutas relativas, y luego utilizar la misma en la 
-etiqueta base de html dentro del head. Ejemplo:
-
-```php
-    
-    // usando .htaccess
-    define('URLFRIENDLY', 'http://local.web/project/');
-
-    // sin htaccess
-    define('URLFRIENDLY', 'http://local.web/project/index.php?/');
-```
-
-```html
-    <base href='<?=URLFRIENDLY?>' />
-
-    <!-- ejemplo de uso -->
-    <a href="./ruta">Link a ruta</a>
-```
-
-De esta forma con sólo editar el valor de dicha constante el sistema se ajustará 
-automáticamente al uso o no de url amigables.
-
 ## Resumen de Métodos:
 
 **DMS\Tornado\Tornado**
@@ -588,3 +568,4 @@ El proyecto se distribuye bajo la licencia MIT.
 ## Sugerencias:
 
 Escriba a la dirección info@daniel.spiridione.com.ar
+
