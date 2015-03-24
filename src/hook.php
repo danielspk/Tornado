@@ -8,8 +8,8 @@ namespace DMS\Tornado;
  * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
  * @link http://tornado-php.com
  * @license http://tornado-php.com/licencia/ MIT License
- * @version 1.0.0
- * @TODO: extender los hooks para que permitan rutas y no se ejecuten siempre: $app->hook('before', '/admin/*', callback);
+ * @version 2.0.0-beta
+ * @TODO: extender los hooks para que permitan rutas - Ejemplo: $app->hook('before', '/admin/*', callback);
  */
 final class Hook
 {

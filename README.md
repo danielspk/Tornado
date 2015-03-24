@@ -535,8 +535,6 @@ $nombreClave
 | run() | Arranca el core |
 | config(string) | Devuelve el valor de la variable de configuración |
 | config(string, mixed) | Setea el valor en la variable de configuración |
-| autoload(bool) | Habilita/deshabilita el uso de autoload de clases |
-| autolod(string, array) | Setea un namespace y las posibles ubicaciones de sus clases |
 | error() | Devuelve la última excepción atrapada |
 | error(bool) | Habilita/deshabilita el manejador interno de errores y excepciones |
 | hook(string) | Ejecuta el gancho indicado |
