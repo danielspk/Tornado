@@ -22,23 +22,34 @@ final class Annotation
     {
         $routesFind = array();
 
-        // se recorren los controladores
-        foreach (glob($pHmvcPath . '/*/controller/*.php') as $file) {
+        // se recorren los controladores con SPL
+        // (no se lleva a cabo con \GlobIterator dado que en Windows sólo funciona con rutas absolutas)
+        $controllers = new \RegexIterator(
+            new \RecursiveIteratorIterator(
+                new \RecursiveDirectoryIterator(
+                    $pHmvcPath,
+                    \RecursiveDirectoryIterator::SKIP_DOTS |
+                    \RecursiveDirectoryIterator::UNIX_PATHS
+                )
+            ),
+            '/.*\/controller\/.*\.php/i'
+        );
+
+        foreach($controllers as $file) {
 
             require $file;
 
-            $nameClass = str_replace(array('/', '.php'), array('\\', ''), $file);
-            $namespaceSections = explode('\\', $nameClass);
-            $moduleSections = $namespaceSections[2] . '|' . $namespaceSections[4] . '|';
+            $namespaceClass = str_replace(array('/', '.php'), array('\\', ''), $file);
+            $namespaceSections = array_reverse(explode('\\', $namespaceClass));
 
-            $rc = new \ReflectionClass($nameClass);
+            $rc = new \ReflectionClass($namespaceClass);
 
             $methods = $rc->getMethods();
 
             // se recorren los métodos del controlador
             foreach ($methods as $method) {
 
-                $rm = new \ReflectionMethod($nameClass, $method->name);
+                $rm = new \ReflectionMethod($namespaceClass, $method->name);
 
                 $commentsText = $rm->getDocComment();
                 $commentsLines = explode("\n", $commentsText);
@@ -52,7 +63,7 @@ final class Annotation
                 foreach ($routes as $route) {
 
                     $route = trim(substr(str_replace('@T_ROUTE', '', trim($route)), 1));
-                    $callback = $moduleSections . $method->name;
+                    $callback = $namespaceSections[2] . '|' . $namespaceSections[0] . '|' . $method->name;
 
                     $routesFind[] = array($route, $callback);
 

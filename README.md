@@ -600,4 +600,3 @@ El proyecto se distribuye bajo la licencia MIT.
 ## Sugerencias:
 
 Escriba a la dirección info@daniel.spiridione.com.ar
-
