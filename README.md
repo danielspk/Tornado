@@ -597,7 +597,7 @@ $nombreClave
 | hook(string mixed) | Registra un gancho y su callback |
 | route(string, mixed) | Registra un enrutamiento y su callback |
 | addTypeParam(string, string) | Registra un nuevo tipo de parámetro |
-| register(string, callable) | Registra una clase/servicio para extender la aplicación
+| register(string, callable, [bool]) | Registra una clase/servicio para extender la aplicación
 | render(string) | Incluye una vista/template
 | render(string, array) | Incluye una vista/template junto a un array de variables |
 | param(string) | Devuelve el valor de un parámetro del enrutamiento |
