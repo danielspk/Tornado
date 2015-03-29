@@ -11,7 +11,11 @@
          bootstrap="test/bootstrap.php">
     <testsuites>
         <testsuite name="Tornado Tests">
-            <directory>./test/</directory>
+            <!-- El orden es importante para no re-declarar las clases importadas por Tornado -->
+            <file>./test/TornadoTest.php</file>
+            <file>./test/AnnotationTest.php</file>
+            <file>./test/ConfigTest.php</file>
+            <file>./test/ErrorTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>
