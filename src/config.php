@@ -22,7 +22,7 @@ final class Config implements \ArrayAccess
      * Método constructor
      * @param array $pConf Configuración inicial
      */
-    public function __construct($pConf = array())
+    public function __construct($pConf = [])
     {
         $this->_config = $pConf;
     }

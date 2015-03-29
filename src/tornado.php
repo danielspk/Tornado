@@ -68,12 +68,12 @@ final class Tornado
         require __DIR__ . '/controller.php';
 
         $this->_error = new Error();
-        $this->_config = new Config(array(
+        $this->_config = new Config([
             'tornado_environment_development' => true,
             'tornado_hmvc_use'                => false,
             'tornado_hmvc_module_path'        => '',
             'tornado_hmvc_serialize_path'     => ''
-        ));
+        ]);
         $this->_hook = new Hook();
         $this->_route = new Route();
         $this->_service = new Service();

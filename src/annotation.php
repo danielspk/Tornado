@@ -20,7 +20,7 @@ final class Annotation
      */
     public function findRoutes($pHmvcPath, $pSerializePath)
     {
-        $routesFind = array();
+        $routesFind = [];
 
         // se recorren los controladores con SPL
         // (no se lleva a cabo con \GlobIterator dado que en Windows sólo funciona con rutas absolutas)
@@ -39,7 +39,7 @@ final class Annotation
 
             require $file;
 
-            $namespaceClass = str_replace(array('/', '.php'), array('\\', ''), $file);
+            $namespaceClass = str_replace(['/', '.php'], ['\\', ''], $file);
             $namespaceSections = array_reverse(explode('\\', $namespaceClass));
 
             $rc = new \ReflectionClass($namespaceClass);
@@ -65,7 +65,7 @@ final class Annotation
                     $route = trim(substr(str_replace('@T_ROUTE', '', trim($route)), 1));
                     $callback = $namespaceSections[2] . '|' . $namespaceSections[0] . '|' . $method->name;
 
-                    $routesFind[] = array($route, $callback);
+                    $routesFind[] = [$route, $callback];
 
                 }
 

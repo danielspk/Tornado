@@ -17,7 +17,7 @@ final class Service
      * Servicios inyectados
      * @var array
      */
-    private $_services = array();
+    private $_services = [];
 
     /**
      * Método que registra un servicio/clase externa

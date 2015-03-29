@@ -17,7 +17,7 @@ final class Hook
      * Contenedor de funciones de eventos de usuario
      * @var array
      */
-    private $_hooks = array();
+    private $_hooks = [];
 
     /**
      * Método que registra un evento de aplicación
@@ -43,7 +43,7 @@ final class Hook
         $return = null;
 
         if (!isset($this->_hooks[$pName])) {
-            if (in_array($pName, array('init', 'before', 'after', 'end', 'error', '404')))
+            if (in_array($pName, ['init', 'before', 'after', 'end', 'error', '404']))
                 return $return;
             else
                 throw new \InvalidArgumentException('Not registered Hook.');
@@ -60,13 +60,7 @@ final class Hook
 
                 $classHook = new $hook[0]();
 
-                $return = call_user_func_array(
-                    array(
-                        $classHook,
-                        $hook[1]
-                    ),
-                    $hook[2]
-                );
+                $return = call_user_func_array([$classHook, $hook[1]], $hook[2]);
 
                 // si el callback es una función anónima se la ejecuta
             } elseif (is_callable($hook)) {

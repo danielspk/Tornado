@@ -500,14 +500,17 @@ Puede descargar el mismo desde https://github.com/danielspk/TornadoSkeletonAppli
 
 ##### Controladores:
 Todos los controladores deben extender de \DMS\Tornado\Controller y deben 
-definir un namespace que respete la siguiente jerarquía: 
-app\modules\[modulo]\controller
+definir un namespace que respete la especificación PSR-4. Ejemplo: 
+
+Asumiendo que los módulos HMVC se encuentran en app\modules\[modulo HMVC]\controller
 
 ```php
 
     namespace app\modules\demo\controller;
 
-    class Demo extends \DMS\Tornado\Controller {
+    use \DMS\Tornado\Controller;
+    
+    class Demo extends Controller {
         public function index($param = null){
             echo ' Hola ' . $param . '<br>';
         }
@@ -519,6 +522,9 @@ La clase Controller ofrece los siguientes métodos:
 
 ```php
 
+    // permite acceder a una instancia de Tornado
+    $app = $this->app;
+    
     // permite cargar un controlador
     $this->loadController('Modulo|Controlador');
 
@@ -585,6 +591,10 @@ $nombreClave
 | forwardUrl(string) | Delega la acción hacia otra ruta |
 
 **DMS\Tornado\Controller**
+
+| Atributo | Detalle |
+| ------ | ------- |
+| app | Instancia de Tornado |
 
 | Método | Detalle |
 | ------ | ------- |
