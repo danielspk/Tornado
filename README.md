@@ -393,7 +393,7 @@ request original. Ejemplo:
     // a módulo con parámetros
     $app->forwardModule('modulo|clase|metodo', array('param1', 'param2'));
 
-    // a url (parámetros incluidos en url)
+    // a url (parámetros incluidos en la url)
     $app->forwardUrl('/otra/ruta/1234');
     
 ```
