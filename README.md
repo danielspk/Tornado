@@ -473,7 +473,7 @@ La forma de registrar una nueva dependencia es:
 ```php
 
     $app->register('fecha', function($fecha = '2014-12-31'){
-        return new DateTime($fecha);
+        return new \DateTime($fecha);
     });
     
 ```
@@ -485,9 +485,25 @@ Podrá hacer uso de la misma de la siguiente forma:
 
     $app = \DMS\Tornado\Tornado::getInstance();
 
-    echo $app->fecha()->format('d/m/Y') . '<br />'; // forma de uso como método
-    echo $app->fecha('2014-08-20')->format('d/m/Y') . '<br />'; // forma de uso como método con parámetros
-    echo $app->fecha->format('d/m/Y') . '<br />'; // forma de uso como propiedad
+    // forma de uso como método
+    echo $app->fecha()->format('d/m/Y') . '<br />';
+    
+    // forma de uso como método con parámetros
+    echo $app->fecha('2014-08-20')->format('d/m/Y') . '<br />';
+    
+    // forma de uso como propiedad
+    echo $app->fecha->format('d/m/Y') . '<br />';
+    
+```
+
+Por defecto todas las dependencias inyectadas crean una nueva instancia de la clase.
+Puede registrar el servicio como Singleton seteando el tercer parámetro opcional en true:
+
+```php
+
+    $app->register('fecha', function(){
+        return new \DateTime('2014-12-31');
+    }, true);
     
 ```
 
