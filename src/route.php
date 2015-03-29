@@ -16,20 +16,20 @@ final class Route
      * Contenedor de enrutamientos
      * @var array
      */
-    private $_routes = array();
+    private $_routes = [];
 
     /**
      * Tipos de parámetros soportados
      * @var array
      */
-    private $_typesParams = array(
+    private $_typesParams = [
         ':*'      => '(.*)',
         ':string' => '([a-zA-Z]+)',
         ':number' => '([0-9]+)',
         ':alpha'  => '([a-zA-Z0-9-_]+)',
         '[/'      => '/?',
         ']'       => '?'
-    );
+    ];
 
     /**
      * Parámetros con nombre del enrutamiento invocado
@@ -50,7 +50,7 @@ final class Route
      */
     public function addType($pType, $pExpression)
     {
-        $this->_typesParams[] = array($pType => $pExpression);
+        $this->_typesParams[] = [$pType => $pExpression];
     }
 
     /**
@@ -83,24 +83,24 @@ final class Route
 
         if ($pos === 0) {
 
-            $this->_routes[] = array(
+            $this->_routes[] = [
                 'method' => 'ALL',
                 'route' => $pMethodRoute,
                 'callback' => $pCallback,
                 'params' => null
-            );
+            ];
 
         } else {
 
             $route = trim(substr($pMethodRoute, $pos));
             $methods = trim(substr($pMethodRoute, 0, $pos));
 
-            $this->_routes[] = array(
+            $this->_routes[] = [
                 'method' => $methods,
                 'route' => $route,
                 'callback' => $pCallback,
                 'params' => null
-            );
+            ];
         }
     }
 
@@ -125,7 +125,8 @@ final class Route
 
     /**
      * Método que parsea la url en busca del módulo/callback a ejecutar
-     * @return boolean Resultado de la petición
+     * @param null $pUrl Url a parsear
+     * @return bool Resultado de la petición
      */
     public function parseUrl($pUrl = null)
     {
@@ -177,7 +178,7 @@ final class Route
                     }
 
                 } else {
-                    $params = array();
+                    $params = [];
                 }
 
                 // el comodin :* hace que la expresión regular no separe los
@@ -229,7 +230,7 @@ final class Route
      * @param  array   $pParams     Parámetros del método
      * @return boolean Resultado de la invocación
      */
-    public function callModule($pModule, $pController, $pMethod, $pParams = array())
+    public function callModule($pModule, $pController, $pMethod, $pParams = [])
     {
         // se valida si la ruta de la clase solicitada existe
         $path = 'app/modules/' . $pModule . '/controller/' . $pController . '.php';
@@ -249,9 +250,9 @@ final class Route
         }
 
         // se instancia el controlador
-        $controller = new $pController();
+        $controller = new $pController(Tornado::getInstance());
 
         // se ejecuta la acción junto a sus parámetros si existiesen
-        call_user_func_array(array($controller, $pMethod), $pParams);
+        call_user_func_array([$controller, $pMethod], $pParams);
     }
 }

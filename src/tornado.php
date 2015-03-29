@@ -68,12 +68,12 @@ final class Tornado
         require __DIR__ . '/controller.php';
 
         $this->_error = new Error();
-        $this->_config = new Config(array(
+        $this->_config = new Config([
             'tornado_environment_development' => true,
             'tornado_hmvc_use'                => false,
             'tornado_hmvc_module_path'        => '',
             'tornado_hmvc_serialize_path'     => ''
-        ));
+        ]);
         $this->_hook = new Hook();
         $this->_route = new Route();
         $this->_service = new Service();
@@ -315,12 +315,16 @@ final class Tornado
 
     /**
      * Método que registra un servicio/clase externa
-     * @param string   $pService  Nombre del servicio a registrar
+     * @param string $pService Nombre del servicio a registrar
      * @param callable $pCallback Función a ejecutar al momento de invocarse
+     * @param bool $pEsSingleton Determina si el servicio debe registrarse como Singleton
      */
-    public function register($pService, $pCallback)
+    public function register($pService, $pCallback, $pEsSingleton = false)
     {
-        $this->_service->register($pService, $pCallback);
+        if ($pEsSingleton === true)
+            $this->_service->registerSingleton($pService, $pCallback);
+        else
+            $this->_service->register($pService, $pCallback);
     }
 
     /**
@@ -331,7 +335,7 @@ final class Tornado
      */
     public function __call($pService, $pArgs)
     {
-        return $this->_service->$pService($pArgs);
+        return $this->_service->get($pService, $pArgs);
     }
 
     /**
@@ -341,6 +345,6 @@ final class Tornado
      */
     public function __get($pService)
     {
-        return $this->_service->$pService;
+        return $this->_service->get($pService);
     }
 }

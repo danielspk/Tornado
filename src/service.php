@@ -9,7 +9,6 @@ namespace DMS\Tornado;
  * @link http://tornado-php.com
  * @license http://tornado-php.com/licencia/ MIT License
  * @version 2.0.0-beta
- * @TODO: analizar registrar como singleton
  */
 final class Service
 {
@@ -17,11 +16,11 @@ final class Service
      * Servicios inyectados
      * @var array
      */
-    private $_services = array();
+    private $_services = [];
 
     /**
      * Método que registra un servicio/clase externa
-     * @param string   $pService  Nombre del servicio a registrar
+     * @param string $pService Nombre del servicio a registrar
      * @param callable $pCallback Función a ejecutar al momento de invocarse
      */
     public function register($pService, $pCallback)
@@ -30,31 +29,39 @@ final class Service
     }
 
     /**
-     * Método mágico __call. Se asume que es invocado al solicitar un servicio inyectado
-     * @param  string $pService Nombre del servicio
-     * @param  array  $pArgs    Parámetros
-     * @return object
+     * Método que registra un servicio/clase externa como Singleton
+     * @param string $pService Nombre del servicio a registrar
+     * @param callable $pCallback Función a ejecutar al momento de invocarse
      */
-    public function __call($pService, $pArgs)
+    public function registerSingleton($pService, $pCallback)
     {
-        if (!isset($this->_services[$pService])) {
-            throw new \BadMethodCallException('The service ' . $pService . ' is not registered.');
-        }
+        $this->_services[$pService] = function () use ($pService, $pCallback) {
 
-        return call_user_func_array($this->_services[$pService], $pArgs);
+            static $instance;
+
+            if (null === $instance) {
+                $instance = $pCallback();
+            }
+
+            return $instance;
+        };
     }
 
     /**
-     * Método mágico __get. Se asume que es invocado al solicitar un servicio inyectado
-     * @param  string $pService Nombre del servicio
+     * Método que recupera un servicio inyectado
+     * @param string $pService Nombre del servicio
+     * @param array $pArgs Parámetros
      * @return object
      */
-    public function __get($pService)
+    public function get($pService, $pArgs = [])
     {
         if (!isset($this->_services[$pService])) {
-            throw new \InvalidArgumentException('The service ' . $pService . ' is not registered.');
+            throw new \BadMethodCallException('The service ' . $pService . ' is not registered in Tornado.');
         }
 
-        return $this->_services[$pService]();
+        if (count($pArgs))
+            return call_user_func_array($this->_services[$pService], $pArgs);
+        else
+            return $this->_services[$pService]();
     }
 }

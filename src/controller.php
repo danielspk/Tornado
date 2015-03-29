@@ -13,13 +13,36 @@ namespace DMS\Tornado;
 abstract class Controller
 {
     /**
+     * Path de módulos HMVC
+     * @var string
+     */
+    private $_path;
+
+    /**
+     * Instancia de Tornado (singleton)
+     * @var \DMS\Tornado\Tornado
+     */
+    protected $app;
+
+    /**
+     * Contructor de la Clase
+     *
+     * @param \DMS\Tornado\Tornado $pApp Instancia de Tornado
+     */
+    public function __construct(Tornado $pApp)
+    {
+        $this->app = $pApp;
+        $this->_path = $this->app->config('tornado_hmvc_module_path') . '/';
+    }
+
+    /**
      * Método que carga otro controlador
      * @param string $pController Módulo|Controlador
      */
     protected function loadController($pController)
     {
         $controller = explode('|', $pController);
-        require 'app/modules/'. $controller[0] . '/controller/' . $controller[1] . '.php';
+        require $this->_path . $controller[0] . '/controller/' . $controller[1] . '.php';
     }
 
     /**
@@ -36,7 +59,7 @@ abstract class Controller
 
         $view = explode('|', $pView);
 
-        require 'app/modules/'. $view[0] . '/view/' . $view[1] . '.tpl.php';
+        require $this->_path . $view[0] . '/view/' . $view[1] . '.tpl.php';
     }
 
     /**
@@ -46,6 +69,6 @@ abstract class Controller
     protected function loadModel($pModel)
     {
         $model = explode('|', $pModel);
-        require 'app/modules/'. $model[0] . '/model/' . $model[1] . '.php';
+        require $this->_path . $model[0] . '/model/' . $model[1] . '.php';
     }
 }

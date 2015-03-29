@@ -28,8 +28,8 @@ final class Error
     public function setHandler($pEnable = true)
     {
         if ($pEnable === true) {
-            set_error_handler(array($this, 'handlerError'));
-            set_exception_handler(array($this, 'handlerException'));
+            set_error_handler([$this, 'handlerError']);
+            set_exception_handler([$this, 'handlerException']);
         } else {
             restore_error_handler();
             restore_exception_handler();
