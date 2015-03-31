@@ -56,7 +56,6 @@ final class Error
      */
     public function handlerError($pErrNro, $pErrStr, $pErrFile, $pErrLine)
     {
-
         // Se omiten los errores del tipo E_NOTICE
         if ($pErrNro === E_NOTICE) {
             return false;
@@ -64,7 +63,6 @@ final class Error
 
         // Se genera una excepción
         throw new \ErrorException($pErrStr, $pErrNro, 1, $pErrFile, $pErrLine);
-
     }
 
     /**

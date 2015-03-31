@@ -393,9 +393,18 @@ request original. Ejemplo:
     // a módulo con parámetros
     $app->forwardModule('modulo|clase|metodo', array('param1', 'param2'));
 
-    // a url (parámetros incluidos en url)
+    // a url (parámetros incluidos en la url)
     $app->forwardUrl('/otra/ruta/1234');
     
+```
+
+Si se encuentra instalado FPM en el Servidor puede devolver el resultado al cliente y 
+continuar con la ejecución de la petición actual en segundo plano de la siguiente forma:
+
+```php
+
+    $app->finishRequest();
+ 
 ```
 
 ##### Anotaciones:
@@ -605,6 +614,7 @@ $nombreClave
 | forwardModule(string) | Delega la acción hacia otro módulo |
 | forwardModule(string, array) | Delega la acción hacia otro módulo |
 | forwardUrl(string) | Delega la acción hacia otra ruta |
+| finishRequest() | Devuelve el request al cliente y continua la ejecución del script actual |
 
 **DMS\Tornado\Controller**
 
