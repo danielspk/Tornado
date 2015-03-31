@@ -162,6 +162,7 @@ final class Tornado
 
         if ($flowReturn === false) {
             $this->_hook->call('404');
+            $this->finishRequest();
             $this->_hook->call('end');
             return;
         }
@@ -169,6 +170,7 @@ final class Tornado
         $flowReturn = $this->_hook->call('before');
 
         if ($flowReturn === false) {
+            $this->finishRequest();
             $this->_hook->call('end');
             return;
         }
@@ -176,7 +178,17 @@ final class Tornado
         $this->_route->execute();
 
         $this->_hook->call('after');
+        $this->finishRequest();
         $this->_hook->call('end');
+    }
+
+    /**
+     * Método que finaliza el request y continuar la ejecución del script
+     */
+    public function finishRequest()
+    {
+        if (function_exists('fastcgi_finish_request'))
+            fastcgi_finish_request();
     }
 
     /**

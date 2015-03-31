@@ -9,7 +9,6 @@ namespace DMS\Tornado;
  * @link http://tornado-php.com
  * @license http://tornado-php.com/licencia/ MIT License
  * @version 2.0.0-beta
- * @TODO: extender los hooks para que pueden ser atachados rutas al momento de definirlas $app->route(...)->attach([hook, callable])
  */
 final class Hook
 {
