@@ -76,7 +76,7 @@ final class Annotation
         // se serializan los enrutamientos en un archivo de configuración
         if (count($routesFind) > 0) {
             $sz = serialize($routesFind);
-            file_put_contents($pSerializePath . '/route_serialize.php', $sz);
+            file_put_contents($pSerializePath . '/serialized.php', $sz);
         }
     }
 }

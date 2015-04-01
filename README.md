@@ -41,9 +41,9 @@ TORNADO se desarrollo tratando de respetar las siguiente metas:
 - ser rápido
 - fácil de entender _(tanto su API como su construcción interna)_
 - tener la menor cantidad de métodos posibles dentro de su API
-- permitir definir ganchos para que los programadores puedan extender el mismo
+- permitir el uso de ganchos para extender el mismo
 - incluir librerías/paquetes de terceros con suma facilidad
-- ser ligero respecto a la cantidad de líneas de código a mantener
+- tener la menor cantidad de líneas de código posible
 - ser un core de trabajo _(NUNCA un framework)_
 
 ## Características:
@@ -633,6 +633,17 @@ $nombreClave
 
 El proyecto se distribuye bajo la licencia MIT.
 
-## Sugerencias:
+### Tests unitarios:
 
-Escriba a la dirección info@daniel.spiridione.com.ar
+Para ejecutar los test es necesario PHPUnit. 
+Sitúese en la carpeta raíz de Tornado y ejecute la siguiente instrucción por línea de comendo: 
+
+```
+    phpunit
+```
+
+Ante errores o sugerencias escriba a la dirección de email de contacto.
+
+## Sugerencias y colaboración:
+
+Email: info@daniel.spiridione.com.ar

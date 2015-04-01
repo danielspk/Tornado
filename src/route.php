@@ -110,7 +110,7 @@ final class Route
      */
     public function unserialize($pSerializePath)
     {
-        $file = $pSerializePath . '/route_serialize.php';
+        $file = $pSerializePath . '/serialized.php';
 
         if (file_exists($file)) {
 

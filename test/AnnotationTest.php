@@ -8,7 +8,7 @@ class AnnotationTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->pathModules = 'test/modules';
-        $this->pathFile = $this->pathModules . '/' . 'route_serialize.php';
+        $this->pathFile = $this->pathModules . '/' . 'serialized.php';
     }
 
     public function testInstance()
