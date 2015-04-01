@@ -39,7 +39,7 @@ final class Hook
      */
     public function call($pName)
     {
-        $return = null;
+        $return = true;
 
         if (!isset($this->_hooks[$pName])) {
             if (in_array($pName, ['init', 'before', 'after', 'end', 'error', '404']))
@@ -61,7 +61,7 @@ final class Hook
 
                 $return = call_user_func_array([$classHook, $hook[1]], $hook[2]);
 
-                // si el callback es una función anónima se la ejecuta
+            // si el callback es una función anónima se la ejecuta
             } elseif (is_callable($hook)) {
 
                 $return = call_user_func($hook);
@@ -72,5 +72,7 @@ final class Hook
             if ($return === false)
                 return $return;
         }
+
+        return $return;
     }
 }

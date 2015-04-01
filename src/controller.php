@@ -42,7 +42,12 @@ abstract class Controller
     protected function loadController($pController)
     {
         $controller = explode('|', $pController);
-        require $this->_path . $controller[0] . '/controller/' . $controller[1] . '.php';
+        $file = $this->_path . $controller[0] . '/controller/' . $controller[1] . '.php';
+
+        if (!file_exists($file))
+            throw new \InvalidArgumentException('Error loading controller');
+
+        require_once $file;
     }
 
     /**
@@ -52,14 +57,18 @@ abstract class Controller
      */
     protected function loadView($pView, $pParams = null)
     {
+        $view = explode('|', $pView);
+        $file = $this->_path . $view[0] . '/view/' . $view[1] . '.tpl.php';
+
+        if (!file_exists($file))
+            throw new \InvalidArgumentException('Error loading view');
+
         if (is_array($pParams)) {
             extract($pParams);
             unset($pParams);
         }
 
-        $view = explode('|', $pView);
-
-        require $this->_path . $view[0] . '/view/' . $view[1] . '.tpl.php';
+        require_once $file;
     }
 
     /**
@@ -69,6 +78,11 @@ abstract class Controller
     protected function loadModel($pModel)
     {
         $model = explode('|', $pModel);
-        require $this->_path . $model[0] . '/model/' . $model[1] . '.php';
+        $file = $this->_path . $model[0] . '/model/' . $model[1] . '.php';
+
+        if (!file_exists($file))
+            throw new \InvalidArgumentException('Error loading module');
+
+        require_once $file;
     }
 }
