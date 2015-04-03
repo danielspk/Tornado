@@ -209,7 +209,7 @@ final class Tornado
      * @param string $pModule Módulo
      * @param array  $pParams Parametros
      */
-    public function forwardModule($pModule, $pParams = null)
+    public function forwardModule($pModule, $pParams = [])
     {
         $module = explode('|', $pModule);
 
