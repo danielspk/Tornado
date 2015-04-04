@@ -19,13 +19,22 @@ final class Service
     private $_services = [];
 
     /**
-     * Método que registra un servicio/clase externa
-     * @param string $pService Nombre del servicio a registrar
-     * @param callable $pCallback Función a ejecutar al momento de invocarse
+     * Parámetros de servicios
+     * @var array
+     */
+    private $_parameters = [];
+
+    /**
+     * Método que registra un servicio/parámetro
+     * @param string $pService Nombre del servicio/parámetro a registrar
+     * @param callable $pCallback Función a ejecutar o parámetro de servicio
      */
     public function register($pService, $pCallback)
     {
-        $this->_services[$pService] = $pCallback;
+        if (is_callable($pCallback))
+            $this->_services[$pService] = $pCallback;
+        else
+            $this->_parameters[$pService] = $pCallback;
     }
 
     /**
@@ -48,20 +57,19 @@ final class Service
     }
 
     /**
-     * Método que recupera un servicio inyectado
-     * @param string $pService Nombre del servicio
-     * @param array $pArgs Parámetros
-     * @return object
+     * Método que recupera un servicio/parámetro inyectado
+     * @param string $pService Nombre del servicio/parámetro
+     * @return mixed
      */
-    public function get($pService, $pArgs = [])
+    public function get($pService)
     {
+        if (isset($this->_parameters[$pService]))
+            return $this->_parameters[$pService];
+
         if (!isset($this->_services[$pService])) {
             throw new \BadMethodCallException('The service ' . $pService . ' is not registered in Tornado.');
         }
 
-        if (count($pArgs))
-            return call_user_func_array($this->_services[$pService], $pArgs);
-        else
-            return $this->_services[$pService]();
+        return $this->_services[$pService]($this);
     }
 }

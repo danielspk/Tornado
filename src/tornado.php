@@ -340,22 +340,11 @@ final class Tornado
     }
 
     /**
-     * Método mágico __call. Se asume que es invocado al solicitar un servicio inyectado
-     * @param  string $pService Nombre del servicio
-     * @param  array  $pArgs    Parámetros
-     * @return object
+     * Método que devuelve un servicio/parámetro
+     * @param $pService String Nombre del servicio/parámetro
+     * @return mixed
      */
-    public function __call($pService, $pArgs)
-    {
-        return $this->_service->get($pService, $pArgs);
-    }
-
-    /**
-     * Método mágico __get. Se asume que es invocado al solicitar un servicio inyectado
-     * @param  string $pService Nombre del servicio
-     * @return object
-     */
-    public function __get($pService)
+    public function container($pService)
     {
         return $this->_service->get($pService);
     }
