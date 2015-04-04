@@ -494,14 +494,7 @@ Podrá hacer uso de la misma de la siguiente forma:
 
     $app = \DMS\Tornado\Tornado::getInstance();
 
-    // forma de uso como método
-    echo $app->fecha()->format('d/m/Y') . '<br />';
-    
-    // forma de uso como método con parámetros
-    echo $app->fecha('2014-08-20')->format('d/m/Y') . '<br />';
-    
-    // forma de uso como propiedad
-    echo $app->fecha->format('d/m/Y') . '<br />';
+    echo $app->container('fecha')->format('d/m/Y') . '<br />';
     
 ```
 
@@ -513,6 +506,19 @@ Puede registrar el servicio como Singleton seteando el tercer parámetro opciona
     $app->register('fecha', function(){
         return new \DateTime('2014-12-31');
     }, true);
+    
+```
+
+Si las dependencias requieren parámetros en sus constructores puede definir los mismos 
+de la siguiente forma:
+
+```php
+
+    $app->register('fecha.config', '2014-12-31');
+    
+    $app->register('fecha', function(\DMS\Tornado\Service $c){
+        return new \DateTime($c->get('fecha.config'));
+    });
     
 ```
 
@@ -606,8 +612,9 @@ $nombreClave
 | hook(string mixed) | Registra un gancho y su callback |
 | route(string, mixed) | Registra un enrutamiento y su callback |
 | addTypeParam(string, string) | Registra un nuevo tipo de parámetro |
-| register(string, callable, [bool]) | Registra una clase/servicio para extender la aplicación
-| render(string) | Incluye una vista/template
+| register(string, callable, [bool]) | Registra una clase/servicio para extender la aplicación |
+| container(string) | Devuelve un servicio o parámetro |
+| render(string) | Incluye una vista/template |
 | render(string, array) | Incluye una vista/template junto a un array de variables |
 | param(string) | Devuelve el valor de un parámetro del enrutamiento |
 | getRouteMatch() | Devuelve la ruta que se esta procesando |
@@ -615,6 +622,12 @@ $nombreClave
 | forwardModule(string, array) | Delega la acción hacia otro módulo |
 | forwardUrl(string) | Delega la acción hacia otra ruta |
 | finishRequest() | Devuelve el request al cliente y continua la ejecución del script actual |
+
+**DMS\Tornado\Service**
+
+| Método | Detalle |
+| ------ | ------- |
+| get | Devuelve un servicio o parámetro |
 
 **DMS\Tornado\Controller**
 
