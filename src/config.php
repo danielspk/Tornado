@@ -28,6 +28,15 @@ final class Config implements \ArrayAccess
     }
 
     /**
+     * Método que setea un array de configuración
+     * @param $pArray
+     */
+    public function set($pArray)
+    {
+        $this->_config = array_merge($pArray, $this->_config);
+    }
+
+    /**
      * Método que setea valores de configuración (Interfase \ArrayAccess)
      * @param  string                    $pName  Identificador
      * @param  mixed                     $pValue Valor

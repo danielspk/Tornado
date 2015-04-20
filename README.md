@@ -141,8 +141,15 @@ Ejemplo de uso básico (con dos tipos de enrutamientos)
 ```php
     $app = \DMS\Tornado\Tornado::getInstance();
 
+    // configuración simple
     $app->config('nombre', 'valor del nombre');
     $app->config('nombres', array('nombre1'=>'valor1', 'nombre2'=>'valor2'));
+    
+    // configuración múltiple
+    $app->config([
+        'clave1' => 'valor uno',
+        'clave2' => 'valor dos'
+    ]);
 ```
 
 ##### Leer configuraciones:
@@ -605,6 +612,7 @@ $nombreClave
 | getInstance() | Devuelve la instancia de Tornado (si no existe la crea) |
 | run() | Arranca el core |
 | config(string) | Devuelve el valor de la variable de configuración |
+| config(array) | Setea un array de configuración |
 | config(string, mixed) | Setea el valor en la variable de configuración |
 | error() | Devuelve la última excepción atrapada |
 | error(bool) | Habilita/deshabilita el manejador interno de errores y excepciones |

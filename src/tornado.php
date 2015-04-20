@@ -242,17 +242,20 @@ final class Tornado
 
     /**
      * Método que asigna o recupera valores de configuración
-     * @param  string $pName  Nombre del valor de configuración
-     * @param  mixed  $pValue Valor de configuración (puede ser un array)
+     * @param  string $pNameArray  Nombre del valor de configuración o Array de configuración
+     * @param  mixed  $pValue      Valor de configuración (puede ser un array)
      * @return mixed
      */
-    public function config($pName, $pValue = null)
+    public function config($pNameArray, $pValue = null)
     {
         if (func_num_args() === 1) {
-            return $this->_config[$pName];
+            if (is_array($pNameArray))
+                $this->_config->set($pNameArray);
+            else
+                return $this->_config[$pNameArray];
         }
 
-        $this->_config[$pName] = $pValue;
+        $this->_config[$pNameArray] = $pValue;
     }
 
     /**
