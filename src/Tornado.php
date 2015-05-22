@@ -75,7 +75,7 @@ final class Tornado
             'tornado_hmvc_serialize_path'     => ''
         ]);
         $this->hook = new Hook();
-        $this->route = new Route();
+        $this->route = new Router();
         $this->service = new Service();
         $this->annotation = new Annotation();
     }
