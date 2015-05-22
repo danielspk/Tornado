@@ -42,7 +42,7 @@ abstract class Controller
     protected function loadController($pController)
     {
         $controller = explode('|', $pController);
-        $file = $this->path . $controller[0] . '/controller/' . $controller[1] . '.php';
+        $file = $this->path . $controller[0] . '/Controller/' . $controller[1] . '.php';
 
         if (!file_exists($file))
             throw new \InvalidArgumentException('Error loading controller');
@@ -58,7 +58,7 @@ abstract class Controller
     protected function loadView($pView, $pParams = null)
     {
         $view = explode('|', $pView);
-        $file = $this->path . $view[0] . '/view/' . $view[1] . '.tpl.php';
+        $file = $this->path . $view[0] . '/View/' . $view[1] . '.tpl.php';
 
         if (!file_exists($file))
             throw new \InvalidArgumentException('Error loading view');
@@ -78,10 +78,10 @@ abstract class Controller
     protected function loadModel($pModel)
     {
         $model = explode('|', $pModel);
-        $file = $this->path . $model[0] . '/model/' . $model[1] . '.php';
+        $file = $this->path . $model[0] . '/Model/' . $model[1] . '.php';
 
         if (!file_exists($file))
-            throw new \InvalidArgumentException('Error loading module');
+            throw new \InvalidArgumentException('Error loading model');
 
         require_once $file;
     }
