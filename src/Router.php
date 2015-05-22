@@ -13,6 +13,12 @@ namespace DMS\Tornado;
 final class Router
 {
     /**
+     * Ubicación de los módulos HMVC
+     * @var string
+     */
+    private $pathModules;
+
+    /**
      * Contenedor de enrutamientos
      * @var array
      */
@@ -42,6 +48,15 @@ final class Router
      * @var null|int
      */
     private $routeMatch = null;
+
+    /**
+     * Método que setea el path de los módulos HMVC
+     * @param $pPath Path de módulos HMVC
+     */
+    public function setPathModules($pPath)
+    {
+        $this->pathModules = $pPath;
+    }
 
     /**
      * Método que agrega nuevos tipos de parámetros
@@ -206,6 +221,9 @@ final class Router
         return false;
     }
 
+    /**
+     * Método que ejecuta la ruta parseada
+     */
     public function execute()
     {
         // se determina si hay una función anonima en vez de un módulo
@@ -217,7 +235,7 @@ final class Router
 
             $handler = explode('|', $this->routes[$this->routeMatch]['callback']);
 
-            $this->callModule($handler[0], $handler[1], $handler[2], $this->routes[$this->routeMatch]['params']);
+            $this->callModule($pPathModules, $handler[0], $handler[1], $handler[2], $this->routes[$this->routeMatch]['params']);
 
         }
     }
@@ -232,17 +250,22 @@ final class Router
      */
     public function callModule($pModule, $pController, $pMethod, $pParams = [])
     {
+        // se ajustan los nombres
+        $pModule     = $this->parseModuleName($pModule);
+        $pController = $this->parseModuleName($pController);
+        $pMethod     = lcfirst($this->parseModuleName($pMethod));
+
         // se valida si la ruta de la clase solicitada existe
-        $path = 'app/modules/' . $pModule . '/controller/' . $pController . '.php';
+        $path = $this->pathModules.  '/' . $pModule . '/Controller/' . $pController . '.php';
 
         if (!file_exists($path)) {
-            throw new \InvalidArgumentException('Module unknown.');
+            throw new \InvalidArgumentException('Module or Controller unknown.');
         } else {
             require_once $path;
         }
 
         // se agrega el namespace al controlador
-        $pController = 'App\\Modules\\' . $pModule . '\\Controller\\' . $pController;
+        $pController = $this->parseNamespace($this->pathModules) . '\\' . $pModule . '\\Controller\\' . $pController;
 
         // se valida si el método solicitado existe
         if (! method_exists($pController, $pMethod)) {
@@ -254,5 +277,29 @@ final class Router
 
         // se ejecuta la acción junto a sus parámetros si existiesen
         call_user_func_array([$controller, $pMethod], $pParams);
+    }
+
+    /**
+     * Método que pasear el path del módulo en un namespace psr-4 válido
+     * Ejemplo: app/modules => App\\Modules
+     * @param $pPath Path donde se ubica el módulo
+     * @return string
+     */
+    private function parseNamespace($pPath)
+    {
+        $words = ucwords(str_replace('/', ' ', $pPath));
+        return str_replace(' ', '\\', $words);
+    }
+
+    /**
+     * Método que parsea un nombre del formato url al formato real de archivo
+     * Ejemplo: procesar-login => ProcesarLogin
+     * @param $pName Nombre del módulo, controllador o método
+     * @return string
+     */
+    private function parseModuleName($pName)
+    {
+        $words = ucwords(str_replace(array('-', '_'), ' ', $pName));
+        return str_replace(' ', '', $words);
     }
 }

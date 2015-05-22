@@ -33,7 +33,7 @@ final class Config implements \ArrayAccess
      */
     public function set($pArray)
     {
-        $this->config = array_merge($pArray, $this->config);
+        $this->config = array_merge($this->config, $pArray);
     }
 
     /**

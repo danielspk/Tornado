@@ -3,7 +3,6 @@ TORNADO
 
 [![Build Status](https://travis-ci.org/danielspk/Tornado.svg)](https://travis-ci.org/danielspk/Tornado)
 [![Latest Stable Version](https://poser.pugx.org/danielspk/Tornado/v/stable.svg)](https://packagist.org/packages/danielspk/Tornado)
-[![Latest Unstable Version](https://poser.pugx.org/danielspk/Tornado/v/unstable.svg)](https://packagist.org/packages/danielspk/Tornado)
 [![Total Downloads](https://poser.pugx.org/danielspk/Tornado/downloads.svg)](https://packagist.org/packages/danielspk/Tornado)
 [![License](https://poser.pugx.org/danielspk/Tornado/license.svg)](https://packagist.org/packages/danielspk/Tornado)
 
@@ -542,15 +541,27 @@ Puede descargar el mismo desde https://github.com/danielspk/TornadoSkeletonAppli
 
 #### Módulos:
 
+Tornado PHP permite utilizar módulos HMVC de forma conjunta con las funciones anónimas.
+
+Si utiliza Composer, se recomienda registrar la ubicación de los módulos en el autoload. Ejemplo:
+
+```
+    "autoload": {
+        "psr-4": {
+            "App\\Modules\\": "app/modules/"
+        }
+    },
+```
+
 ##### Controladores:
 Todos los controladores deben extender de \DMS\Tornado\Controller y deben 
 definir un namespace que respete la especificación PSR-4. Ejemplo: 
 
-Asumiendo que los módulos HMVC se encuentran en app\modules\[modulo HMVC]\controller
+Asumiendo que los módulos HMVC se encuentran en App\Modules\[Modulo HMVC]\Controller
 
 ```php
 
-    namespace app\modules\demo\controller;
+    namespace App\Modules\Demo\Controller;
 
     use \DMS\Tornado\Controller;
     
@@ -562,37 +573,22 @@ Asumiendo que los módulos HMVC se encuentran en app\modules\[modulo HMVC]\contr
     
 ```
 
-La clase Controller ofrece los siguientes métodos:
+Los Controladores poseen una instancia de tornado PHP como propiedad propia. Puede acceder a la misma de la siguiente forma:
 
 ```php
 
     // permite acceder a una instancia de Tornado
     $app = $this->app;
     
-    // permite cargar un controlador
-    $this->loadController('Modulo|Controlador');
-
-    // permite cargar un modeo
-    $this->loadModel('Modulo|Modelo');
-
-    // permite cargar una vista sin parámetros
-    $this->loadView('Modulo|Vista');
-
-    // permite cargar una vista con parámetros
-    $this->loadView('Modulo|Vista', array('clave'=>'valor'));
-
-    // permite cargar una vista contenida dentro de una subcarpeta
-    $this->loadView('Modulo|SubCarpeta/Vista');
-    
 ```
 
 ##### Modelos:
 Todos los controladores deben definir un namespace que respete la siguiente 
-jerarquía: app\modules\[modulo]\model
+jerarquía: App\Modules\[Modulo HMVC]\Model
 
 ```php
 
-    namespace app\modules\demo\model;
+    namespace App\Modules\Demo\Model;
 
     class Demo {
         public function getDemos($param = null){
@@ -603,11 +599,7 @@ jerarquía: app\modules\[modulo]\model
 ```
 
 ##### Vistas:
-Los archivos de vistas deben tener la extensión .tpl.php - Ejemplo:
-nombre.tpl.php
-
-En caso de pasarse parámetros a las vistas la forma de invocar a los mismos es:
-$nombreClave
+Dado que el controlador posee una instancia de Tornado es posible usar el método render() para invocar a una vista.
 
 ## Resumen de Métodos:
 
@@ -648,13 +640,6 @@ $nombreClave
 | Atributo | Detalle |
 | ------ | ------- |
 | app | Instancia de Tornado |
-
-| Método | Detalle |
-| ------ | ------- |
-| loadController(string) | Incluye un controlador |
-| loadModel(string) | Incluye un modelo |
-| loadView(string) | Incluye una vista |
-| loadView(string, array) | Incluye una vista junto a un array de variables |
 
 ## Licencia:
 

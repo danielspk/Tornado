@@ -32,7 +32,7 @@ final class Annotation
                     \RecursiveDirectoryIterator::UNIX_PATHS
                 )
             ),
-            '/.*\/controller\/.*\.php/i'
+            '/.*\/Controller\/.*\.php/i'
         );
 
         foreach($controllers as $file) {

@@ -141,6 +141,10 @@ final class Tornado
         if ($this->config['tornado_environment_development'] === true)
             $this->route->unserialize($this->config['tornado_hmvc_serialize_path']);
 
+        // se registra el path de los módulos HMVC si se utilizan
+        if ($this->config['tornado_hmvc_module_path'])
+            $this->route->setPathModules($this->config['tornado_hmvc_module_path']);
+
         // flujo de ejecución:
         // - se ejecutan los hooks init
         // - se parsea la url en busca de la ruta a ejecutar
