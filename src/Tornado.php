@@ -137,13 +137,16 @@ final class Tornado
 
         }
 
-        // se registran las rutas serializadas de los controladores
-        if ($this->config['tornado_environment_development'] === true)
+        // si se usan módulos HMVC
+        if ($this->config['tornado_hmvc_module_path']) {
+
+            // se registran las rutas serializadas de los controladores
             $this->route->unserialize($this->config['tornado_hmvc_serialize_path']);
 
-        // se registra el path de los módulos HMVC si se utilizan
-        if ($this->config['tornado_hmvc_module_path'])
+            // se registra el path de los módulos
             $this->route->setPathModules($this->config['tornado_hmvc_module_path']);
+
+        }
 
         // flujo de ejecución:
         // - se ejecutan los hooks init
@@ -254,7 +257,7 @@ final class Tornado
     {
         if (func_num_args() === 1) {
             if (is_array($pNameArray))
-                $this->config->set($pNameArray);
+                return $this->config->set($pNameArray);
             else
                 return $this->config[$pNameArray];
         }

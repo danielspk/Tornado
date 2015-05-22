@@ -22,7 +22,7 @@ final class Annotation
     {
         $routesFind = [];
 
-        // se recorren los controladores con SPL
+        // se recorren los controladores con biblioteca SPL
         // (no se lleva a cabo con \GlobIterator dado que en Windows sólo funciona con rutas absolutas)
         $controllers = new \RegexIterator(
             new \RecursiveIteratorIterator(

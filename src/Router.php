@@ -235,7 +235,7 @@ final class Router
 
             $handler = explode('|', $this->routes[$this->routeMatch]['callback']);
 
-            $this->callModule($pPathModules, $handler[0], $handler[1], $handler[2], $this->routes[$this->routeMatch]['params']);
+            $this->callModule($handler[0], $handler[1], $handler[2], $this->routes[$this->routeMatch]['params']);
 
         }
     }
@@ -261,7 +261,7 @@ final class Router
         if (!file_exists($path)) {
             throw new \InvalidArgumentException('Module or Controller unknown.');
         } else {
-            require_once $path;
+            //require_once $path; // Autoload PSR-4
         }
 
         // se agrega el namespace al controlador
