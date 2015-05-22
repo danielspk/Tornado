@@ -4,7 +4,7 @@ namespace DMS\Tornado;
 /**
  * Clase de manejo de errores y excepciones
  *
- * @package TORNADO-CORE
+ * @package TORNADO-PHP
  * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
  * @link http://tornado-php.com
  * @license http://tornado-php.com/licencia/ MIT License
@@ -16,7 +16,7 @@ final class Error
      * Excepción capturada
      * @var \Exception Exception
      */
-    private $_currentException;
+    private $currentException;
 
     /**
      * Método que crea la instancia de la clase si no existiese
@@ -42,7 +42,7 @@ final class Error
      */
     public function getCurrentException()
     {
-        return $this->_currentException;
+        return $this->currentException;
     }
 
     /**
@@ -77,7 +77,7 @@ final class Error
         $this->setHandler(false);
 
         // se conserva la excepción
-        $this->_currentException = $pExc;
+        $this->currentException = $pExc;
 
         // se ejecuta/n el/los gancho/s de errores
         Tornado::getInstance()->hook('error');

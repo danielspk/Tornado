@@ -1,5 +1,5 @@
 <?php
-namespace test\modules\foo\controller;
+namespace test\modules\Foo\Controller;
 
 use \DMS\Tornado\Controller;
 

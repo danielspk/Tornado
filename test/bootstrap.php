@@ -1,4 +1,4 @@
 <?php
 
-require 'src/tornado.php';
+require 'src/Tornado.php';
 

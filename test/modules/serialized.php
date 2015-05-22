@@ -1,1 +1,1 @@
-a:4:{i:0;a:2:{i:0;s:16:"/demo/demo/index";i:1;s:15:"demo|demo|index";}i:1;a:2:{i:0;s:31:"GET|POST /demo/other/annotation";i:1;s:15:"demo|demo|index";}i:2;a:2:{i:0;s:15:"/demo/foo/index";i:1;s:13:"foo|foo|index";}i:3;a:2:{i:0;s:30:"GET|POST /foo/other/annotation";i:1;s:13:"foo|foo|index";}}
+a:4:{i:0;a:2:{i:0;s:16:"/demo/demo/index";i:1;s:15:"Demo|Demo|index";}i:1;a:2:{i:0;s:31:"GET|POST /demo/other/annotation";i:1;s:15:"Demo|Demo|index";}i:2;a:2:{i:0;s:15:"/demo/foo/index";i:1;s:13:"Foo|Foo|index";}i:3;a:2:{i:0;s:30:"GET|POST /foo/other/annotation";i:1;s:13:"Foo|Foo|index";}}

@@ -4,7 +4,7 @@ namespace DMS\Tornado;
 /**
  * Clase de configuracion
  *
- * @package TORNADO-CORE
+ * @package TORNADO-PHP
  * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
  * @link http://tornado-php.com
  * @license http://tornado-php.com/licencia/ MIT License
@@ -16,7 +16,7 @@ final class Config implements \ArrayAccess
      * Matriz con configuración dinámica
      * @var array
      */
-    private $_config;
+    private $config;
 
     /**
      * Método constructor
@@ -24,7 +24,16 @@ final class Config implements \ArrayAccess
      */
     public function __construct($pConf = [])
     {
-        $this->_config = $pConf;
+        $this->config = $pConf;
+    }
+
+    /**
+     * Método que setea un array de configuración
+     * @param $pArray
+     */
+    public function set($pArray)
+    {
+        $this->config = array_merge($this->config, $pArray);
     }
 
     /**
@@ -38,7 +47,7 @@ final class Config implements \ArrayAccess
         if (is_null($pName)) {
             throw new \InvalidArgumentException('Assignment of value without identifier.');
         } else {
-            $this->_config[$pName] = $pValue;
+            $this->config[$pName] = $pValue;
         }
     }
 
@@ -49,7 +58,7 @@ final class Config implements \ArrayAccess
      */
     public function offsetExists($pName)
     {
-        return isset($this->_config[$pName]);
+        return isset($this->config[$pName]);
     }
 
     /**
@@ -58,7 +67,7 @@ final class Config implements \ArrayAccess
      */
     public function offsetUnset($pName)
     {
-        unset($this->_config[$pName]);
+        unset($this->config[$pName]);
     }
 
     /**
@@ -68,6 +77,6 @@ final class Config implements \ArrayAccess
      */
     public function offsetGet($pName)
     {
-        return isset($this->_config[$pName]) ? $this->_config[$pName] : null;
+        return isset($this->config[$pName]) ? $this->config[$pName] : null;
     }
 }

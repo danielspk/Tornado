@@ -4,7 +4,7 @@ namespace DMS\Tornado;
 /**
  * Clase de anotaciones DocBlocks
  *
- * @package TORNADO-CORE
+ * @package TORNADO-PHP
  * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
  * @link http://tornado-php.com
  * @license http://tornado-php.com/licencia/ MIT License
@@ -22,7 +22,7 @@ final class Annotation
     {
         $routesFind = [];
 
-        // se recorren los controladores con SPL
+        // se recorren los controladores con biblioteca SPL
         // (no se lleva a cabo con \GlobIterator dado que en Windows sólo funciona con rutas absolutas)
         $controllers = new \RegexIterator(
             new \RecursiveIteratorIterator(
@@ -32,7 +32,7 @@ final class Annotation
                     \RecursiveDirectoryIterator::UNIX_PATHS
                 )
             ),
-            '/.*\/controller\/.*\.php/i'
+            '/.*\/Controller\/.*\.php/i'
         );
 
         foreach($controllers as $file) {
