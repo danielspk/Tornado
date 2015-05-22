@@ -1,6 +1,8 @@
 TORNADO
 ============
 
+[![Build Status](https://travis-ci.org/danielspk/Tornado.svg?branch=develop)](https://travis-ci.org/danielspk/Tornado)
+
 ![ScreenShot](http://tornado-php.com/wp-content/uploads/2014/08/tornado-php.png)
 
 TORNADO es un reducido marco de trabajo para PHP que permite implementar el 
