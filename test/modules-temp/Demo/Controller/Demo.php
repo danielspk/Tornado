@@ -19,31 +19,31 @@ class Demo extends Controller
 
     public function testLoadController()
     {
-        $this->loadController('foo|foo');
+        $this->loadController('Foo|Foo');
     }
 
     public function testLoadControllerError()
     {
-        $this->loadController('foo2|foo2');
+        $this->loadController('Foo2|Foo2');
     }
 
     public function testLoadView()
     {
-        $this->loadView('demo|demo');
+        $this->loadView('Demo|demo');
     }
 
     public function testLoadViewError()
     {
-        $this->loadView('demo2|demo2');
+        $this->loadView('Demo2|demo2');
     }
 
     public function testLoadModel()
     {
-        $this->loadModel('demo|demo');
+        $this->loadModel('Demo|Demo');
     }
 
     public function testLoadModelError()
     {
-        $this->loadModel('demo2|demo2');
+        $this->loadModel('Demo2|Demo2');
     }
 }

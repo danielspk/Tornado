@@ -13,7 +13,7 @@ class ControllerTest extends PHPUnit_Framework_TestCase
     public function testInstance()
     {
         $controller = new \test\modules\demo\controller\Demo($this->app);
-        $this->assertInstanceOf('\test\modules\demo\controller\Demo', $controller);
+        $this->assertInstanceOf('\test\modules\Demo\Controller\Demo', $controller);
     }
 
     public function testLoadController()
@@ -21,7 +21,7 @@ class ControllerTest extends PHPUnit_Framework_TestCase
         $controller = new \test\modules\demo\controller\Demo($this->app);
         $controller->testLoadController();
         $otherController = new \test\modules\foo\controller\Foo($this->app);
-        $this->assertInstanceOf('\test\modules\foo\controller\Foo', $otherController);
+        $this->assertInstanceOf('\test\modules\Foo\Controller\Foo', $otherController);
     }
 
     /**

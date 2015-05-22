@@ -29,7 +29,7 @@ class AnnotationTest extends PHPUnit_Framework_TestCase
 
         $fileString = file_get_contents($this->pathFile);
 
-        $this->assertContains('foo|foo|index', $fileString);
+        $this->assertContains('foo|foo|index', strtolower($fileString));
 
         $fileArray = unserialize($fileString);
 
