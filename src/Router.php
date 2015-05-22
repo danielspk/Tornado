@@ -4,13 +4,13 @@ namespace DMS\Tornado;
 /**
  * Clase de enrutamientos
  *
- * @package TORNADO-CORE
+ * @package TORNADO-PHP
  * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
  * @link http://tornado-php.com
  * @license http://tornado-php.com/licencia/ MIT License
  * @version 2.0.0-beta
  */
-final class Route
+final class Router
 {
     /**
      * Contenedor de enrutamientos

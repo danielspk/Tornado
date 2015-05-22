@@ -4,7 +4,7 @@ namespace DMS\Tornado;
 /**
  * Clase de principal/bootstrap del src
  *
- * @package TORNADO-CORE
+ * @package TORNADO-PHP
  * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
  * @link http://tornado-php.com
  * @license http://tornado-php.com/licencia/ MIT License
@@ -59,13 +59,13 @@ final class Tornado
      */
     private function __construct()
     {
-        require __DIR__ . '/error.php';
-        require __DIR__ . '/config.php';
-        require __DIR__ . '/hook.php';
-        require __DIR__ . '/route.php';
-        require __DIR__ . '/service.php';
-        require __DIR__ . '/annotation.php';
-        require __DIR__ . '/controller.php';
+        require __DIR__ . '/Error.php';
+        require __DIR__ . '/Config.php';
+        require __DIR__ . '/Hook.php';
+        require __DIR__ . '/Router.php';
+        require __DIR__ . '/Service.php';
+        require __DIR__ . '/Annotation.php';
+        require __DIR__ . '/Controller.php';
 
         $this->error = new Error();
         $this->config = new Config([

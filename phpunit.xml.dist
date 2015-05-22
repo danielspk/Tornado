@@ -18,7 +18,7 @@
             <file>./test/ErrorTest.php</file>
             <file>./test/ControllerTest.php</file>
             <file>./test/HookTest.php</file>
-            <file>./test/RouteTest.php</file>
+            <file>./test/RouterTest.php</file>
             <file>./test/ServiceTest.php</file>
         </testsuite>
     </testsuites>

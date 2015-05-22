@@ -4,7 +4,7 @@ namespace DMS\Tornado;
 /**
  * Clase de configuracion
  *
- * @package TORNADO-CORE
+ * @package TORNADO-PHP
  * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
  * @link http://tornado-php.com
  * @license http://tornado-php.com/licencia/ MIT License

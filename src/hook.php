@@ -4,7 +4,7 @@ namespace DMS\Tornado;
 /**
  * Clase de eventos/ganchos para extender el src
  *
- * @package TORNADO-CORE
+ * @package TORNADO-PHP
  * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
  * @link http://tornado-php.com
  * @license http://tornado-php.com/licencia/ MIT License
