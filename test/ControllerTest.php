@@ -12,15 +12,15 @@ class ControllerTest extends PHPUnit_Framework_TestCase
 
     public function testInstance()
     {
-        $controller = new \test\modules\demo\controller\Demo($this->app);
+        $controller = new \test\modules\Demo\Controller\Demo($this->app);
         $this->assertInstanceOf('\test\modules\Demo\Controller\Demo', $controller);
     }
 
     public function testLoadController()
     {
-        $controller = new \test\modules\demo\controller\Demo($this->app);
+        $controller = new \test\modules\Demo\Controller\Demo($this->app);
         $controller->testLoadController();
-        $otherController = new \test\modules\foo\controller\Foo($this->app);
+        $otherController = new \test\modules\Foo\Controller\Foo($this->app);
         $this->assertInstanceOf('\test\modules\Foo\Controller\Foo', $otherController);
     }
 
@@ -29,13 +29,13 @@ class ControllerTest extends PHPUnit_Framework_TestCase
      */
     public function testLoadControllerError()
     {
-        $controller = new \test\modules\demo\controller\Demo($this->app);
+        $controller = new \test\modules\Demo\Controller\Demo($this->app);
         $controller->testLoadControllerError();
     }
 
     public function testLoadView()
     {
-        $controller = new \test\modules\demo\controller\Demo($this->app);
+        $controller = new \test\modules\Demo\Controller\Demo($this->app);
         $controller->testLoadView();
         $this->assertEquals(true, true);
     }
@@ -45,13 +45,13 @@ class ControllerTest extends PHPUnit_Framework_TestCase
      */
     public function testLoadViewError()
     {
-        $controller = new \test\modules\demo\controller\Demo($this->app);
+        $controller = new \test\modules\Demo\Controller\Demo($this->app);
         $controller->testLoadViewError();
     }
 
     public function testLoadModel()
     {
-        $controller = new \test\modules\demo\controller\Demo($this->app);
+        $controller = new \test\modules\Demo\Controller\Demo($this->app);
         $controller->testLoadModel();
         $this->assertEquals(true, true);
     }
@@ -61,7 +61,7 @@ class ControllerTest extends PHPUnit_Framework_TestCase
      */
     public function testLoadModelError()
     {
-        $controller = new \test\modules\demo\controller\Demo($this->app);
+        $controller = new \test\modules\Demo\Controller\Demo($this->app);
         $controller->testLoadModelError();
     }
 }
