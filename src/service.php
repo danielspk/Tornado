@@ -16,13 +16,13 @@ final class Service
      * Servicios inyectados
      * @var array
      */
-    private $_services = [];
+    private $services = [];
 
     /**
      * Parámetros de servicios
      * @var array
      */
-    private $_parameters = [];
+    private $parameters = [];
 
     /**
      * Método que registra un servicio/parámetro
@@ -32,9 +32,9 @@ final class Service
     public function register($pService, $pCallback)
     {
         if (is_callable($pCallback))
-            $this->_services[$pService] = $pCallback;
+            $this->services[$pService] = $pCallback;
         else
-            $this->_parameters[$pService] = $pCallback;
+            $this->parameters[$pService] = $pCallback;
     }
 
     /**
@@ -44,7 +44,7 @@ final class Service
      */
     public function registerSingleton($pService, $pCallback)
     {
-        $this->_services[$pService] = function () use ($pService, $pCallback) {
+        $this->services[$pService] = function () use ($pService, $pCallback) {
 
             static $instance;
 
@@ -63,13 +63,13 @@ final class Service
      */
     public function get($pService)
     {
-        if (isset($this->_parameters[$pService]))
-            return $this->_parameters[$pService];
+        if (isset($this->parameters[$pService]))
+            return $this->parameters[$pService];
 
-        if (!isset($this->_services[$pService])) {
+        if (!isset($this->services[$pService])) {
             throw new \BadMethodCallException('The service ' . $pService . ' is not registered in Tornado.');
         }
 
-        return $this->_services[$pService]($this);
+        return $this->services[$pService]($this);
     }
 }

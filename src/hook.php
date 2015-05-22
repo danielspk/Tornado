@@ -16,7 +16,7 @@ final class Hook
      * Contenedor de funciones de eventos de usuario
      * @var array
      */
-    private $_hooks = [];
+    private $hooks = [];
 
     /**
      * Método que registra un evento de aplicación
@@ -27,9 +27,9 @@ final class Hook
     public function register($pName, $pCallback, $pPosition)
     {
         if ($pPosition !== null)
-            $this->_hooks[$pName][$pPosition] = $pCallback;
+            $this->hooks[$pName][$pPosition] = $pCallback;
         else
-            $this->_hooks[$pName][] = $pCallback;
+            $this->hooks[$pName][] = $pCallback;
     }
 
     /**
@@ -41,7 +41,7 @@ final class Hook
     {
         $return = true;
 
-        if (!isset($this->_hooks[$pName])) {
+        if (!isset($this->hooks[$pName])) {
             if (in_array($pName, ['init', 'before', 'after', 'end', 'error', '404']))
                 return $return;
             else
@@ -49,10 +49,10 @@ final class Hook
         }
 
         // se ordenan los hooks con ese nombre
-        ksort($this->_hooks[$pName]);
+        ksort($this->hooks[$pName]);
 
         // se recorren los hooks con ese nombre
-        foreach ($this->_hooks[$pName] as $hook) {
+        foreach ($this->hooks[$pName] as $hook) {
 
             // si el callback del hook es un array se hace una llamada a la clase/método
             if (is_array($hook)) {

@@ -1,7 +1,11 @@
 TORNADO
 ============
 
-[![Build Status](https://travis-ci.org/danielspk/Tornado.svg?branch=develop)](https://travis-ci.org/danielspk/Tornado)
+[![Build Status](https://travis-ci.org/danielspk/Tornado.svg)](https://travis-ci.org/danielspk/Tornado)
+[![Latest Stable Version](https://poser.pugx.org/danielspk/Tornado/v/stable.svg)](https://packagist.org/packages/danielspk/Tornado)
+[![Latest Unstable Version](https://poser.pugx.org/danielspk/Tornado/v/unstable.svg)](https://packagist.org/packages/danielspk/Tornado)
+[![Total Downloads](https://poser.pugx.org/danielspk/Tornado/downloads.svg)](https://packagist.org/packages/danielspk/Tornado)
+[![License](https://poser.pugx.org/danielspk/Tornado/license.svg)](https://packagist.org/packages/danielspk/Tornado)
 
 ![ScreenShot](http://tornado-php.com/wp-content/uploads/2014/08/tornado-php.png)
 
@@ -60,7 +64,7 @@ amigables)
 ### Codificación:
 
 TORNADO apoya la iniciativa del PHP Framework Interop Group e implementa los 
-estándares PSR-1, PSR-2 y PSR-4.
+estándares PSR-2 y PSR-4.
 
 Puede obtener más información en http://www.php-fig.org/
 

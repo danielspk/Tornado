@@ -1,6 +1,6 @@
 The MIT License (MIT)
 
-TORNADO - CORE PHP
+TORNADO - PHP
 Copyright (c) 2014 Daniel Martín Spiridione
 http://tornado-php.com
 
