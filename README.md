@@ -26,8 +26,6 @@ de datos, gestión de plantillas, envío de mais, etc.
 Utilice Composer para incluir paquetes de terceros de acuerdo a las necesidades 
 particulares del proyecto a desarrollar.
 
-Puede obtener más información de la filosofía del core mirando la wiki del 
-proyecto.
 
 ### Inspiración:
 
@@ -71,9 +69,9 @@ Puede obtener más información en http://www.php-fig.org/
 
 La instalación recomendada requiere el uso de Composer. 
 
-1. Instale composer ( puede obtener ayuda en https://getcomposer.org/download/ )
+* Instale composer ( puede obtener ayuda en https://getcomposer.org/download/ )
 
-2. Cree un archivo composer.json con los paquetes a instalar
+* Cree un archivo composer.json con los paquetes a instalar
 
 ```
 {
@@ -83,7 +81,7 @@ La instalación recomendada requiere el uso de Composer.
 }
 ```
 
-3. Inicie la consola de comando y ejecute el siguiente comando
+* Inicie la consola de comando y ejecute el siguiente comando:
 
 ```
 composer install
@@ -104,7 +102,7 @@ Ejemplo de uso básico (con dos tipos de enrutamientos)
     // incluir el autoload
     require 'vendor/autoload.php';
     
-    // obtener instancia del core
+    // obtener una instancia del core
     $app = \DMS\Tornado\Tornado::getInstance();
     
     // enrutamiento a módulo desde raíz
@@ -137,7 +135,7 @@ Ejemplo de uso básico (con dos tipos de enrutamientos)
     $app = \DMS\Tornado\Tornado::getInstance();
     $app->run();
 
-    // sin ninguna instancia del core en una variable
+    // sin ninguna instancia anterior del core
     \DMS\Tornado\Tornado::getInstance()->run();
 ```
 
@@ -178,7 +176,7 @@ De esta forma se puede cambiar el comportamiento interno del core:
 
 ```php
 
-    // configura la aplicación para un ambiente de desarrollo
+    // configurar la aplicación para un ambiente de desarrollo
     // - errores visibles
     // - parse de anotaciones en módulos HMVC para generar enrutamientos automáticos
     $app->config('tornado_environment_development', true);
@@ -193,11 +191,11 @@ Otras configuraciones:
     $app->config('tornado_hmvc_use', true);
 
     // - ruta donde se alojarán los módulos hmvc
-    // (relativa a donde se inicie Tornado)
+    // (relativa a donde se inicia Tornado)
     $app->config('tornado_hmvc_module_path', true);
         
-    // - ruta donde se serilizaran las rutas de los módulos hmvc
-    // (relativa a donde se inicie Tornado)
+    // - ruta donde se serializaran las rutas de los módulos hmvc
+    // (relativa a donde se inicia Tornado)
     $app->config('tornado_hmvc_serialize_path', true);
         
 ```
@@ -647,11 +645,11 @@ El proyecto se distribuye bajo la licencia MIT.
 
 ### Tests unitarios:
 
-Para ejecutar los test es necesario PHPUnit. 
-Sitúese en la carpeta raíz de Tornado y ejecute la siguiente instrucción por línea de comendo: 
+Para ejecutar los test es necesario descargar PHPUnit. 
+Sitúese en la carpeta raíz de Tornado y ejecute la siguiente instrucción por línea de comando: 
 
 ```
-    phpunit
+    phpunit.phar
 ```
 
 Ante errores o sugerencias escriba a la dirección de email de contacto.

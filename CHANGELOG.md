@@ -1,6 +1,6 @@
 # Change Log
 
-## [2.0.0-beta.5](https://github.com/danielspk/TORNADO/releases/tag/v2.0.0-beta.5) (2015-04-04)
+## [2.0.0](https://github.com/danielspk/TORNADO/releases/tag/v2.0.0) (2015-06-20)
 
 **Nuevas características:**
 
