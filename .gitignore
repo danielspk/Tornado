@@ -1,5 +1,6 @@
 /.DS_Store
 /.idea/
+/nbproject/
 /resources/
 /phpunit.phar
-/nbproject/
+/phpunit.xml

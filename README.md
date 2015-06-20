@@ -645,11 +645,11 @@ El proyecto se distribuye bajo la licencia MIT.
 
 ### Tests unitarios:
 
-Para ejecutar los test es necesario PHPUnit. 
-Sitúese en la carpeta raíz de Tornado y ejecute la siguiente instrucción por línea de comendo: 
+Para ejecutar los test es necesario descargar PHPUnit. 
+Sitúese en la carpeta raíz de Tornado y ejecute la siguiente instrucción por línea de comando: 
 
 ```
-    phpunit
+    phpunit.phar
 ```
 
 Ante errores o sugerencias escriba a la dirección de email de contacto.
