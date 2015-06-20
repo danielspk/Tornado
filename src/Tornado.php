@@ -8,7 +8,7 @@ namespace DMS\Tornado;
  * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
  * @link http://tornado-php.com
  * @license http://tornado-php.com/licencia/ MIT License
- * @version 2.0.0-beta
+ * @version 2.0.0
  */
 final class Tornado
 {
@@ -20,9 +20,9 @@ final class Tornado
 
     /**
      * Clase de manejo de enrutamientos
-     * @var \DMS\Tornado\Route
+     * @var \DMS\Tornado\Router
      */
-    private $route = null;
+    private $router = null;
 
     /**
      * Clase de manejo de errors
@@ -75,7 +75,7 @@ final class Tornado
             'tornado_hmvc_serialize_path'     => ''
         ]);
         $this->hook = new Hook();
-        $this->route = new Router();
+        $this->router = new Router();
         $this->service = new Service();
         $this->annotation = new Annotation();
     }
@@ -141,10 +141,10 @@ final class Tornado
         if ($this->config['tornado_hmvc_module_path']) {
 
             // se registran las rutas serializadas de los controladores
-            $this->route->unserialize($this->config['tornado_hmvc_serialize_path']);
+            $this->router->unserialize($this->config['tornado_hmvc_serialize_path']);
 
             // se registra el path de los módulos
-            $this->route->setPathModules($this->config['tornado_hmvc_module_path']);
+            $this->router->setPathModules($this->config['tornado_hmvc_module_path']);
 
         }
 
@@ -165,7 +165,7 @@ final class Tornado
 
         $this->hook->call('init');
 
-        $flowReturn = $this->route->parseUrl();
+        $flowReturn = $this->router->parseUrl();
 
         if ($flowReturn === false) {
             $this->hook->call('404');
@@ -182,7 +182,7 @@ final class Tornado
             return;
         }
 
-        $this->route->execute();
+        $this->router->execute();
 
         $this->hook->call('after');
         $this->finishRequest();
@@ -204,11 +204,11 @@ final class Tornado
      */
     public function forwardUrl($pUrl)
     {
-        if ($this->route->parseUrl($pUrl) !== true) {
+        if ($this->router->parseUrl($pUrl) !== true) {
             throw new \BadMethodCallException('Invalid url route.');
         }
 
-        $this->route->execute();
+        $this->router->execute();
     }
 
     /**
@@ -224,7 +224,7 @@ final class Tornado
             throw new \BadMethodCallException('Invalid module name.');
         }
 
-        $this->route->callModule($module[0], $module[1], $module[2], $pParams);
+        $this->router->callModule($module[0], $module[1], $module[2], $pParams);
     }
 
     /**
@@ -234,7 +234,7 @@ final class Tornado
      */
     public function route($pMethodRoute, $pCallback)
     {
-        $this->route->register($pMethodRoute, $pCallback);
+        $this->router->register($pMethodRoute, $pCallback);
     }
 
     /**
@@ -244,7 +244,7 @@ final class Tornado
      */
     public function addTypeParam($pType, $pExpression)
     {
-        $this->route->addType($pType, $pExpression);
+        $this->router->addType($pType, $pExpression);
     }
 
     /**
@@ -323,7 +323,7 @@ final class Tornado
      */
     public function param($pName)
     {
-        return $this->route->getParam($pName);
+        return $this->router->getParam($pName);
     }
 
     /**
@@ -332,7 +332,7 @@ final class Tornado
      */
     public function getRouteMatch()
     {
-        return $this->route->getRouteMatch();
+        return $this->router->getRouteMatch();
     }
 
     /**

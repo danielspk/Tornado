@@ -8,7 +8,7 @@ namespace DMS\Tornado;
  * @author Daniel M. Spiridione <info@daniel-spiridione.com.ar>
  * @link http://tornado-php.com
  * @license http://tornado-php.com/licencia/ MIT License
- * @version 2.0.0-beta
+ * @version 2.0.0
  */
 final class Router
 {
@@ -260,9 +260,9 @@ final class Router
 
         if (!file_exists($path)) {
             throw new \InvalidArgumentException('Module or Controller unknown.');
-        } else {
+        } //else {
             //require_once $path; // Autoload PSR-4
-        }
+        //}
 
         // se agrega el namespace al controlador
         $pController = $this->parseNamespace($this->pathModules) . '\\' . $pModule . '\\Controller\\' . $pController;
