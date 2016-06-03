@@ -1,42 +1,53 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <title>Tornado by danielspk</title>
 
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
-    <title>Tornado by danielspk</title>
   </head>
-
   <body>
-    <header>
-      <div class="inner">
+    <div class="wrapper">
+      <header>
         <h1>Tornado</h1>
-        <h2>Reducido núcleo de trabajo para PHP</h2>
-        <a href="https://github.com/danielspk/Tornado" class="button"><small>View project on</small> GitHub</a>
-      </div>
-    </header>
+        <p>Reducido núcleo de trabajo para PHP</p>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <p>TORNADO es un reducido marco de trabajo para PHP que permite implementar el patrón HMVC y/o servicios RESTfull..</p>
+        <p class="view"><a href="https://github.com/danielspk/Tornado">View the Project on GitHub <small>danielspk/Tornado</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/danielspk/Tornado/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/danielspk/Tornado/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/danielspk/Tornado">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <p><img src="http://tornado-php.com/wp-content/uploads/2014/08/tornado-php.png" alt="ScreenShot"></p>
+
+<p>TORNADO es un reducido marco de trabajo para PHP que permite implementar el 
+patrón HMVC y/o servicios RESTfull</p>
+
+<p>Puede obtener más información en su web <a href="http://tornado-php.com">http://tornado-php.com</a></p>
 
 <h3>
-<a id="filosofía" class="anchor" href="#filosof%C3%ADa" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Filosofía:</h3>
+<a id="filosofia" class="anchor" href="#filosofia" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Filosofia:</h3>
 
-<p>TORNADO no intenta ser un framework PHP full-stack. Contrariamente intenta ser un núcleo de trabajo muy reducido para implementar patrones de arquitectura HMVC y/o servicios REST, con la menor parametrización y utilización de código posible, apoyado en un core que organice su proyecto junto a un sistema de configuración y gestión de errores simple.</p>
+<p>TORNADO no intenta ser un framework PHP full-stack. Contrariamente intenta ser<br>
+un núcleo de trabajo muy reducido para implementar patrones de arquitectura HMVC 
+y/o servicios REST, con la menor parametrización y utilización de código 
+posible, apoyado en un core que organice su proyecto junto a un sistema de 
+configuración y gestión de errores simple.</p>
 
-<p>TORNADO no incluye librerías de soporte para tareas comunes como acceso a base de datos, gestión de plantillas, envío de mais, etc.
-Utilice Composer para incluir paquetes de terceros de acuerdo a las necesidades particulares del proyecto a desarrollar.</p>
+<p>TORNADO no incluye librerías de soporte para tareas comunes como acceso a base 
+de datos, gestión de plantillas, envío de mais, etc.
+Utilice Composer para incluir paquetes de terceros de acuerdo a las necesidades 
+particulares del proyecto a desarrollar.</p>
 
 <h3>
 <a id="inspiración" class="anchor" href="#inspiraci%C3%B3n" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Inspiración:</h3>
@@ -44,15 +55,15 @@ Utilice Composer para incluir paquetes de terceros de acuerdo a las necesidades 
 <p>TORNADO se inspiro en varios microframeworks PHP, entre ellos cabe mencionar:</p>
 
 <ul>
-<li>Toro – <a href="http://toroweb.org/">http://toroweb.org/</a>
+<li>Toro - <a href="http://toroweb.org/">http://toroweb.org/</a>
 </li>
-<li>Flight – <a href="http://flightphp.com/">http://flightphp.com/</a>
+<li>Flight - <a href="http://flightphp.com/">http://flightphp.com/</a>
 </li>
-<li>Shield – <a href="https://github.com/enygma/shieldframework">https://github.com/enygma/shieldframework</a>
+<li>Shield - <a href="https://github.com/enygma/shieldframework">https://github.com/enygma/shieldframework</a>
 </li>
-<li>Slim – <a href="http://www.slimframework.com/">http://www.slimframework.com/</a>
+<li>Slim - <a href="http://www.slimframework.com/">http://www.slimframework.com/</a>
 </li>
-<li>AltoRouter – <a href="http://altorouter.com/">http://altorouter.com/</a>
+<li>AltoRouter - <a href="http://altorouter.com/">http://altorouter.com/</a>
 </li>
 </ul>
 
@@ -63,47 +74,727 @@ Utilice Composer para incluir paquetes de terceros de acuerdo a las necesidades 
 
 <ul>
 <li>ser rápido</li>
-<li>fácil de entender (tanto su API como su construcción interna)</li>
+<li>fácil de entender <em>(tanto su API como su construcción interna)</em>
+</li>
 <li>tener la menor cantidad de métodos posibles dentro de su API</li>
 <li>permitir el uso de ganchos para extender el mismo</li>
 <li>incluir librerías/paquetes de terceros con suma facilidad</li>
 <li>tener la menor cantidad de líneas de código posible</li>
-<li>ser un core de trabajo (NUNCA un framework)</li>
+<li>ser un core de trabajo <em>(NUNCA un framework)</em>
+</li>
 </ul>
 
-<h3>
-<a id="características" class="anchor" href="#caracter%C3%ADsticas" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Características:</h3>
+<h2>
+<a id="características" class="anchor" href="#caracter%C3%ADsticas" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Características:</h2>
 
 <ul>
-<li>Enrutamientos para utilizar módulos HMVC y/o servicios REST (apoyado en URL amigables)</li>
+<li>Enrutamientos para utilizar módulos HMVC y/o servicios REST (apoyado en URL 
+amigables)</li>
 <li>Configuración general de la aplicación</li>
 <li>Ganchos para extender las características del core</li>
 <li>Captura de errores y excepciones</li>
 <li>Inyección de dependencias</li>
 </ul>
 
-<blockquote>
-<p>Importante: La versión actual difiere totalmente de la versión inicial 1.0.0. Si va a actualizar su aplicación lea en detalle el archivo de cambios CHANGELOG.md</p>
-</blockquote>
-        </section>
+<h3>
+<a id="codificación" class="anchor" href="#codificaci%C3%B3n" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Codificación:</h3>
 
-        <aside id="sidebar">
-          <a href="https://github.com/danielspk/Tornado/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/danielspk/Tornado/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
+<p>TORNADO apoya la iniciativa del PHP Framework Interop Group e implementa los 
+estándares PSR-2 y PSR-4.</p>
 
-          <p class="repo-owner"><a href="https://github.com/danielspk/Tornado"></a> is maintained by <a href="https://github.com/danielspk">danielspk</a>.</p>
+<p>Puede obtener más información en <a href="http://www.php-fig.org/">http://www.php-fig.org/</a></p>
 
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
+<h2>
+<a id="instalación" class="anchor" href="#instalaci%C3%B3n" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Instalación:</h2>
+
+<p>La instalación recomendada requiere el uso de Composer. </p>
+
+<ul>
+<li><p>Instale composer ( puede obtener ayuda en <a href="https://getcomposer.org/download/">https://getcomposer.org/download/</a> )</p></li>
+<li><p>Cree un archivo composer.json con los paquetes a instalar</p></li>
+</ul>
+
+<pre><code>{
+    "require": {
+        "danielspk/tornado" : "2.*"
+    }
+}
+</code></pre>
+
+<ul>
+<li>Inicie la consola de comando y ejecute el siguiente comando:</li>
+</ul>
+
+<pre><code>composer install
+</code></pre>
+
+<h2>
+<a id="manual-de-uso" class="anchor" href="#manual-de-uso" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Manual de uso:</h2>
+
+<p>La versión actual difiere totalmente de la versión inicial 1.0.0</p>
+
+<p>Si va a actualizar su aplicación lea en detalle el archivo de cambios CHANGELOG.md</p>
+
+<h4>
+<a id="uso-básico" class="anchor" href="#uso-b%C3%A1sico" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Uso básico:</h4>
+
+<p>Ejemplo de uso básico (con dos tipos de enrutamientos)</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-pse">&lt;?php</span><span class="pl-s1"></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// incluir el autoload</span></span>
+<span class="pl-s1">    <span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>vendor/autoload.php<span class="pl-pds">'</span></span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// obtener una instancia del core</span></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span> <span class="pl-k">=</span> <span class="pl-c1">\DMS\Tornado\</span><span class="pl-c1">Tornado</span><span class="pl-k">::</span>getInstance();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// enrutamiento a módulo desde raíz</span></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>route(<span class="pl-s"><span class="pl-pds">'</span>/<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>demo|demo|index<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// enrutamiento a función anónima</span></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>route(<span class="pl-c1">array</span>(</span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>/saludar/:string<span class="pl-pds">'</span></span>  <span class="pl-k">=&gt;</span> <span class="pl-k">function</span>(<span class="pl-smi">$pNombre</span> <span class="pl-k">=</span> <span class="pl-c1">null</span>){</span>
+<span class="pl-s1">            <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>Hola <span class="pl-pds">'</span></span> <span class="pl-k">.</span> <span class="pl-smi">$pNombre</span>;</span>
+<span class="pl-s1">        }</span>
+<span class="pl-s1">    ));</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// ejecutar la aplicación</span></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>run();</span>
+<span class="pl-s1"></span></pre></div>
+
+<h4>
+<a id="api" class="anchor" href="#api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>API:</h4>
+
+<h5>
+<a id="obtener-instancia-del-core" class="anchor" href="#obtener-instancia-del-core" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Obtener Instancia del core:</h5>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1">    <span class="pl-smi">$app</span> <span class="pl-k">=</span> <span class="pl-c1">\DMS\Tornado\</span><span class="pl-c1">Tornado</span><span class="pl-k">::</span>getInstance();</span></pre></div>
+
+<h5>
+<a id="ejecutar-el-core" class="anchor" href="#ejecutar-el-core" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ejecutar el core:</h5>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1">    <span class="pl-c">// con una instancia del core en una variable</span></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span> <span class="pl-k">=</span> <span class="pl-c1">\DMS\Tornado\</span><span class="pl-c1">Tornado</span><span class="pl-k">::</span>getInstance();</span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>run();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// sin ninguna instancia anterior del core</span></span>
+<span class="pl-s1">    <span class="pl-c1">\DMS\Tornado\</span><span class="pl-c1">Tornado</span><span class="pl-k">::</span>getInstance()<span class="pl-k">-&gt;</span>run();</span></pre></div>
+
+<h5>
+<a id="setear-configuraciones" class="anchor" href="#setear-configuraciones" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setear configuraciones:</h5>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1">    <span class="pl-smi">$app</span> <span class="pl-k">=</span> <span class="pl-c1">\DMS\Tornado\</span><span class="pl-c1">Tornado</span><span class="pl-k">::</span>getInstance();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// configuración simple</span></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>config(<span class="pl-s"><span class="pl-pds">'</span>nombre<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>valor del nombre<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>config(<span class="pl-s"><span class="pl-pds">'</span>nombres<span class="pl-pds">'</span></span>, <span class="pl-c1">array</span>(<span class="pl-s"><span class="pl-pds">'</span>nombre1<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-s"><span class="pl-pds">'</span>valor1<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>nombre2<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-s"><span class="pl-pds">'</span>valor2<span class="pl-pds">'</span></span>));</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// configuración múltiple</span></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>config([</span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>clave1<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>valor uno<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>clave2<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>valor dos<span class="pl-pds">'</span></span></span>
+<span class="pl-s1">    ]);</span></pre></div>
+
+<h5>
+<a id="leer-configuraciones" class="anchor" href="#leer-configuraciones" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Leer configuraciones:</h5>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1">    <span class="pl-smi">$app</span> <span class="pl-k">=</span> <span class="pl-c1">\DMS\Tornado\</span><span class="pl-c1">Tornado</span><span class="pl-k">::</span>getInstance();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// configuración simple</span></span>
+<span class="pl-s1">    <span class="pl-c1">echo</span> <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>config(<span class="pl-s"><span class="pl-pds">'</span>nombre<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// configuración array</span></span>
+<span class="pl-s1">    <span class="pl-smi">$nombres</span> <span class="pl-k">=</span> <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>config(<span class="pl-s"><span class="pl-pds">'</span>nombres<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1">    <span class="pl-c1">echo</span> <span class="pl-smi">$nombres</span>[<span class="pl-c1">0</span>][<span class="pl-s"><span class="pl-pds">'</span>nombre1<span class="pl-pds">'</span></span>];</span>
+<span class="pl-s1">    <span class="pl-c1">echo</span> <span class="pl-smi">$nombres</span>[<span class="pl-c1">1</span>][<span class="pl-s"><span class="pl-pds">'</span>nombre2<span class="pl-pds">'</span></span>];</span></pre></div>
+
+<h5>
+<a id="variables-de-configuración-propias-de-tornado" class="anchor" href="#variables-de-configuraci%C3%B3n-propias-de-tornado" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Variables de configuración propias de Tornado:</h5>
+
+<p>Tornado permite configurar el ambiente de trabajo de la aplicación.
+De esta forma se puede cambiar el comportamiento interno del core:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// configurar la aplicación para un ambiente de desarrollo</span></span>
+<span class="pl-s1">    <span class="pl-c">// - errores visibles</span></span>
+<span class="pl-s1">    <span class="pl-c">// - parse de anotaciones en módulos HMVC para generar enrutamientos automáticos</span></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>config(<span class="pl-s"><span class="pl-pds">'</span>tornado_environment_development<span class="pl-pds">'</span></span>, <span class="pl-c1">true</span>);</span>
+<span class="pl-s1"></span></pre></div>
+
+<p>Otras configuraciones:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// - indica si se van a utilizar módulos hmvc</span></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>config(<span class="pl-s"><span class="pl-pds">'</span>tornado_hmvc_use<span class="pl-pds">'</span></span>, <span class="pl-c1">true</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// - ruta donde se alojarán los módulos hmvc</span></span>
+<span class="pl-s1">    <span class="pl-c">// (relativa a donde se inicia Tornado)</span></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>config(<span class="pl-s"><span class="pl-pds">'</span>tornado_hmvc_module_path<span class="pl-pds">'</span></span>, <span class="pl-c1">true</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// - ruta donde se serializaran las rutas de los módulos hmvc</span></span>
+<span class="pl-s1">    <span class="pl-c">// (relativa a donde se inicia Tornado)</span></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>config(<span class="pl-s"><span class="pl-pds">'</span>tornado_hmvc_serialize_path<span class="pl-pds">'</span></span>, <span class="pl-c1">true</span>);</span>
+<span class="pl-s1"></span></pre></div>
+
+<h5>
+<a id="uso-de-hooks" class="anchor" href="#uso-de-hooks" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Uso de Hooks:</h5>
+
+<p>Existen 6 tipos de hooks:</p>
+
+<ul>
+<li>init: antes de parsear la url en busca de una ruta coincidente</li>
+<li>before: antes de ejecutar la ruta coincidente</li>
+<li>after: despues de ejecutar la ruta coincidente</li>
+<li>end: al finalizar la ejecución de la petición</li>
+<li>404: al no encontrarse una ruta coincidente con la url</li>
+<li>error: al atraparse un error o excepción en aplicación</li>
+</ul>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span> <span class="pl-k">=</span> <span class="pl-c1">\DMS\Tornado\</span><span class="pl-c1">Tornado</span><span class="pl-k">::</span>getInstance();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// utilizando una clase / método / parámetros</span></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>hook(<span class="pl-s"><span class="pl-pds">'</span>error<span class="pl-pds">'</span></span>, <span class="pl-c1">array</span>(<span class="pl-s"><span class="pl-pds">'</span>ErrorUser<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>display<span class="pl-pds">'</span></span>, <span class="pl-c1">array</span>()));</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// utilizando una función anónima</span></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>hook(<span class="pl-s"><span class="pl-pds">'</span>404<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(){</span>
+<span class="pl-s1">        <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>404<span class="pl-pds">'</span></span>;</span>
+<span class="pl-s1">    });</span>
+<span class="pl-s1"></span></pre></div>
+
+<p>También es posible crear ganchos personalizados. Ejemplo usando una clase de usuario:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-k">class</span> <span class="pl-en">Saludador</span></span>
+<span class="pl-s1">    {</span>
+<span class="pl-s1">        <span class="pl-k">public</span> <span class="pl-k">function</span> <span class="pl-en">persona</span>(<span class="pl-smi">$nombre</span>, <span class="pl-smi">$apellido</span>)</span>
+<span class="pl-s1">        {</span>
+<span class="pl-s1">            <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>Hola <span class="pl-pds">'</span></span> <span class="pl-k">.</span> <span class="pl-smi">$nombre</span> <span class="pl-k">.</span> <span class="pl-s"><span class="pl-pds">'</span>, <span class="pl-pds">'</span></span> <span class="pl-k">.</span> <span class="pl-smi">$apellido</span>;</span>
+<span class="pl-s1">        }</span>
+<span class="pl-s1">    }</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>hook(<span class="pl-s"><span class="pl-pds">'</span>saludar<span class="pl-pds">'</span></span>, <span class="pl-c1">array</span>(<span class="pl-s"><span class="pl-pds">'</span>Saludador<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>persona<span class="pl-pds">'</span></span>, <span class="pl-c1">array</span>(<span class="pl-s"><span class="pl-pds">'</span>Tornado<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>PHP<span class="pl-pds">'</span></span>)));</span>
+<span class="pl-s1"></span></pre></div>
+
+<p>La forma de ejecutar un gancho por código es la siguiente:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span> <span class="pl-k">=</span> <span class="pl-c1">\DMS\Tornado\</span><span class="pl-c1">Tornado</span><span class="pl-k">::</span>getInstance();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>hook(<span class="pl-s"><span class="pl-pds">'</span>fueraDeLinea<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"></span></pre></div>
+
+<p>Pueden crearse n cantidad de hooks con un mismo nombre. Los mismos se ejecutarán 
+secuencialmente en el orden en que fueron definidos. Puede, opcionalmente, alterar 
+este orden indicando explicitamente el orden deseado:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span> <span class="pl-k">=</span> <span class="pl-c1">\DMS\Tornado\</span><span class="pl-c1">Tornado</span><span class="pl-k">::</span>getInstance();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>hook(<span class="pl-s"><span class="pl-pds">'</span>before<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(){</span>
+<span class="pl-s1">        <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>Declarado primero - ejecutado despues<span class="pl-pds">'</span></span>;</span>
+<span class="pl-s1">    }, <span class="pl-c1">1</span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>hook(<span class="pl-s"><span class="pl-pds">'</span>before<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(){</span>
+<span class="pl-s1">        <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>Declarado despues - ejecutado primero<span class="pl-pds">'</span></span>;</span>
+<span class="pl-s1">    }, <span class="pl-c1">0</span>);</span>
+<span class="pl-s1"></span></pre></div>
+
+<p>Si declara más de un hook con el mismo nombre puede impedir que se ejecuten los hooks 
+subsiguientes haciendo que el hook devuelva false en su ejecución.</p>
+
+<p>A excepción de los hook init puede consultar que ruta se va o se esta ejecutandose de 
+la siguiente forma:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span> <span class="pl-k">=</span> <span class="pl-c1">\DMS\Tornado\</span><span class="pl-c1">Tornado</span><span class="pl-k">::</span>getInstance();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>hook(<span class="pl-s"><span class="pl-pds">'</span>before<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>() <span class="pl-k">use</span> (<span class="pl-smi">$app</span>){</span>
+<span class="pl-s1">        <span class="pl-smi">$ruta</span> <span class="pl-k">=</span> <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>getRouteMatch()</span>
+<span class="pl-s1">    });</span>
+<span class="pl-s1"></span></pre></div>
+
+<p>Esto devolverá un array con la siguiente información:</p>
+
+<ul>
+<li>Método de la petición (GET, POST, etc)</li>
+<li>Ruta</li>
+<li>Callback</li>
+<li>Parámetros</li>
+</ul>
+
+<h5>
+<a id="hooks-y-flujo-de-ejecución" class="anchor" href="#hooks-y-flujo-de-ejecuci%C3%B3n" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Hooks y flujo de ejecución:</h5>
+
+<p>La secuencia de ejecución del core es la siguiente:</p>
+
+<ul>
+<li>se ejecutan los hooks init</li>
+<li>se parsea la url en busca de la ruta coincidente</li>
+<li>- si no hay coincidencias se ejecuta:</li>
+<li>- - hooks 404</li>
+<li>- - hooks end</li>
+<li>- - se finaliza la ejecución</li>
+<li>se ejecutan los hooks before</li>
+<li>- si alguno devuelve false se ejecuta:</li>
+<li>- - hooks end</li>
+<li>- - se finaliza la ejecución</li>
+<li>se ejecuta la ruta coincidente</li>
+<li>se ejecutan los hooks after</li>
+<li>se ejecutan los hooks end</li>
+</ul>
+
+<h5>
+<a id="definir-enrutamientos" class="anchor" href="#definir-enrutamientos" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Definir Enrutamientos:</h5>
+
+<p>Los enrutamientos pueden ser:</p>
+
+<ul>
+<li>(vacio) - cualquier tipo de petición</li>
+<li>GET - RESTfull por método GET</li>
+<li>POST - RESTfull por método POST</li>
+<li>PUT - RESTfull por método PUT</li>
+<li>DELETE - RESTfull por método DELETE</li>
+</ul>
+
+<p>En caso de que el servidor no soporte los métodos PUT y DELETE se pueden simular 
+los mismos enviando una petición POST con una variable "REST_METHOD" cuyo valor 
+sea PUT o DELETE</p>
+
+<p>Existen cuatro tipos de parámetros para enrutar una URL:</p>
+
+<ul>
+<li>:string - sólo acepta letras</li>
+<li>:number - sólo acepta números</li>
+<li>:alpha - acepta números y letras</li>
+<li>:* - acepta cualquier cantidad y tipo de parámetros (sólo puede incluirse uno solo y al final)</li>
+</ul>
+
+<p>En caso de incluir parámetros opcionales la sintaxis es la siguiente:</p>
+
+<ul>
+<li>[/:string]</li>
+<li>[/:number]</li>
+<li>[/:alpha]</li>
+</ul>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span> <span class="pl-k">=</span> <span class="pl-c1">\DMS\Tornado\</span><span class="pl-c1">Tornado</span><span class="pl-k">::</span>getInstance();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// utilizando un módulo y cualquier tipo de petición</span></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>route(<span class="pl-s"><span class="pl-pds">'</span>/<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>demo|demo|index<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// utilizando una función anónima y cualquier tipo de petición</span></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>route(<span class="pl-s"><span class="pl-pds">'</span>/saludar/:alpha<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">$pNombre</span> <span class="pl-k">=</span> <span class="pl-c1">null</span>) {</span>
+<span class="pl-s1">        <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>Hola <span class="pl-pds">'</span></span> <span class="pl-k">.</span> <span class="pl-smi">$pNombre</span>;</span>
+<span class="pl-s1">    });</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// utilizando parámetros opcionales y cualquier tipo de petición</span></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>route(<span class="pl-s"><span class="pl-pds">'</span>/mostrar[/:alpha][/:number]<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> (<span class="pl-smi">$pNombre</span> <span class="pl-k">=</span> <span class="pl-c1">null</span>, <span class="pl-smi">$pEdad</span> <span class="pl-k">=</span> <span class="pl-c1">null</span>) {</span>
+<span class="pl-s1">        <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>Hola <span class="pl-pds">'</span></span> <span class="pl-k">.</span> <span class="pl-smi">$pNombre</span> <span class="pl-k">.</span> <span class="pl-s"><span class="pl-pds">'</span>, <span class="pl-pds">'</span></span> <span class="pl-k">.</span> <span class="pl-smi">$pEdad</span>;</span>
+<span class="pl-s1">    });</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// utilizando un comodín (n cantidad de parámetros) y cualquier tipo de petición</span></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>route(<span class="pl-s"><span class="pl-pds">'</span>/felicitador/:*<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> () {</span>
+<span class="pl-s1">        <span class="pl-smi">$params</span> <span class="pl-k">=</span> <span class="pl-c1">func_get_args</span>();</span>
+<span class="pl-s1">        <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>Felicitaciones <span class="pl-pds">'</span></span> <span class="pl-k">.</span> (<span class="pl-c1">isset</span>(<span class="pl-smi">$params</span>[<span class="pl-c1">0</span>]) ? <span class="pl-smi">$params</span>[<span class="pl-c1">0</span>] : <span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1">    });</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// utilizando un módulo y petición POST</span></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>route(<span class="pl-s"><span class="pl-pds">'</span>POST /<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>demo|demo|guardar<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// utilizando un módulo y petición GET o POST</span></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>route(<span class="pl-s"><span class="pl-pds">'</span>GET|POST /<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>demo|demo|listar<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"></span></pre></div>
+
+<p>También es posible definir parámetros con nombre. En dicho caso puede omitirse 
+el uso de parámetros de entrada en las funciones anónimas o métodos de los 
+módulos HMVC. Ejemplo:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>route(<span class="pl-s"><span class="pl-pds">'</span>/bienvenida/@nombre:alpha/tornado/@edad:number<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> () <span class="pl-k">use</span> (<span class="pl-smi">$app</span>) {</span>
+<span class="pl-s1">        <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>Hola <span class="pl-pds">'</span></span> <span class="pl-k">.</span> <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>param(<span class="pl-s"><span class="pl-pds">'</span>nombre<span class="pl-pds">'</span></span>) <span class="pl-k">.</span> <span class="pl-s"><span class="pl-pds">'</span>, Edad: <span class="pl-pds">'</span></span> <span class="pl-k">.</span> <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>param(<span class="pl-s"><span class="pl-pds">'</span>edad<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1">    });</span>
+<span class="pl-s1"></span></pre></div>
+
+<p>Puede agregar tipos de parámetros auxiliares de la siguiente forma:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span> <span class="pl-k">=</span> <span class="pl-c1">\DMS\Tornado\</span><span class="pl-c1">Tornado</span><span class="pl-k">::</span>getInstance();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>addTypeParam(<span class="pl-s"><span class="pl-pds">'</span>:custom<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>([123]+)<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>route(<span class="pl-s"><span class="pl-pds">'</span>/personalizado/:custom<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> (<span class="pl-smi">$pCustom</span> <span class="pl-k">=</span> <span class="pl-c1">null</span>) {</span>
+<span class="pl-s1">        <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>Parametro personalizado <span class="pl-pds">'</span></span> <span class="pl-k">.</span> <span class="pl-smi">$pCustom</span>;</span>
+<span class="pl-s1">    });</span>
+<span class="pl-s1"></span></pre></div>
+
+<p>Nota: El único enrutamiento obligatorio es el del nodo raíz ya que indica cuál será el 
+callback a ejecutar por defecto al ingresar a la aplicación.</p>
+
+<h5>
+<a id="delegaciones" class="anchor" href="#delegaciones" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Delegaciones:</h5>
+
+<p>Es posible delegar la acción de un módulo/ruta hacia otro sin necesidad de realizar 
+una redirección por http. Esta delegación invoca al otro módulo/ruta dentro del mismo 
+request original. Ejemplo:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// a módulo sin parámetros</span></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>forwardModule(<span class="pl-s"><span class="pl-pds">'</span>modulo|clase|metodo<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// a módulo con parámetros</span></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>forwardModule(<span class="pl-s"><span class="pl-pds">'</span>modulo|clase|metodo<span class="pl-pds">'</span></span>, <span class="pl-c1">array</span>(<span class="pl-s"><span class="pl-pds">'</span>param1<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>param2<span class="pl-pds">'</span></span>));</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// a url (parámetros incluidos en la url)</span></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>forwardUrl(<span class="pl-s"><span class="pl-pds">'</span>/otra/ruta/1234<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"></span></pre></div>
+
+<p>Si se encuentra instalado FPM en el Servidor puede devolver el resultado al cliente y 
+continuar con la ejecución de la petición actual en segundo plano de la siguiente forma:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>finishRequest();</span>
+<span class="pl-s1"></span></pre></div>
+
+<h5>
+<a id="anotaciones" class="anchor" href="#anotaciones" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Anotaciones:</h5>
+
+<p>Algunas acciones pueden ser establecidas mediante anotaciones DocBlocks.</p>
+
+<h6>
+<a id="enrutamientos" class="anchor" href="#enrutamientos" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Enrutamientos:</h6>
+
+<p>En los controladores de los módulos HMVC puede utilizar el tag @T_ROUTE para 
+setear un enrutamiento. Esto generará un archivo de configuración denominado 
+"route_serialize.php".</p>
+
+<p>Siempre que la aplicación se encuentre en modo de desarrollo (variable de 
+configuración "tornado_environment_development" en true) se recorrerán los 
+métodos de los controladores para actualizar este archivo de configuración.</p>
+
+<p>Ejemplo:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-k">class</span> <span class="pl-en">Demo</span> <span class="pl-k">extends</span> <span class="pl-c1">\DMS\Tornado\</span><span class="pl-e">Controller</span></span>
+<span class="pl-s1">    {</span>
+<span class="pl-s1">        <span class="pl-c">/**</span></span>
+<span class="pl-s1"><span class="pl-c">         * Ejemplo de enrutamientos mediante anotaciones</span></span>
+<span class="pl-s1"><span class="pl-c">         * @T_ROUTE /demo/anotacion</span></span>
+<span class="pl-s1"><span class="pl-c">         * @T_ROUTE GET|POST /demo/otra/anotacion</span></span>
+<span class="pl-s1"><span class="pl-c">         */</span></span>
+<span class="pl-s1">        <span class="pl-k">public</span> <span class="pl-k">function</span> <span class="pl-en">index</span>()</span>
+<span class="pl-s1">        {</span>
+<span class="pl-s1">            <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>Hola Mundo Tornado<span class="pl-pds">'</span></span>;</span>
+<span class="pl-s1">        }</span>
+<span class="pl-s1">    }</span>
+<span class="pl-s1"></span></pre></div>
+
+<h5>
+<a id="vistas" class="anchor" href="#vistas" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Vistas</h5>
+
+<p>Puede incluir archivos de vistas/templates dentro de una ruta manejada por 
+clousures de la siguiente forma:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1">    <span class="pl-smi">$app</span> <span class="pl-k">=</span> <span class="pl-c1">\DMS\Tornado\</span><span class="pl-c1">Tornado</span><span class="pl-k">::</span>getInstance();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>render(<span class="pl-s"><span class="pl-pds">'</span>ruta/archivo.php<span class="pl-pds">'</span></span>);  <span class="pl-c">// vista sin parámetros</span></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>render(<span class="pl-s"><span class="pl-pds">'</span>ruta/archivo.php<span class="pl-pds">'</span></span>, <span class="pl-c1">array</span>(<span class="pl-s"><span class="pl-pds">'</span>nombre<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-s"><span class="pl-pds">'</span>valor<span class="pl-pds">'</span></span>)); <span class="pl-c">// vista con parámetros</span></span></pre></div>
+
+<p>Los parámetros pasados a la vista/template se manejan de la misma forma que los 
+parámetros pasados a una vista de un módulo HMVC.</p>
+
+<h5>
+<a id="gestión-de-errores-y-excepciones" class="anchor" href="#gesti%C3%B3n-de-errores-y-excepciones" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Gestión de errores y excepciones:</h5>
+
+<p>El manejo de errores y excepciones viene habilitado por defecto. Puede alterar 
+su comportamiento de la siguiente forma:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span> <span class="pl-k">=</span> <span class="pl-c1">\DMS\Tornado\</span><span class="pl-c1">Tornado</span><span class="pl-k">::</span>getInstance();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>error(<span class="pl-c1">true</span>);  <span class="pl-c">// habilita el manejador</span></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>error(<span class="pl-c1">false</span>); <span class="pl-c">// deshabilita el manejador</span></span>
+<span class="pl-s1"></span></pre></div>
+
+<p>Puede acceder a la última excepción lanzada de la siguiente forma:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span> <span class="pl-k">=</span> <span class="pl-c1">\DMS\Tornado\</span><span class="pl-c1">Tornado</span><span class="pl-k">::</span>getInstance();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$exc</span> <span class="pl-k">=</span> <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>error();</span>
+<span class="pl-s1"></span></pre></div>
+
+<h5>
+<a id="inyección-de-dependencias" class="anchor" href="#inyecci%C3%B3n-de-dependencias" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Inyección de Dependencias:</h5>
+
+<p>Es posible extender el core mediante la inyección de nuevas clases.
+La forma de registrar una nueva dependencia es:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>register(<span class="pl-s"><span class="pl-pds">'</span>fecha<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">$fecha</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>2014-12-31<span class="pl-pds">'</span></span>){</span>
+<span class="pl-s1">        <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-c1">\DateTime</span>(<span class="pl-smi">$fecha</span>);</span>
+<span class="pl-s1">    });</span>
+<span class="pl-s1"></span></pre></div>
+
+<p>Este registro creará un dependencia para la clase 'DateTime' denominada 'fecha'.
+Podrá hacer uso de la misma de la siguiente forma:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span> <span class="pl-k">=</span> <span class="pl-c1">\DMS\Tornado\</span><span class="pl-c1">Tornado</span><span class="pl-k">::</span>getInstance();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c1">echo</span> <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>container(<span class="pl-s"><span class="pl-pds">'</span>fecha<span class="pl-pds">'</span></span>)<span class="pl-k">-&gt;</span>format(<span class="pl-s"><span class="pl-pds">'</span>d/m/Y<span class="pl-pds">'</span></span>) <span class="pl-k">.</span> <span class="pl-s"><span class="pl-pds">'</span>&lt;br /&gt;<span class="pl-pds">'</span></span>;</span>
+<span class="pl-s1"></span></pre></div>
+
+<p>Por defecto todas las dependencias inyectadas crean una nueva instancia de la clase.
+Puede registrar el servicio como Singleton seteando el tercer parámetro opcional en true:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>register(<span class="pl-s"><span class="pl-pds">'</span>fecha<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(){</span>
+<span class="pl-s1">        <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-c1">\DateTime</span>(<span class="pl-s"><span class="pl-pds">'</span>2014-12-31<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1">    }, <span class="pl-c1">true</span>);</span>
+<span class="pl-s1"></span></pre></div>
+
+<p>Si las dependencias requieren parámetros en sus constructores puede definir los mismos 
+de la siguiente forma:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>register(<span class="pl-s"><span class="pl-pds">'</span>fecha.config<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>2014-12-31<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span><span class="pl-k">-&gt;</span>register(<span class="pl-s"><span class="pl-pds">'</span>fecha<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-c1">\DMS\Tornado\</span><span class="pl-c1">Service</span> <span class="pl-smi">$c</span>){</span>
+<span class="pl-s1">        <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-c1">\DateTime</span>(<span class="pl-smi">$c</span><span class="pl-k">-&gt;</span>get(<span class="pl-s"><span class="pl-pds">'</span>fecha.config<span class="pl-pds">'</span></span>));</span>
+<span class="pl-s1">    });</span>
+<span class="pl-s1"></span></pre></div>
+
+<h5>
+<a id="organización-de-proyecto" class="anchor" href="#organizaci%C3%B3n-de-proyecto" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Organización de proyecto:</h5>
+
+<p>Existe un proyecto que dispone de un esqueleto para una aplicación base.
+Puede descargar el mismo desde <a href="https://github.com/danielspk/TornadoSkeletonApplication">https://github.com/danielspk/TornadoSkeletonApplication</a></p>
+
+<h4>
+<a id="módulos" class="anchor" href="#m%C3%B3dulos" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Módulos:</h4>
+
+<p>Tornado PHP permite utilizar módulos HMVC de forma conjunta con las funciones anónimas.</p>
+
+<p>Si utiliza Composer, se recomienda registrar la ubicación de los módulos en el autoload. Ejemplo:</p>
+
+<pre><code>    "autoload": {
+        "psr-4": {
+            "App\\Modules\\": "app/modules/"
+        }
+    },
+</code></pre>
+
+<h5>
+<a id="controladores" class="anchor" href="#controladores" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Controladores:</h5>
+
+<p>Todos los controladores deben extender de \DMS\Tornado\Controller y deben 
+definir un namespace que respete la especificación PSR-4. Ejemplo: </p>
+
+<p>Asumiendo que los módulos HMVC se encuentran en App\Modules[Modulo HMVC]\Controller</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-k">namespace</span> <span class="pl-en">App\Modules\Demo\Controller</span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-k">use</span> <span class="pl-c1">\DMS\Tornado\Controller</span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-k">class</span> <span class="pl-en">Demo</span> <span class="pl-k">extends</span> <span class="pl-e">Controller</span> {</span>
+<span class="pl-s1">        <span class="pl-k">public</span> <span class="pl-k">function</span> <span class="pl-en">index</span>(<span class="pl-smi">$param</span> <span class="pl-k">=</span> <span class="pl-c1">null</span>){</span>
+<span class="pl-s1">            <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span> Hola <span class="pl-pds">'</span></span> <span class="pl-k">.</span> <span class="pl-smi">$param</span> <span class="pl-k">.</span> <span class="pl-s"><span class="pl-pds">'</span>&lt;br&gt;<span class="pl-pds">'</span></span>;</span>
+<span class="pl-s1">        }</span>
+<span class="pl-s1">    }</span>
+<span class="pl-s1"></span></pre></div>
+
+<p>Los Controladores poseen una instancia de tornado PHP como propiedad propia. Puede acceder a la misma de la siguiente forma:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c">// permite acceder a una instancia de Tornado</span></span>
+<span class="pl-s1">    <span class="pl-smi">$app</span> <span class="pl-k">=</span> <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span><span class="pl-smi">app</span>;</span>
+<span class="pl-s1"></span></pre></div>
+
+<h5>
+<a id="modelos" class="anchor" href="#modelos" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Modelos:</h5>
+
+<p>Todos los controladores deben definir un namespace que respete la siguiente 
+jerarquía: App\Modules[Modulo HMVC]\Model</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-k">namespace</span> <span class="pl-en">App\Modules\Demo\Model</span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-k">class</span> <span class="pl-en">Demo</span> {</span>
+<span class="pl-s1">        <span class="pl-k">public</span> <span class="pl-k">function</span> <span class="pl-en">getDemos</span>(<span class="pl-smi">$param</span> <span class="pl-k">=</span> <span class="pl-c1">null</span>){</span>
+<span class="pl-s1">            <span class="pl-k">return</span> <span class="pl-c1">true</span>;</span>
+<span class="pl-s1">        }</span>
+<span class="pl-s1">    }</span>
+<span class="pl-s1"></span></pre></div>
+
+<h5>
+<a id="vistas-1" class="anchor" href="#vistas-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Vistas:</h5>
+
+<p>Dado que el controlador posee una instancia de Tornado es posible usar el método render() para invocar a una vista.</p>
+
+<h2>
+<a id="resumen-de-métodos" class="anchor" href="#resumen-de-m%C3%A9todos" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Resumen de Métodos:</h2>
+
+<p><strong>DMS\Tornado\Tornado</strong></p>
+
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>getInstance()</td>
+<td>Devuelve la instancia de Tornado (si no existe la crea)</td>
+</tr>
+<tr>
+<td>run()</td>
+<td>Arranca el core</td>
+</tr>
+<tr>
+<td>config(string)</td>
+<td>Devuelve el valor de la variable de configuración</td>
+</tr>
+<tr>
+<td>config(array)</td>
+<td>Setea un array de configuración</td>
+</tr>
+<tr>
+<td>config(string, mixed)</td>
+<td>Setea el valor en la variable de configuración</td>
+</tr>
+<tr>
+<td>error()</td>
+<td>Devuelve la última excepción atrapada</td>
+</tr>
+<tr>
+<td>error(bool)</td>
+<td>Habilita/deshabilita el manejador interno de errores y excepciones</td>
+</tr>
+<tr>
+<td>hook(string)</td>
+<td>Ejecuta el gancho indicado</td>
+</tr>
+<tr>
+<td>hook(string mixed)</td>
+<td>Registra un gancho y su callback</td>
+</tr>
+<tr>
+<td>route(string, mixed)</td>
+<td>Registra un enrutamiento y su callback</td>
+</tr>
+<tr>
+<td>addTypeParam(string, string)</td>
+<td>Registra un nuevo tipo de parámetro</td>
+</tr>
+<tr>
+<td>register(string, callable, [bool])</td>
+<td>Registra una clase/servicio para extender la aplicación</td>
+</tr>
+<tr>
+<td>container(string)</td>
+<td>Devuelve un servicio o parámetro</td>
+</tr>
+<tr>
+<td>render(string)</td>
+<td>Incluye una vista/template</td>
+</tr>
+<tr>
+<td>render(string, array)</td>
+<td>Incluye una vista/template junto a un array de variables</td>
+</tr>
+<tr>
+<td>param(string)</td>
+<td>Devuelve el valor de un parámetro del enrutamiento</td>
+</tr>
+<tr>
+<td>getRouteMatch()</td>
+<td>Devuelve la ruta que se esta procesando</td>
+</tr>
+<tr>
+<td>forwardModule(string)</td>
+<td>Delega la acción hacia otro módulo</td>
+</tr>
+<tr>
+<td>forwardModule(string, array)</td>
+<td>Delega la acción hacia otro módulo</td>
+</tr>
+<tr>
+<td>forwardUrl(string)</td>
+<td>Delega la acción hacia otra ruta</td>
+</tr>
+<tr>
+<td>finishRequest()</td>
+<td>Devuelve el request al cliente y continua la ejecución del script actual</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>DMS\Tornado\Service</strong></p>
+
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>get</td>
+<td>Devuelve un servicio o parámetro</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>DMS\Tornado\Controller</strong></p>
+
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>app</td>
+<td>Instancia de Tornado</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="licencia" class="anchor" href="#licencia" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Licencia:</h2>
+
+<p>El proyecto se distribuye bajo la licencia MIT.</p>
+
+<h3>
+<a id="tests-unitarios" class="anchor" href="#tests-unitarios" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tests unitarios:</h3>
+
+<p>Para ejecutar los test es necesario descargar PHPUnit. 
+Sitúese en la carpeta raíz de Tornado y ejecute la siguiente instrucción por línea de comando: </p>
+
+<pre><code>    phpunit.phar
+</code></pre>
+
+<p>Ante errores o sugerencias escriba a la dirección de email de contacto.</p>
+
+<h2>
+<a id="sugerencias-y-colaboración" class="anchor" href="#sugerencias-y-colaboraci%C3%B3n" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Sugerencias y colaboración:</h2>
+
+<p>Email: <a href="mailto:info@daniel.spiridione.com.ar">info@daniel.spiridione.com.ar</a></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/danielspk">danielspk</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
     </div>
-
-  
+    <script src="javascripts/scale.fix.js"></script>
+    
   </body>
 </html>
